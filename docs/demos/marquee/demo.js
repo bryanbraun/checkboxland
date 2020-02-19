@@ -1,20 +1,11 @@
 import { Checkboxland } from '../../src/checkboxland.js';
 
-const cbl = new Checkboxland({ dimensions: '18x8' });
+const cbl = new Checkboxland({ dimensions: '35x14' });
 
-cbl.setData([
-  [0,0,0,1],
-  [0,0,0,1],
-  [0,0,0,1],
-  [0,0,0,1],
-  [0,0,0,1],
-  [0,0,0,1],
-  [0,0,0,1]
-])
+const textData = cbl.print('hi mom', { dataOnly: true });
+const paddedTextData = cbl.dataUtils('pad', textData, { top: 4 });
 
-const textData = cbl.print('hi', { dataOnly: true });
-
-cbl.marquee(textData, { interval: 200, repeat: true });
+cbl.marquee(paddedTextData, { interval: 150, repeat: true });
 
 // For easy debugging
 window.cbl = cbl;
