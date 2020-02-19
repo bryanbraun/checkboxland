@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkboxland</title>
+
+  <meta name="description" content="Render anything as HTML checkboxes">
+  <meta name="keywords" content="HTML, Checkboxes, Checkboxland">
+  <meta name="robots" content="follow, index">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta property="og:title" content="Checkboxland">
+  <meta property="og:description" content="Render anything as HTML checkboxes">
+  <!-- <meta property="og:image" content="https://musicboxfun.com/images/og-image.png"> -->
+  <!-- <meta property="og:url" content="https://musicboxfun.com"> -->
+  <meta property="og:type" content="website">
+
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon.png">
+  <link rel="stylesheet" type="text/css" href="styles.css" />
+</head>
+
+<body>
+  <div class="page">
+    <aside class="sidebar">
+      <div id="logo" class="checkbox-logo"></div>
+      <h3>The Basics</h3>
+      <ul>
+        <li><a href="#">Getting Started</a></li>
+        <li><a href="#">Methods</a></li>
+      </ul>
+
+      <h3>Advanced Usage</h3>
+      <ul>
+        <li><a href="#">Using Plugins</a></li>
+        <li><a href="#">Creating a Plugin</a></li>
+      </ul>
+
+    </aside>
+
+    <main class="main">
+      <h1 class="title">Checkboxland</h1>
+      <h2 class="subtitle">Render anything as HTML checkboxes</h2>
+      <div id="demobox" class="demobox">
+        <iframe src="demos/clock/index.html" frameborder="0" scrolling="no" class="demoframe"></iframe>
+        <form id="demoboxForm">
+          <input type="radio" id="clock-demo" class="visuallyhidden" name="demoRadios" value="clock" checked="true" />
+          <label for="clock-demo">Clock</label>
+          <input type="radio" id="conways-demo" class="visuallyhidden" name="demoRadios" value="conways-game" />
+          <label for="conways-demo">Game of Life</label>
+          <input type="radio" id="marquee-demo" class="visuallyhidden" name="demoRadios" value="marquee" />
+          <label for="marquee-demo">Marquee</label>
+        </form>
+      </div>
+    </main>
+  </div>
+
+  <script type="module" src="scripts.js"></script>
+</body>
+
+</html>

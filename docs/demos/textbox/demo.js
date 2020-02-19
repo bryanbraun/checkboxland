@@ -10,3 +10,6 @@ textboxEl.addEventListener('input', (event) => {
   cbl.clearData();
   cbl.print(event.target.value);
 });
+
+// For easy debugging
+window.cbl = cbl;

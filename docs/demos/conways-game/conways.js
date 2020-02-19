@@ -53,7 +53,7 @@ const liveOrDie = (row, cell, state) => {
 export const life = {
   state: [],
 
-  seed(rows, cols) {
+  seed(cols, rows) {
     this.state = mappable(rows).map(row => {
       return mappable(cols).reduce(populate, []);
     });

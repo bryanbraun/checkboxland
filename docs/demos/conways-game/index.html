@@ -5,31 +5,32 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Conways Game of Life in Checkboxes</title>
+  <title>Conways Game of Life</title>
 
   <style>
-    .page {
-      text-align: center;
+    body {
+      margin: 0;
+    }
+
+    .display {
+      min-height: 170px;
     }
 
     .play {
       font: normal normal normal 1rem/1 FontAwesome;
       display: block;
       cursor: pointer;
-      margin-bottom: 1rem;
+      margin-top: 2rem;
     }
   </style>
 </head>
 
 <body>
-  <div class="page">
-    <h1>Welcome to Checkboxland</h1>
-    <div class="controls">
-      <label for="play" class="play">Play
-        <input type="checkbox" id="play" />
-      </label>
-    </div>
-    <div id="checkboxland"></div>
+  <div id="checkboxland" class="display"></div>
+  <div class="controls">
+    <label for="play" class="play">Play
+      <input type="checkbox" id="play" checked="true" />
+    </label>
   </div>
   <script type="module" src="demo.js"></script>
 </body>

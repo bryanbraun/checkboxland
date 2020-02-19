@@ -1,0 +1,98 @@
+html {
+  box-sizing: border-box;
+  font-size: 16px;
+  line-height: 1.5;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  font-family: 'Geneva', Tahoma, sans-serif;
+  margin: 0;
+  color: #505E71;
+}
+
+:root {
+  --checkbox-blue: #3c88fd;
+}
+
+/* single margin directions */
+h1,h2,h3,h4,h5,h6,hgroup,ul,ol,dd,p,figure,pre,table,fieldset,hr {
+  margin-top: 0;
+  margin-bottom:1.5rem;
+}
+
+a {
+  color: var(--checkbox-blue);
+}
+
+
+/* basic component styles */
+
+.page {
+  display: grid;
+  grid-template-columns: 250px auto;
+  grid-template-rows: 100vh;
+}
+
+.sidebar {
+  padding: 2rem 1rem 1rem;
+}
+
+.checkbox-logo {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+.checkbox-logo input {
+  cursor: pointer;
+}
+
+.main {
+  padding: 2rem;
+  background: #fafafa;
+}
+
+.title {
+  font-size: 4rem;
+  line-height: 1;
+}
+
+.subtitle {
+  font-size: 1.45rem;
+  margin-bottom: 3rem;
+}
+
+.demoframe {
+  width: 600px;
+  height: 170px;
+  border: none;
+  margin-bottom: 1.5rem;
+}
+
+.demobox label {
+  padding: 2px 14px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  border-radius: 999px;
+}
+.demobox label:not(:last-child) {
+  margin-right: 0.25rem;
+}
+
+.demobox input[type="radio"]:checked + label {
+  background-color: var(--checkbox-blue);
+  color: white;
+}
+
+
+/* utilities */
+.visuallyhidden {
+  position: absolute !important;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+  clip: rect(1px, 1px, 1px, 1px);
+  white-space: nowrap; /* added line */
+}

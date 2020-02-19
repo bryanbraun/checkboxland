@@ -30,6 +30,7 @@ Here's a few things we've done to mitigate the performance issues for large grid
 - Don't requery the DOM a bunch of times. Query it once, and use traversal to access the checkbox elements.
   - Note: this might be requiring more memory... possibly worth revisiting at some point.
 - Don't update a checkbox if its state hasn't changed.
+- Use some semi-hacky `inline-block` checkbox alignment instead of using flexbox on the rows.
 
 The biggest issue we currently face for large grids is excessive time spent in Composite Layers. This is difficult to diagnose and fix, because it depends on browser internals.
 

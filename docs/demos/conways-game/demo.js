@@ -1,8 +1,8 @@
 import { Checkboxland } from '../../src/checkboxland.js';
 import { life } from './conways.js';
 
-const width = 36;
-const height = 36;
+const width = 35;
+const height = 14;
 
 const cbl = new Checkboxland({ dimensions: `${width}x${height}` });
 
@@ -10,7 +10,7 @@ life.seed(width, height);
 
 cbl.setData(life.state);
 
-let interval = 100;
+let interval = 333;
 let trueInterval = performance.now();
 
 function loop() {
@@ -26,3 +26,6 @@ function loop() {
 }
 
 loop();
+
+// For easy debugging
+window.cbl = cbl;

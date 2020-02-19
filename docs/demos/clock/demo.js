@@ -1,6 +1,6 @@
 import { Checkboxland } from '../../src/checkboxland.js';
 
-const cbl = new Checkboxland({ dimensions: '35x11' });
+const cbl = new Checkboxland({ dimensions: '35x14' });
 
 function updateClock() {
   const currentTimeArray = getCurrentTimeString().split('');
