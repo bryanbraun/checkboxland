@@ -14,7 +14,7 @@ cbl.setData([
 
 const textData = cbl.print('hi', { dataOnly: true });
 
-cbl.marquee(textData, { repeat: true });
+cbl.marquee(textData, { interval: 200, repeat: true });
 
 // For easy debugging
 window.cbl = cbl;

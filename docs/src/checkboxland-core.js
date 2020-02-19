@@ -37,7 +37,8 @@ export class Checkboxland {
   }
 
   getData() {
-    return this._data;
+    const clonedData = this._data.map((row) => row.slice());
+    return clonedData;
   }
 
   setData(data) {
