@@ -58,59 +58,21 @@ function _textDimensionsToArray(textDimensions) {
 
 function _createInitialCheckboxDisplay(displayEl, data) {
   displayEl.innerHTML = '';
-  displayEl.style.add('checkboxland');
-
-  _addBaselineStyles();
+  displayEl.style.overflowX = 'auto';
+  displayEl.style.padding = '1px';
 
   data.forEach(rowData => {
     const rowEl = document.createElement('div');
-    rowEl.classList.add('checkboxland-row');
+    rowEl.style.lineHeight = 0.75;
+    rowEl.style.whiteSpace = 'nowrap';
 
     rowData.forEach(cellData => {
       const checkboxEl = document.createElement('input');
-      checkboxEl.classList.add('checkboxland-checkbox');
+      checkboxEl.style.margin = 0;
       checkboxEl.type = 'checkbox';
       rowEl.appendChild(checkboxEl);
     });
 
     displayEl.appendChild(rowEl);
   });
-}
-
-function _addBaselineStyles() {
-  // We don't want to add global baseline styles if they've been added before.
-  if (document.head.querySelector('style.checkboxland-styles') !== null) {
-    return;
-  }
-
-  const style = document.createElement('style');
-  const displayRule = `
-    .checkboxland {
-      overflow: scroll;
-    }`;
-  const rowRule = `
-    .checkboxland-row {
-      line-height: 0.75;
-    }`;
-  const checkboxRule = `
-    .checkboxland-checkbox {
-      margin: 0;
-    }`;
-
-  style.className = 'checkboxland-styles';
-  style.appendChild(document.createTextNode('')); // Necessary for Webkit.
-
-  // We place it in the head with the other style tags, if possible, so as to
-  // not look out of place. We insert before the others so these styles can be
-  // overridden if necessary.
-  const firstStyleEl = document.head.querySelector('[rel="stylesheet"], style');
-  if (firstStyleEl === undefined) {
-    document.head.appendChild(style);
-  } else {
-    document.head.insertBefore(style, firstStyleEl);
-  }
-
-  style.sheet.insertRule(displayRule, style.sheet.cssRules.length);
-  style.sheet.insertRule(rowRule, style.sheet.cssRules.length);
-  style.sheet.insertRule(checkboxRule, style.sheet.cssRules.length);
 }
