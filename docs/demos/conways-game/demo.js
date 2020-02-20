@@ -1,4 +1,4 @@
-import { Checkboxland } from '../../src/checkboxland.js';
+import { Checkboxland } from '../../../lib/checkboxland.js';
 import { life } from './conways.js';
 
 const width = 35;
@@ -10,7 +10,7 @@ life.seed(width, height);
 
 cbl.setData(life.state);
 
-let interval = 333;
+let interval = 200;
 let trueInterval = performance.now();
 
 function loop() {
