@@ -65,7 +65,7 @@ a {
 
 .demoframe {
   width: 600px;
-  height: 170px;
+  height: 180px;
   border: none;
   margin-bottom: 1.5rem;
 }
@@ -95,4 +95,44 @@ a {
   clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
   clip: rect(1px, 1px, 1px, 1px);
   white-space: nowrap; /* added line */
+}
+
+
+/* Recurse Center Badge */
+.rc-text {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 0.85em;
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.rc-text strong {
+  font-weight: bold;
+}
+
+.rc-text a {
+  color: black;
+  text-decoration: none;
+}
+
+.rc-text i.icon-svg svg {
+  width: 1em;
+  display: inline-block;
+  -webkit-transform: translateY(2px);
+  -ms-transform: translateY(2px);
+  transform: translateY(2px);
+}
+
+.rc-text i.icon-svg svg path {
+  fill: #ff6060;
+}
+
+.rc-text .green,
+.rc-text:hover a,
+.rc-text:focus a {
+  color: #61ae24;
+  text-decoration: none;
 }

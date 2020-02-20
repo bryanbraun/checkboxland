@@ -55,6 +55,10 @@ export class Checkboxland {
   }
 
   static extend(fn) {
+    if (!fn.name) {
+      throw new Error('Your plugin must be a function with a "name" property.');
+    }
+
     this.prototype[fn.name] = fn;
   }
 }

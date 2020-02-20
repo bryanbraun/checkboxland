@@ -1,41 +1,5 @@
-export function print(text, options = {}) {
-  const textArray = text.split('');
-
-  const dataMatrix = textArray.reduce((matrix, currentChar) => {
-    const currentCharacterMatrix = _getCharacter(currentChar);
-    return _matrixConcat(matrix, currentCharacterMatrix);
-  }, []);
-
-  if (options.dataOnly) {
-    return dataMatrix;
-  }
-
-  this.setData(dataMatrix);
-}
-
-
-// HELPER FUNCTIONS
-
-function _matrixConcat(mat1, mat2) {
-  if (mat1.length === 0) return mat2;
-
-  const newMatrix = [];
-
-  mat1.forEach((row, index) => {
-    // We go row by row, concatenating mat1 to mat2.
-    newMatrix.push(
-      // the [0] puts a spacer between the two characters.
-      row.concat([0]).concat(mat2[index])
-    );
-  });
-
-  return newMatrix;
-}
-
-// Get a matrix version of a text character.
-// All characters are 5x7 checkboxes in size.
-function _getCharacter(character) {
-  const zero = [
+export const fiveBySeven = {
+  '0': [
     [0,1,1,1,0],
     [1,0,0,0,1],
     [1,0,0,1,1],
@@ -43,9 +7,8 @@ function _getCharacter(character) {
     [1,1,0,0,1],
     [1,0,0,0,1],
     [0,1,1,1,0],
-  ];
-
-  const one = [
+  ],
+  '1': [
     [0,1,0],
     [1,1,0],
     [0,1,0],
@@ -53,9 +16,8 @@ function _getCharacter(character) {
     [0,1,0],
     [0,1,0],
     [1,1,1],
-  ];
-
-  const two = [
+  ],
+  '2': [
     [0,1,1,1,0],
     [1,0,0,0,1],
     [0,0,0,0,1],
@@ -63,9 +25,8 @@ function _getCharacter(character) {
     [1,0,0,0,0],
     [1,0,0,0,0],
     [1,1,1,1,1],
-  ];
-
-  const three = [
+  ],
+  '3': [
     [1,1,1,1,1],
     [0,0,0,0,1],
     [0,0,0,1,0],
@@ -73,9 +34,8 @@ function _getCharacter(character) {
     [0,0,0,0,1],
     [1,0,0,0,1],
     [0,1,1,1,0],
-  ];
-
-  const four = [
+  ],
+  '4': [
     [1,0,0,0,1],
     [1,0,0,0,1],
     [1,0,0,0,1],
@@ -83,9 +43,8 @@ function _getCharacter(character) {
     [0,0,0,0,1],
     [0,0,0,0,1],
     [0,0,0,0,1],
-  ];
-
-  const five = [
+  ],
+  '5': [
     [1,1,1,1,1],
     [1,0,0,0,0],
     [1,0,0,0,0],
@@ -93,9 +52,8 @@ function _getCharacter(character) {
     [0,0,0,0,1],
     [1,0,0,0,1],
     [0,1,1,1,0],
-  ];
-
-  const six = [
+  ],
+  '6': [
     [0,0,1,1,0],
     [0,1,0,0,0],
     [1,0,0,0,0],
@@ -103,9 +61,8 @@ function _getCharacter(character) {
     [1,0,0,0,1],
     [1,0,0,0,1],
     [0,1,1,1,0],
-  ];
-
-  const seven = [
+  ],
+  '7': [
     [1,1,1,1,1],
     [0,0,0,0,1],
     [0,0,0,1,0],
@@ -113,9 +70,8 @@ function _getCharacter(character) {
     [0,1,0,0,0],
     [0,1,0,0,0],
     [0,1,0,0,0],
-  ];
-
-  const eight = [
+  ],
+  '8': [
     [0,1,1,1,0],
     [1,0,0,0,1],
     [1,0,0,0,1],
@@ -123,9 +79,8 @@ function _getCharacter(character) {
     [1,0,0,0,1],
     [1,0,0,0,1],
     [0,1,1,1,0],
-  ];
-
-  const nine = [
+  ],
+  '9': [
     [0,1,1,1,0],
     [1,0,0,0,1],
     [1,0,0,0,1],
@@ -133,19 +88,8 @@ function _getCharacter(character) {
     [0,0,0,0,1],
     [0,0,0,1,0],
     [0,1,1,0,0],
-  ];
-
-  const space = [
-    [0,0,0,0,0],
-    [0,0,0,0,0],
-    [0,0,0,0,0],
-    [0,0,0,0,0],
-    [0,0,0,0,0],
-    [0,0,0,0,0],
-    [0,0,0,0,0],
-  ];
-
-  const colon = [
+  ],
+  ':': [
     [0],
     [1],
     [0],
@@ -153,9 +97,17 @@ function _getCharacter(character) {
     [0],
     [1],
     [0],
-  ];
-
-  const A = [
+  ],
+  ' ': [
+  [0,0,0,0],
+  [0,0,0,0],
+  [0,0,0,0],
+  [0,0,0,0],
+  [0,0,0,0],
+  [0,0,0,0],
+  [0,0,0,0],
+],
+  'A': [
     [0,1,1,1,0],
     [1,0,0,0,1],
     [1,0,0,0,1],
@@ -163,9 +115,8 @@ function _getCharacter(character) {
     [1,1,1,1,1],
     [1,0,0,0,1],
     [1,0,0,0,1],
-  ];
-
-  const B = [
+  ],
+  'B': [
     [1,1,1,1,0],
     [1,0,0,0,1],
     [1,0,0,0,1],
@@ -173,9 +124,8 @@ function _getCharacter(character) {
     [1,0,0,0,1],
     [1,0,0,0,1],
     [1,1,1,1,0],
-  ];
-
-  const C = [
+  ],
+  'C': [
     [0,1,1,1,0],
     [1,0,0,0,1],
     [1,0,0,0,0],
@@ -183,9 +133,8 @@ function _getCharacter(character) {
     [1,0,0,0,0],
     [1,0,0,0,1],
     [0,1,1,1,0],
-  ];
-
-  const D = [
+  ],
+  'D': [
     [1,1,1,0,0],
     [1,0,0,1,0],
     [1,0,0,0,1],
@@ -193,9 +142,8 @@ function _getCharacter(character) {
     [1,0,0,0,1],
     [1,0,0,1,0],
     [1,1,1,0,0],
-  ];
-
-  const E = [
+  ],
+  'E': [
     [1,1,1,1,1],
     [1,0,0,0,0],
     [1,0,0,0,0],
@@ -203,9 +151,8 @@ function _getCharacter(character) {
     [1,0,0,0,0],
     [1,0,0,0,0],
     [1,1,1,1,1],
-  ];
-
-  const F = [
+  ],
+  'F': [
     [1,1,1,1,1],
     [1,0,0,0,0],
     [1,0,0,0,0],
@@ -213,9 +160,8 @@ function _getCharacter(character) {
     [1,0,0,0,0],
     [1,0,0,0,0],
     [1,0,0,0,0],
-  ];
-
-  const G = [
+  ],
+  'G': [
     [0,1,1,1,0],
     [1,0,0,0,1],
     [1,0,0,0,0],
@@ -223,9 +169,8 @@ function _getCharacter(character) {
     [1,0,0,0,1],
     [1,0,0,0,1],
     [0,1,1,1,1],
-  ];
-
-  const H = [
+  ],
+  'H': [
     [1,0,0,0,1],
     [1,0,0,0,1],
     [1,0,0,0,1],
@@ -233,9 +178,8 @@ function _getCharacter(character) {
     [1,0,0,0,1],
     [1,0,0,0,1],
     [1,0,0,0,1],
-  ];
-
-  const I = [
+  ],
+  'I': [
     [1,1,1],
     [0,1,0],
     [0,1,0],
@@ -243,9 +187,8 @@ function _getCharacter(character) {
     [0,1,0],
     [0,1,0],
     [1,1,1],
-  ];
-
-  const J = [
+  ],
+  'J': [
     [0,0,1,1,1],
     [0,0,0,1,0],
     [0,0,0,1,0],
@@ -253,9 +196,8 @@ function _getCharacter(character) {
     [0,0,0,1,0],
     [1,0,0,1,0],
     [0,1,1,0,0],
-  ];
-
-  const K = [
+  ],
+  'K': [
     [1,0,0,0,1],
     [1,0,0,1,0],
     [1,0,1,0,0],
@@ -263,9 +205,8 @@ function _getCharacter(character) {
     [1,0,1,0,0],
     [1,0,0,1,0],
     [1,0,0,0,1],
-  ];
-
-  const L = [
+  ],
+  'L': [
     [1,0,0,0,0],
     [1,0,0,0,0],
     [1,0,0,0,0],
@@ -273,9 +214,8 @@ function _getCharacter(character) {
     [1,0,0,0,0],
     [1,0,0,0,0],
     [1,1,1,1,1],
-  ];
-
-  const M = [
+  ],
+  'M': [
     [1,0,0,0,1],
     [1,1,0,1,1],
     [1,0,1,0,1],
@@ -283,9 +223,8 @@ function _getCharacter(character) {
     [1,0,0,0,1],
     [1,0,0,0,1],
     [1,0,0,0,1],
-  ];
-
-  const N = [
+  ],
+  'N': [
     [1,0,0,0,1],
     [1,0,0,0,1],
     [1,1,0,0,1],
@@ -293,9 +232,8 @@ function _getCharacter(character) {
     [1,0,0,1,1],
     [1,0,0,0,1],
     [1,0,0,0,1],
-  ];
-
-  const O = [
+  ],
+  'O': [
     [0,1,1,1,0],
     [1,0,0,0,1],
     [1,0,0,0,1],
@@ -303,9 +241,8 @@ function _getCharacter(character) {
     [1,0,0,0,1],
     [1,0,0,0,1],
     [0,1,1,1,0],
-  ];
-
-  const P = [
+  ],
+  'P': [
     [1,1,1,1,0],
     [1,0,0,0,1],
     [1,0,0,0,1],
@@ -313,9 +250,8 @@ function _getCharacter(character) {
     [1,0,0,0,0],
     [1,0,0,0,0],
     [1,0,0,0,0],
-  ];
-
-  const Q = [
+  ],
+  'Q': [
     [0,1,1,1,0],
     [1,0,0,0,1],
     [1,0,0,0,1],
@@ -323,9 +259,8 @@ function _getCharacter(character) {
     [1,0,1,0,1],
     [1,0,0,1,0],
     [0,1,1,0,1],
-  ];
-
-  const R = [
+  ],
+  'R': [
     [1,1,1,1,0],
     [1,0,0,0,1],
     [1,0,0,0,1],
@@ -333,9 +268,8 @@ function _getCharacter(character) {
     [1,0,0,0,1],
     [1,0,0,0,1],
     [1,0,0,0,1],
-  ];
-
-  const S = [
+  ],
+  'S': [
     [0,1,1,1,1],
     [1,0,0,0,0],
     [1,0,0,0,0],
@@ -343,9 +277,8 @@ function _getCharacter(character) {
     [0,0,0,0,1],
     [0,0,0,0,1],
     [1,1,1,1,0],
-  ];
-
-  const T = [
+  ],
+  'T': [
     [1,1,1,1,1],
     [0,0,1,0,0],
     [0,0,1,0,0],
@@ -353,9 +286,8 @@ function _getCharacter(character) {
     [0,0,1,0,0],
     [0,0,1,0,0],
     [0,0,1,0,0],
-  ];
-
-  const U = [
+  ],
+  'U': [
     [1,0,0,0,1],
     [1,0,0,0,1],
     [1,0,0,0,1],
@@ -363,9 +295,8 @@ function _getCharacter(character) {
     [1,0,0,0,1],
     [1,0,0,0,1],
     [0,1,1,1,0],
-  ];
-
-  const V = [
+  ],
+  'V': [
     [1,0,0,0,1],
     [1,0,0,0,1],
     [1,0,0,0,1],
@@ -373,9 +304,8 @@ function _getCharacter(character) {
     [1,0,0,0,1],
     [0,1,0,1,0],
     [0,0,1,0,0],
-  ];
-
-  const W = [
+  ],
+  'W': [
     [1,0,0,0,1],
     [1,0,0,0,1],
     [1,0,0,0,1],
@@ -383,9 +313,8 @@ function _getCharacter(character) {
     [1,0,1,0,1],
     [1,0,1,0,1],
     [0,1,0,1,0],
-  ];
-
-  const X = [
+  ],
+  'X': [
     [1,0,0,0,1],
     [1,0,0,0,1],
     [0,1,0,1,0],
@@ -393,9 +322,8 @@ function _getCharacter(character) {
     [0,1,0,1,0],
     [1,0,0,0,1],
     [1,0,0,0,1],
-  ];
-
-  const Y = [
+  ],
+  'Y': [
     [1,0,0,0,1],
     [1,0,0,0,1],
     [0,1,0,1,0],
@@ -403,9 +331,8 @@ function _getCharacter(character) {
     [0,0,1,0,0],
     [0,0,1,0,0],
     [0,0,1,0,0],
-  ];
-
-  const Z = [
+  ],
+  'Z': [
     [1,1,1,1,1],
     [0,0,0,0,1],
     [0,0,0,1,0],
@@ -413,9 +340,8 @@ function _getCharacter(character) {
     [0,1,0,0,0],
     [1,0,0,0,0],
     [1,1,1,1,1],
-  ];
-
-  const a = [
+  ],
+  'a': [
     [0,0,0,0,0],
     [0,0,0,0,0],
     [0,1,1,1,0],
@@ -423,9 +349,8 @@ function _getCharacter(character) {
     [0,1,1,1,1],
     [1,0,0,0,1],
     [1,1,1,1,1],
-  ];
-
-  const b = [
+  ],
+  'b': [
     [1,0,0,0,0],
     [1,0,0,0,0],
     [1,0,1,1,0],
@@ -433,9 +358,8 @@ function _getCharacter(character) {
     [1,0,0,0,1],
     [1,0,0,0,1],
     [1,1,1,1,0],
-  ];
-
-  const c = [
+  ],
+  'c': [
     [0,0,0,0,0],
     [0,0,0,0,0],
     [0,1,1,1,0],
@@ -443,9 +367,8 @@ function _getCharacter(character) {
     [1,0,0,0,0],
     [1,0,0,0,1],
     [0,1,1,1,0],
-  ];
-
-  const d = [
+  ],
+  'd': [
     [0,0,0,0,1],
     [0,0,0,0,1],
     [0,1,1,0,1],
@@ -453,9 +376,8 @@ function _getCharacter(character) {
     [1,0,0,0,1],
     [1,0,0,0,1],
     [0,1,1,1,1],
-  ];
-
-    const e = [
+  ],
+  'e': [
     [0,0,0,0,0],
     [0,0,0,0,0],
     [0,1,1,1,0],
@@ -463,9 +385,8 @@ function _getCharacter(character) {
     [1,1,1,1,1],
     [1,0,0,0,0],
     [0,1,1,1,0],
-  ];
-
-  const f = [
+  ],
+  'f': [
     [0,0,1,1,0],
     [0,1,0,0,1],
     [0,1,0,0,0],
@@ -473,9 +394,8 @@ function _getCharacter(character) {
     [0,1,0,0,0],
     [0,1,0,0,0],
     [0,1,0,0,0],
-  ];
-
-  const g = [
+  ],
+  'g': [
     [0,0,0,0,0],
     [0,0,0,0,0],
     [0,1,1,1,1],
@@ -483,9 +403,8 @@ function _getCharacter(character) {
     [0,1,1,1,1],
     [0,0,0,0,1],
     [0,1,1,1,0],
-  ];
-
-  const h = [
+  ],
+  'h': [
     [1,0,0,0,0],
     [1,0,0,0,0],
     [1,0,1,1,0],
@@ -493,9 +412,8 @@ function _getCharacter(character) {
     [1,0,0,0,1],
     [1,0,0,0,1],
     [1,0,0,0,1],
-  ];
-
-  const i = [
+  ],
+  'i': [
     [0,1,0],
     [0,0,0],
     [1,1,0],
@@ -503,9 +421,8 @@ function _getCharacter(character) {
     [0,1,0],
     [0,1,0],
     [1,1,1],
-  ];
-
-  const j = [
+  ],
+  'j': [
     [0,0,0,1],
     [0,0,0,0],
     [0,0,1,1],
@@ -513,9 +430,8 @@ function _getCharacter(character) {
     [0,0,0,1],
     [1,0,0,1],
     [0,1,1,0],
-  ];
-
-  const k = [
+  ],
+  'k': [
     [1,0,0,0],
     [1,0,0,0],
     [1,0,0,1],
@@ -523,9 +439,8 @@ function _getCharacter(character) {
     [1,1,0,0],
     [1,0,1,0],
     [1,0,0,1],
-  ];
-
-  const l = [
+  ],
+  'l': [
     [1,1,0],
     [0,1,0],
     [0,1,0],
@@ -533,9 +448,8 @@ function _getCharacter(character) {
     [0,1,0],
     [0,1,0],
     [1,1,1],
-  ];
-
-  const m = [
+  ],
+  'm': [
     [0,0,0,0,0],
     [0,0,0,0,0],
     [1,1,0,1,0],
@@ -543,9 +457,8 @@ function _getCharacter(character) {
     [1,0,1,0,1],
     [1,0,0,0,1],
     [1,0,0,0,1],
-  ];
-
-  const n = [
+  ],
+  'n': [
     [0,0,0,0,0],
     [0,0,0,0,0],
     [1,0,1,1,0],
@@ -553,9 +466,8 @@ function _getCharacter(character) {
     [1,0,0,0,1],
     [1,0,0,0,1],
     [1,0,0,0,1],
-  ];
-
-  const o = [
+  ],
+  'o': [
     [0,0,0,0,0],
     [0,0,0,0,0],
     [0,1,1,1,0],
@@ -563,9 +475,8 @@ function _getCharacter(character) {
     [1,0,0,0,1],
     [1,0,0,0,1],
     [0,1,1,1,0],
-  ];
-
-  const p = [
+  ],
+  'p': [
     [0,0,0,0,0],
     [0,0,0,0,0],
     [1,1,1,1,0],
@@ -573,9 +484,8 @@ function _getCharacter(character) {
     [1,1,1,1,1],
     [1,0,0,0,0],
     [1,0,0,0,0],
-  ];
-
-  const q = [
+  ],
+  'q': [
     [0,0,0,0,0],
     [0,0,0,0,0],
     [1,1,1,0,1],
@@ -583,9 +493,8 @@ function _getCharacter(character) {
     [1,1,1,1,1],
     [0,0,0,0,1],
     [0,0,0,0,1],
-  ];
-
-  const r = [
+  ],
+  'r': [
     [0,0,0,0,0],
     [0,0,0,0,0],
     [1,0,1,1,0],
@@ -593,9 +502,8 @@ function _getCharacter(character) {
     [1,0,0,0,0],
     [1,0,0,0,0],
     [1,0,0,0,0],
-  ];
-
-  const s = [
+  ],
+  's': [
     [0,0,0,0,0],
     [0,0,0,0,0],
     [0,1,1,1,0],
@@ -603,9 +511,8 @@ function _getCharacter(character) {
     [0,1,1,1,0],
     [0,0,0,0,1],
     [1,1,1,1,0],
-  ];
-
-  const t = [
+  ],
+  't': [
     [0,1,0,0,0],
     [0,1,0,0,0],
     [1,1,1,0,0],
@@ -613,9 +520,8 @@ function _getCharacter(character) {
     [0,1,0,0,0],
     [0,1,0,0,1],
     [0,0,1,1,0],
-  ];
-
-  const u = [
+  ],
+  'u': [
     [0,0,0,0,0],
     [0,0,0,0,0],
     [1,0,0,0,1],
@@ -623,9 +529,8 @@ function _getCharacter(character) {
     [1,0,0,0,1],
     [1,0,0,1,1],
     [0,1,1,0,1],
-  ];
-
-  const v = [
+  ],
+  'v': [
     [0,0,0,0,0],
     [0,0,0,0,0],
     [1,0,0,0,1],
@@ -633,9 +538,8 @@ function _getCharacter(character) {
     [1,0,0,0,1],
     [0,1,0,1,0],
     [0,0,1,0,0],
-  ];
-
-  const w = [
+  ],
+  'w': [
     [0,0,0,0,0],
     [0,0,0,0,0],
     [1,0,0,0,1],
@@ -643,9 +547,8 @@ function _getCharacter(character) {
     [1,0,1,0,1],
     [1,0,1,0,1],
     [0,1,0,1,0],
-  ];
-
-  const x = [
+  ],
+  'x': [
     [0,0,0,0,0],
     [0,0,0,0,0],
     [1,0,0,0,1],
@@ -653,9 +556,8 @@ function _getCharacter(character) {
     [0,0,1,0,0],
     [0,1,0,1,0],
     [1,0,0,0,1],
-  ];
-
-  const y = [
+  ],
+  'y': [
     [0,0,0,0,0],
     [0,0,0,0,0],
     [1,0,0,0,1],
@@ -663,9 +565,8 @@ function _getCharacter(character) {
     [0,1,1,1,1],
     [0,0,0,0,1],
     [0,1,1,1,0],
-  ];
-
-  const z = [
+  ],
+  'z': [
     [0,0,0,0,0],
     [0,0,0,0,0],
     [1,1,1,1,1],
@@ -673,9 +574,8 @@ function _getCharacter(character) {
     [0,0,1,0,0],
     [0,1,0,0,0],
     [1,1,1,1,1],
-  ];
-
-  const tick = [
+  ],
+  '`': [
     [1,0,0],
     [0,1,0],
     [0,0,1],
@@ -683,9 +583,8 @@ function _getCharacter(character) {
     [0,0,0],
     [0,0,0],
     [0,0,0],
-  ];
-
-  const tilde = [
+  ],
+  '~': [
     [0,0,0,0,0],
     [0,0,0,0,0],
     [0,1,0,0,0],
@@ -693,9 +592,8 @@ function _getCharacter(character) {
     [0,0,0,1,0],
     [0,0,0,0,0],
     [0,0,0,0,0],
-  ];
-
-  const bang = [
+  ],
+  '!': [
     [1],
     [1],
     [1],
@@ -703,9 +601,8 @@ function _getCharacter(character) {
     [1],
     [0],
     [1],
-  ];
-
-  const at = [
+  ],
+  '@': [
     [0,1,1,1,0],
     [1,0,0,0,1],
     [0,0,0,0,1],
@@ -713,9 +610,8 @@ function _getCharacter(character) {
     [1,0,1,0,1],
     [1,0,1,0,1],
     [0,1,1,1,0],
-  ];
-
-  const hash = [
+  ],
+  '#': [
     [0,1,0,1,0],
     [0,1,0,1,0],
     [1,1,1,1,1],
@@ -723,9 +619,8 @@ function _getCharacter(character) {
     [1,1,1,1,1],
     [0,1,0,1,0],
     [0,1,0,1,0],
-  ];
-
-  const dollar = [
+  ],
+  '$': [
     [0,0,1,0,0],
     [0,1,1,1,1],
     [1,0,0,0,0],
@@ -733,9 +628,8 @@ function _getCharacter(character) {
     [0,0,0,0,1],
     [1,1,1,1,0],
     [0,0,1,0,0],
-  ];
-
-  const percent = [
+  ],
+  '%': [
     [1,1,0,0,1],
     [1,1,0,0,1],
     [0,0,0,1,0],
@@ -743,9 +637,8 @@ function _getCharacter(character) {
     [0,1,0,0,0],
     [1,0,0,1,1],
     [1,0,0,1,1],
-  ];
-
-  const caret = [
+  ],
+  '^': [
     [0,0,1,0,0],
     [0,1,0,1,0],
     [1,0,0,0,1],
@@ -753,9 +646,8 @@ function _getCharacter(character) {
     [0,0,0,0,0],
     [0,0,0,0,0],
     [0,0,0,0,0],
-  ];
-
-  const ampersand = [
+  ],
+  '&': [
     [0,1,1,0,0],
     [1,0,0,1,0],
     [1,0,1,0,0],
@@ -763,9 +655,8 @@ function _getCharacter(character) {
     [1,0,1,0,1],
     [1,0,0,1,0],
     [1,1,1,0,1],
-  ];
-
-  const asterisk = [
+  ],
+  '*': [
     [0,0,0,0,0],
     [0,0,1,0,0],
     [1,0,1,0,1],
@@ -773,9 +664,8 @@ function _getCharacter(character) {
     [1,0,1,0,1],
     [0,0,1,0,0],
     [0,0,0,0,0],
-  ];
-
-  const leftParens = [
+  ],
+  '(': [
     [0,0,1],
     [0,1,0],
     [1,0,0],
@@ -783,9 +673,8 @@ function _getCharacter(character) {
     [1,0,0],
     [0,1,0],
     [0,0,1],
-  ];
-
-  const rightParens = [
+  ],
+  ')': [
     [1,0,0],
     [0,1,0],
     [0,0,1],
@@ -793,9 +682,8 @@ function _getCharacter(character) {
     [0,0,1],
     [0,1,0],
     [1,0,0],
-  ];
-
-  const hyphen = [
+  ],
+  '-': [
     [0,0,0,0,0],
     [0,0,0,0,0],
     [0,0,0,0,0],
@@ -803,9 +691,8 @@ function _getCharacter(character) {
     [0,0,0,0,0],
     [0,0,0,0,0],
     [0,0,0,0,0],
-  ];
-
-  const underscore = [
+  ],
+  '_': [
     [0,0,0,0,0],
     [0,0,0,0,0],
     [0,0,0,0,0],
@@ -813,9 +700,8 @@ function _getCharacter(character) {
     [0,0,0,0,0],
     [0,0,0,0,0],
     [1,1,1,1,1],
-  ];
-
-  const plus = [
+  ],
+  '+': [
     [0,0,0,0,0],
     [0,0,1,0,0],
     [0,0,1,0,0],
@@ -823,9 +709,8 @@ function _getCharacter(character) {
     [0,0,1,0,0],
     [0,0,1,0,0],
     [0,0,0,0,0],
-  ];
-
-  const equals = [
+  ],
+  '=': [
     [0,0,0,0,0],
     [0,0,0,0,0],
     [1,1,1,1,1],
@@ -833,9 +718,8 @@ function _getCharacter(character) {
     [1,1,1,1,1],
     [0,0,0,0,0],
     [0,0,0,0,0],
-  ];
-
-  const leftBracket = [
+  ],
+  '[': [
     [1,1,1],
     [1,0,0],
     [1,0,0],
@@ -843,9 +727,8 @@ function _getCharacter(character) {
     [1,0,0],
     [1,0,0],
     [1,1,1],
-  ];
-
-  const rightBracket = [
+  ],
+  ']': [
     [1,1,1],
     [0,0,1],
     [0,0,1],
@@ -853,9 +736,8 @@ function _getCharacter(character) {
     [0,0,1],
     [0,0,1],
     [1,1,1],
-  ];
-
-  const leftBrace = [
+  ],
+  '{': [
     [0,0,1],
     [0,1,0],
     [0,1,0],
@@ -863,9 +745,8 @@ function _getCharacter(character) {
     [0,1,0],
     [0,1,0],
     [0,0,1],
-  ];
-
-  const rightBrace = [
+  ],
+  '}': [
     [1,0,0],
     [0,1,0],
     [0,1,0],
@@ -873,9 +754,8 @@ function _getCharacter(character) {
     [0,1,0],
     [0,1,0],
     [1,0,0],
-  ];
-
-  const pipe = [
+  ],
+  '|': [
     [1],
     [1],
     [1],
@@ -883,9 +763,8 @@ function _getCharacter(character) {
     [1],
     [1],
     [1],
-  ];
-
-  const backSlash = [
+  ],
+  '\\': [
     [1,0,0],
     [1,0,0],
     [0,1,0],
@@ -893,9 +772,8 @@ function _getCharacter(character) {
     [0,1,0],
     [0,0,1],
     [0,0,1],
-  ];
-
-  const forwardSlash = [
+  ],
+  '/': [
     [0,0,1],
     [0,0,1],
     [0,1,0],
@@ -903,9 +781,8 @@ function _getCharacter(character) {
     [0,1,0],
     [1,0,0],
     [1,0,0],
-  ];
-
-  const semicolon = [
+  ],
+  ';': [
     [0,0],
     [0,1],
     [0,1],
@@ -913,9 +790,8 @@ function _getCharacter(character) {
     [0,0],
     [0,1],
     [1,0],
-  ];
-
-  const quote = [
+  ],
+  '"': [
     [1,0,1],
     [1,0,1],
     [1,0,1],
@@ -923,9 +799,8 @@ function _getCharacter(character) {
     [0,0,0],
     [0,0,0],
     [0,0,0],
-  ];
-
-  const apostrophe = [
+  ],
+  "'": [
     [1,1],
     [0,1],
     [1,0],
@@ -933,9 +808,8 @@ function _getCharacter(character) {
     [0,0],
     [0,0],
     [0,0],
-  ];
-
-  const comma = [
+  ],
+  ',': [
     [0,0],
     [0,0],
     [0,0],
@@ -943,9 +817,8 @@ function _getCharacter(character) {
     [1,1],
     [0,1],
     [1,0],
-  ];
-
-  const period = [
+  ],
+  '.': [
     [0],
     [0],
     [0],
@@ -953,9 +826,8 @@ function _getCharacter(character) {
     [0],
     [0],
     [1],
-  ];
-
-  const leftAngle = [
+  ],
+  '<': [
     [0,0,0],
     [0,0,1],
     [0,1,0],
@@ -963,9 +835,8 @@ function _getCharacter(character) {
     [0,1,0],
     [0,0,1],
     [0,0,0],
-  ];
-
-  const rightAngle = [
+  ],
+  '>': [
     [0,0,0],
     [1,0,0],
     [0,1,0],
@@ -973,9 +844,8 @@ function _getCharacter(character) {
     [0,1,0],
     [1,0,0],
     [0,0,0],
-  ];
-
-  const questionMark = [
+  ],
+  '?': [
     [0,1,1,1,0],
     [1,0,0,0,1],
     [0,0,0,0,1],
@@ -983,105 +853,5 @@ function _getCharacter(character) {
     [0,0,1,0,0],
     [0,0,0,0,0],
     [0,0,1,0,0],
-  ];
-
-  const characterMap = {
-    '0': zero,
-    '1': one,
-    '2': two,
-    '3': three,
-    '4': four,
-    '5': five,
-    '6': six,
-    '7': seven,
-    '8': eight,
-    '9': nine,
-    ':': colon,
-    ' ': space,
-    'A': A,
-    'B': B,
-    'C': C,
-    'D': D,
-    'E': E,
-    'F': F,
-    'G': G,
-    'H': H,
-    'I': I,
-    'J': J,
-    'K': K,
-    'L': L,
-    'M': M,
-    'N': N,
-    'O': O,
-    'P': P,
-    'Q': Q,
-    'R': R,
-    'S': S,
-    'T': T,
-    'U': U,
-    'V': V,
-    'W': W,
-    'X': X,
-    'Y': Y,
-    'Z': Z,
-    'a': a,
-    'b': b,
-    'c': c,
-    'd': d,
-    'e': e,
-    'f': f,
-    'g': g,
-    'h': h,
-    'i': i,
-    'j': j,
-    'k': k,
-    'l': l,
-    'm': m,
-    'n': n,
-    'o': o,
-    'p': p,
-    'q': q,
-    'r': r,
-    's': s,
-    't': t,
-    'u': u,
-    'v': v,
-    'w': w,
-    'x': x,
-    'y': y,
-    'z': z,
-    '`': tick,
-    '~': tilde,
-    '!': bang,
-    '@': at,
-    '#': hash,
-    '$': dollar,
-    '%': percent,
-    '^': caret,
-    '&': ampersand,
-    '*': asterisk,
-    '(': leftParens,
-    ')': rightParens,
-    '-': hyphen,
-    '_': underscore,
-    '+': plus,
-    '=': equals,
-    '[': leftBracket,
-    ']': rightBracket,
-    '{': leftBrace,
-    '}': rightBrace,
-    '|': pipe,
-    '\\': backSlash,
-    '/': forwardSlash,
-    ';': semicolon,
-    '"': quote,
-    "'": apostrophe,
-    ',': comma,
-    '.': period,
-    '<': leftAngle,
-    '>': rightAngle,
-    '?': questionMark
-  }
-
-  return characterMap[character];
+  ]
 }

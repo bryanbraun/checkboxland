@@ -2,7 +2,7 @@ import { Checkboxland } from '../../src/checkboxland.js';
 import { life } from './conways.js';
 
 const width = 35;
-const height = 14;
+const height = 15;
 
 const cbl = new Checkboxland({ dimensions: `${width}x${height}` });
 
