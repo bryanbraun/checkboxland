@@ -1,5 +1,5 @@
 export function transitionWipe(newData, options = {}) {
-  const { interval = 120, fillValue = 0, direction = 'ltr', callback = () => {} } = options;
+  const { interval = 200, fillValue = 0, direction = 'ltr', callback = () => {} } = options;
 
   const numberOfRows = this.dimensions[1];
   const numberOfColumns = this.dimensions[0];

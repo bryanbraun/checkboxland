@@ -1,5 +1,5 @@
 export function marquee(newData, options = {}) {
-  const { interval = 500, repeat = false, fillValue = 0, callback = () => {} } = options;
+  const { interval = 200, repeat = false, fillValue = 0, callback = () => {} } = options;
 
   const numberOfRows = this.dimensions[1];
   const numberOfColumns = this.dimensions[0];

@@ -1,7 +1,7 @@
 import { Checkboxland } from '../../../src/index.js';
 import { fourByEleven } from './font-4x11.js';
 
-const cbl = new Checkboxland({ dimensions: '35x15' });
+const cbl = new Checkboxland({ dimensions: '44x15' });
 
 function getCurrentTimeString() {
   const date = new Date();
@@ -18,7 +18,7 @@ function getCurrentTimeString() {
 
 function updateClock() {
   const clockData = cbl.print(getCurrentTimeString(), { font: fourByEleven, dataOnly: true });
-  const paddedClockData = cbl.dataUtils('pad', clockData, { left: 1, top: 2 });
+  const paddedClockData = cbl.dataUtils('pad', clockData, { left: 3, top: 2 });
   cbl.setData(paddedClockData);
 }
 

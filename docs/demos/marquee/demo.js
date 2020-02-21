@@ -1,6 +1,6 @@
 import { Checkboxland } from '../../../src/index.js';
 
-const cbl = new Checkboxland({ dimensions: '35x15' });
+const cbl = new Checkboxland({ dimensions: '44x15' });
 
 const textData = cbl.print('hello.', { dataOnly: true });
 const paddedTextData = cbl.dataUtils('pad', textData, { top: 4 });

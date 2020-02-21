@@ -12,24 +12,25 @@ export class Checkboxland {
   }
 
   getCheckboxValue(x, y) {
+    // @todo: needs a isWithinDisplay check.
     return this._data[y][x];
   }
 
-  setCheckboxValue(x, y, val) {
-    const isValueValid = (val === 0 || val === 1);
+  setCheckboxValue(x, y, value) {
+    const isValueValid = (value === 0 || value === 1);
     const isWithinDisplay = (typeof this._data[y] !== 'undefined' && typeof this._data[y][x] !== 'undefined');
 
     if (!isValueValid) {
-      throw new Error(`${val} is not a valid checkbox value`);
+      throw new Error(`${value} is not a valid checkbox value`);
     }
 
     if (!isWithinDisplay) return;
 
-    this._data[y][x] = val;
+    this._data[y][x] = value;
 
     // We can assume the checkboxEl exists because it's within the display.
     const checkboxEl = this.displayEl.children[y].children[x];
-    const isCellChecked = Boolean(val);
+    const isCellChecked = Boolean(value);
 
     if (checkboxEl.checked === isCellChecked) return;
 
@@ -95,6 +96,7 @@ function _textDimensionsToArray(textDimensions) {
 function _createInitialCheckboxDisplay(displayEl, data) {
   displayEl.innerHTML = '';
   displayEl.style.overflowX = 'auto';
+  displayEl.setAttribute('aria-hidden', true);
 
   data.forEach(rowData => {
     const rowEl = document.createElement('div');
@@ -106,6 +108,7 @@ function _createInitialCheckboxDisplay(displayEl, data) {
       checkboxEl.style.margin = 0;
       checkboxEl.style.verticalAlign = 'top';
       checkboxEl.type = 'checkbox';
+      checkboxEl.tabIndex = '-1';
       rowEl.appendChild(checkboxEl);
     });
 

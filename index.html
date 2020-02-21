@@ -13,9 +13,9 @@
 
   <meta property="og:title" content="Checkboxland">
   <meta property="og:description" content="Render anything as HTML checkboxes">
-  <!-- <meta property="og:image" content="https://musicboxfun.com/images/og-image.png"> -->
-  <!-- <meta property="og:url" content="https://musicboxfun.com"> -->
+  <meta property="og:url" content="https://braynbraun.com/checkboxland/">
   <meta property="og:type" content="website">
+  <!-- <meta property="og:image" content="docs/img/og-image.png"> -->
 
   <link rel="icon" type="image/png" sizes="16x16" href="docs/favicon.png">
   <link href="https://fonts.googleapis.com/css?family=Blinker:400&display=swap" rel="stylesheet">
@@ -29,31 +29,31 @@
       <nav>
         <h3>The Basics</h3>
         <ul>
-          <li><a href="#">Overview</a></li>
-          <li><a href="#">Setup</a></li>
-          <li><a href="#">Limitations</a></li>
-          <li><a href="#">An Example</a></li>
+          <li><a href="#overview">Overview</a></li>
+          <li><a href="#limitations">Limitations</a></li>
+          <li><a href="#setup">Setup</a></li>
+          <li><a href="#an-example">An Example</a></li>
         </ul>
       </nav>
 
       <nav>
         <h3>Methods</h3>
         <ul>
-          <li><a href="#">Low-level API</a>
+          <li><a href="#low-level-api">Low-level API</a>
             <ul>
-              <li><a href="#">getCheckboxValue</a></li>
-              <li><a href="#">setCheckboxValue</a></li>
-              <li><a href="#">getData</a></li>
-              <li><a href="#">setData</a></li>
-              <li><a href="#">clearData</a></li>
+              <li><a href="#getcheckboxvalue">getCheckboxValue</a></li>
+              <li><a href="#setcheckboxvalue">setCheckboxValue</a></li>
+              <li><a href="#getdata">getData</a></li>
+              <li><a href="#setdata">setData</a></li>
+              <li><a href="#cleardata">clearData</a></li>
             </ul>
           </li>
           <li><a href="#">Extended API</a>
             <ul>
-              <li><a href="#">print</a></li>
-              <li><a href="#">marquee</a></li>
-              <li><a href="#">transitionWipe</a></li>
-              <li><a href="#">dataUtils</a></li>
+              <li><a href="#print">print</a></li>
+              <li><a href="#marquee">marquee</a></li>
+              <li><a href="#transitionwipe">transitionWipe</a></li>
+              <li><a href="#datautils">dataUtils</a></li>
             </ul>
           </li>
         </ul>
@@ -62,8 +62,8 @@
       <nav>
         <h3>Advanced Usage</h3>
         <ul>
-          <li><a href="#">Using Plugins</a></li>
-          <li><a href="#">Creating a Plugin</a></li>
+          <li><a href="#using-plugins">Using Plugins</a></li>
+          <li><a href="#creating-a-plugin">Creating a Plugin</a></li>
         </ul>
       </nav>
     </aside>
@@ -85,9 +85,399 @@
         </form>
       </div>
 
-      <p>Volutpat duis quisque feugiat efficitur ultrices tempus et augue habitant nec tristique integer, nostra nascetur proin ullamcorper vehicula enim rutrum consectetur est amet.</p>
-      <p>Luctus ridiculus mus phasellus elementum penatibus elit justo mollis, congue auctor purus rhoncus enim blandit hac est, lobortis feugiat tincidunt parturient commodo ultricies eu. Sapien mauris porttitor donec pulvinar ridiculus vehicula diam laoreet, parturient sollicitudin ut felis vitae malesuada praesent facilisis pellentesque, massa sagittis sociosqu fermentum habitasse posuere facilisi. Lectus libero felis curae id vestibulum iaculis aliquam malesuada dui, lacus placerat habitant odio dapibus netus ultricies senectus urna, risus vitae nascetur proin natoque praesent inceptos congue. Vel imperdiet rhoncus magna malesuada venenatis class sapien lectus mattis, neque odio cras vitae ad curae suspendisse aliquam lorem, dis efficitur mus netus torquent volutpat ligula inceptos.</p>
-      <p>Phasellus elit ac himenaeos id est vestibulum rutrum cursus torquent, mattis ridiculus justo adipiscing senectus suscipit scelerisque mi ornare, ex nullam interdum feugiat amet vel lectus magna. Ante montes cubilia tortor primis ac nostra platea ex, lobortis maecenas rhoncus mi sagittis dictum quis, ridiculus dapibus eros odio tristique vel ligula.</p>
+
+
+
+
+
+      <h2>Overview</h2>
+
+      <p>Checkboxland is a JavaScript library for rendering things as HTML checkboxes, and embedding them in a webpage.</p>
+
+      <p>You can use it to display animations, text, and arbitrary data. Checkboxland is dependency-free, framework-agnostic, and fun.</p>
+
+      <h2>Limitations</h2>
+
+      <p>Having lots of elements on a webpage <a href="https://web.dev/dom-size/">can impact runtime performance</a>. Checkboxes are no exception. Checkboxland attempts to mitigate some of these issues, but you'll likely run into performance issues if you are displaying large grids (1500+ checkboxes), and trying to update them rapidly.</p>
+
+      <p>For best results, stay below 1500 checkboxes. Some good sizes in this range include <code>32x32</code>, <code>48x24</code>, and <code>64x16</code>;</p>
+
+      <h2>Setup</h2>
+
+      <p>Install this package via npm:</p>
+
+      <pre><code>npm install checkboxland</code></pre>
+
+      <p>Import it into your application, and create a checkbox grid:</p>
+
+      <pre><code class="js language-js">import { Checkboxland } from 'checkboxland';
+
+// Creates a 16x16 checkbox grid inside `#my-container`.
+const cbl = new Checkboxland({ dimensions: '16x8', selector: '#my-container' });</code></pre>
+
+      <p>If no options are provided, the following defaults will be used:</p>
+
+      <ul>
+      <li><code>dimensions</code>: <code>8x8</code></li>
+
+      <li><code>selector</code>: <code>#checkboxland</code></li>
+      </ul>
+
+      <h2 id="an-example">An Example</h2>
+
+      <p>Let's display a heart on a checkbox grid:</p>
+
+      <pre><code class="js language-js">import { Checkboxland } from 'checkboxland';
+
+const cbl = new Checkboxland({ dimensions: '8x8', selector: '#my-container' });
+
+// Create a data representation of the heart.
+const heart = [
+  [0,1,1,0,0,1,1,0],
+  [1,0,0,1,1,0,0,1],
+  [1,0,0,0,0,0,0,1],
+  [1,0,0,0,0,0,0,1],
+  [0,1,0,0,0,0,1,0],
+  [0,0,1,0,0,1,0,0],
+  [0,0,0,1,1,0,0,0],
+  [0,0,0,0,0,0,0,0]
+];
+
+// This updates the grid with the data we provided.
+cbl.setData(heart);</code></pre>
+
+      <p><img src="docs/img/checkbox-heart.png" style="width:115px; height:102px" alt="a grid of checkboxes displaying the shape of a heart" /></p>
+
+      <p>So what happened?</p>
+
+      <p>We created a JavaScript matrix (an array of arrays) to represent the grid. Each location in the matrix represents a checkbox, where:</p>
+
+      <ul>
+      <li>0 = Unchecked</li>
+
+      <li>1 = Checked</li>
+      </ul>
+
+      <p>By passing this matrix to our <code>setData()</code> method, we update the checkbox grid on the page.</p>
+
+      <p>For more ways to interact with the checkbox grid, see the API methods below.</p>
+
+      <h2>Low-level API</h2>
+
+      <p>The low-level API lets you update the checkbox grid with raw data.</p>
+
+      <h3>getCheckboxValue</h3>
+
+      <p>Gets the value of a single checkbox in the checkbox grid.</p>
+
+      <p>Requires an (x,y) coordinate to identify the checkbox.</p>
+
+      <p><em>Note: the top-left corner of the grid represents the origin (0,0)</em>.</p>
+
+      <pre><code>.getCheckboxValue(x, y)</code></pre>
+
+      <h4 id="getcheckboxvalue-arguments">Arguments</h4>
+
+      <ul>
+      <li><code>x</code> (number): The x-coordinate of the checkbox you are targeting.</li>
+
+      <li><code>y</code> (number): The y-coordinate of the checkbox you are targeting.</li>
+      </ul>
+
+      <h4 id="getcheckboxvalue-returns">Returns</h4>
+
+      <p>(number): Returns a 0 or a 1, where 0 represents "unchecked" and 1 represents "checked"</p>
+
+      <h3>setCheckboxValue</h3>
+
+      <p>Sets the value of a single checkbox in the checkbox grid.</p>
+
+      <p>Requires an (x, y) coordinate to identify the checkbox.</p>
+
+      <p><em>Note: the top-left corner of the grid represents the origin (0,0)</em>.</p>
+
+      <pre><code>.setCheckboxValue(x, y, value)</code></pre>
+
+      <h4 id="setcheckboxvalue-arguments">Arguments</h4>
+
+      <ul>
+      <li><code>x</code> (number): The x-coordinate of the checkbox you are targeting.</li>
+
+      <li><code>y</code> (number): The y-coordinate of the checkbox you are targeting.</li>
+
+      <li><code>value</code> (number): The value of the checkbox you are setting. Must be a 0 or a 1, (since 0 represents "unchecked" and 1 represents "checked").</li>
+      </ul>
+
+      <h4 id="setcheckboxvalue-returns">Returns</h4>
+
+      <p>Nothing</p>
+
+      <h3>getData</h3>
+
+      <p>Get a data matrix representing the current state of the checkbox grid.</p>
+
+      <pre><code>.getData()</code></pre>
+
+      <h4 id="getdata-arguments">Arguments</h4>
+
+      <p>None</p>
+
+      <h4 id="getdata-returns">Returns</h4>
+
+      <p>(array): A matrix (array of arrays), representing the full state of the checkbox grid.</p>
+
+      <h3>setData</h3>
+
+      <p>Sets the values in the checkbox grid to those in the provided matrix.</p>
+
+      <p>The matrix will overwrite the existing data in the grid, starting at the top-left corner.</p>
+
+      <pre><code>.setData(data)</code></pre>
+
+      <h4  id="setdata-arguments">Arguments</h4>
+
+      <ul>
+      <li><code>data</code> (array): A matrix (array of arrays), representing the intended state of the checkbox grid.</li>
+      </ul>
+
+      <h4 id="setdata-returns">Returns</h4>
+
+      <p>Nothing</p>
+
+      <h3>clearData</h3>
+
+      <p>Clears all data from the checkbox grid. Result: all checkboxes in the grid become unchecked.</p>
+
+      <pre><code>.clearData()</code></pre>
+
+      <h4 id="cleardata-arguments">Arguments</h4>
+
+      <p>None</p>
+
+      <h4 id="cleardata-returns">Returns</h4>
+
+      <p>Nothing</p>
+
+      <h2>Extended API</h2>
+
+      <p>Checkboxland comes with built-in plugins that extend the API with higher-level functionality. The following are the API methods provided by these "core" plugins.</p>
+
+      <h3>print</h3>
+
+      <p>Prints text to the checkbox grid. This text overwrites the existing checkbox grid, starting in the top left corner.</p>
+
+      <p>Most of the characters in <a href="https://github.com/bryanbraun/checkboxland/blob/master/src/plugins/print/font-5x7.js">the default font</a> are 5x7 checkboxes in size. Supported characters include the following:</p>
+
+      <pre><code>ABCDEFGHIJKLMNOPQRSTUVWXYZ
+abcdefghijklmnopqrstuvwxyz
+0123456789`~!@#$%^&amp;*()-_+=[]{}|\/;:"',.&lt;&gt;?</code></pre>
+
+      <p>For a working example, see <a href="https://github.com/bryanbraun/checkboxland/blob/master/docs/demos/textbox/demo.js">the textbox demo</a>.</p>
+
+      <pre><code>.print(text, [options])</code></pre>
+
+      <h4 id="print-arguments">Arguments</h4>
+
+      <ul>
+      <li><code>text</code> (string): The text you want printed to the checkbox grid.</li>
+
+      <li><code>options</code> (object)
+
+
+      <ul>
+      <li><code>font</code> (object): An object containing character data for a custom font, if you want to use one. For an example, see <a href="https://github.com/bryanbraun/checkboxland/blob/master/docs/demos/clock/demo.js">the clock demo</a>.</li>
+
+      <li><code>dataOnly</code> (boolean): If <code>true</code>, returns a data matrix for the text instead of updating the checkbox grid. <em>Default: <code>false</code></em></li></ul>
+      </li>
+      </ul>
+
+      <h4 id="print-arguments">Returns</h4>
+
+      <p>None, UNLESS <code>options.dataOnly</code> is set to <code>true</code>. If this is the case, it returns a matrix (array of array).</p>
+
+      <h3>marquee</h3>
+
+      <p>Animates a block of data, by making it scroll across the checkbox grid from right to left.</p>
+
+      <p>For an working example, see <a href="https://github.com/bryanbraun/checkboxland/blob/master/docs/demos/marquee/demo.js">the marquee demo</a>.</p>
+
+      <pre><code>.marquee(data, [options])</code></pre>
+
+      <h4 id="marquee-arguments">Arguments</h4>
+
+      <ul>
+      <li><code>data</code> (array): A matrix (array of arrays), representing the block of data you want to scroll across the grid.</li>
+
+      <li><code>options</code> (object)
+
+
+      <ul>
+      <li><code>repeat</code> (boolean): Repeat the animation, once it is complete. <em>Default: <code>false</code></em></li>
+
+      <li><code>interval</code> (number): The number of milliseconds between each step in the animation. <em>Default: <code>200</code></em></li>
+
+      <li><code>fillValue</code> (number): If the scrolling data doesn't fill the whole checkbox grid, this value is used to fill the leftover areas. <em>Default: <code>0</code></em></li>
+
+      <li><code>callback</code> (function): A callback to be executed when the animation is complete.</li></ul>
+      </li>
+      </ul>
+
+      <h4 id="marquee-returns">Returns</h4>
+
+      <p>Nothing</p>
+
+      <h3>transitionWipe</h3>
+
+      <p>Transition between the current checkbox grid state and a future state by wiping across the screen.</p>
+
+      <p>For a working example, see <a href="https://github.com/bryanbraun/checkboxland/blob/master/docs/demos/wipe/demo.js">the wipe demo</a>.</p>
+
+      <pre><code>.transitionWipe(newData, [options])</code></pre>
+
+      <h4 id="transitionwipe-arguments">Arguments</h4>
+
+      <ul>
+      <li><code>newData</code> (array): A matrix (array of arrays), representing the final state of the checkbox grid after the transition.</li>
+
+      <li><code>options</code> (object)
+
+
+      <ul>
+      <li><code>direction</code> (string): The direction of the wipe. Accepts <code>ltr</code> (left-to-right) and <code>rtl</code> (right-to-left). <em>Default: <code>ltr</code></em></li>
+
+      <li><code>interval</code> (number): The number of milliseconds between each step in the animation. <em>Default: <code>200</code></em></li>
+
+      <li><code>fillValue</code> (number): If the scrolling data doesn't fill the whole checkbox grid, this value is used to fill the leftover areas. <em>Default: <code>0</code></em></li>
+
+      <li><code>callback</code> (function): A callback to be executed when the animation is complete.</li></ul>
+      </li>
+      </ul>
+
+      <h4 id="transitionwipe-returns">Returns</h4>
+
+      <p>Nothing</p>
+
+      <h3>dataUtils</h3>
+
+      <p>Perform a variety of transformations (or actions) on a matrix of data, and return the result. These transformation do not affect the checkbox grid.</p>
+
+      <pre><code>.dataUtils(actionName, matrix, [options])</code></pre>
+
+      <h4 id="datautils-arguments">Arguments</h4>
+
+      <ul>
+      <li><code>actionName</code> (string): The name of the transformation you want to apply to your matrix.</li>
+
+      <li><code>matrix</code> (array): A matrix (array of arrays), representing the data you want to transform.</li>
+
+      <li><code>options</code> (object): Options for the transformation.</li>
+      </ul>
+
+      <p><em>Supported <code>actionName</code>s:</em></p>
+
+      <ul>
+      <li><code>invert</code>: Inverts the provided matrix (all 0s become 1s and vice-versa). No options supported.</li>
+
+      <li><code>pad</code>: Adds padding around the provided matrix. Options include:
+
+
+      <ul>
+      <li><code>top</code> (number): The number of rows of padding on the top.</li>
+
+      <li><code>bottom</code> (number): The number of rows of padding on the bottom.</li>
+
+      <li><code>left</code> (number): The number of columns of padding on the left.</li>
+
+      <li><code>right</code> (number): The number of columns of padding on the right.</li>
+
+      <li><code>all</code> (number): Sets this padding value on all sides of the matrix.</li></ul>
+      </li>
+      </ul>
+
+      <h4 id="datautils-returns">Returns</h4>
+
+      <p>(array): A matrix (array of arrays), representing the transformed data.</p>
+
+      <h2>Using Plugins</h2>
+
+      <p>Checkboxland supports plugins, which extend the API and provide higher-level functionality.</p>
+
+      <p>Here's an example on how use a plugin to extend Checkboxland:</p>
+
+      <pre><code class="js language-js">import { Checkboxland } from 'checkboxland';
+import { newFunctionality } from 'myPlugin';
+
+Checkboxland.extend(newFunctionality);
+
+const cbl = new Checkboxland();
+
+// Now we can run the newFunctionality
+cbl.newFunctionality();</code></pre>
+
+      <p>You can see <a href="https://github.com/bryanbraun/checkboxland/blob/master/src/index.js">an example of this in action, with Checkboxland's core plugins</a>.</p>
+
+      <h2>Creating a Plugin</h2>
+
+      <p>Checkboxland plugins are just JavaScript functions that get special access to Checkboxland data.</p>
+
+      <p>Plugins can access all of Checkboxland's properties and <a href="">low-level API methods</a> on the <code>this</code> object. This includes:</p>
+
+      <ul>
+      <li><code>this.displayEl</code> (object) - The stored DOM element for the checkbox grid</li>
+
+      <li><code>this.dimensions</code> (array) - The dimensions of the checkbox grid, formatted like <code>[x, y]</code></li>
+
+      <li><code>this.getCheckboxValue()</code> (function) - <a href="#getCheckboxValue">See getCheckboxValue()</a></li>
+
+      <li><code>this.setCheckboxValue()</code> (function) - <a href="#setCheckboxValue">See setCheckboxValue()</a></li>
+
+      <li><code>this.getData()</code> (function) - <a href="#getData">See getData()</a></li>
+
+      <li><code>this.setData()</code> (function) - <a href="#setData">See setData()</a></li>
+
+      <li><code>this.clearData()</code> (function) - <a href="#clearData">See clearData()</a></li>
+      </ul>
+
+      <p><em>Note: do not access Checkboxland's internal <code>this._data</code> object directly. Instead, use <code>this.getData()</code> and <code>this.setData()</code>.</em></p>
+
+      <h3 id="an-example-plugin">An Example</h3>
+
+      <p>Here's an example of a plugin that logs various pieces of data to the JavaScript console:</p>
+
+      <pre><code class="js language-js">import { Checkboxland } from 'checkboxland';
+
+// Define the plugin's functionality.
+// The function name 'logData' becomes the api method name.
+const myPlugin = function logData(propertyName) {
+  if (propertyName === 'element') {
+    console.log(this.displayEl);
+  } else
+  if (propertyName === 'dimensions') {
+    console.log(`width: ${dimensions[0]}, height: ${dimensions[1]}`);
+  } else
+  if (propertyName === 'matrix') {
+    console.log(this.getData());
+  }
+};
+
+Checkboxland.extend(myPlugin);
+
+const cbl = new Checkboxland({ dimensions: '4x2' });
+
+// Use the plugin
+cbl.logData('dimensions'); // =&gt; 'width: 4, height: 2'
+cbl.logData('element'); // =&gt; &lt;div id="checkboxland"&gt;...&lt;/div&gt;
+cbl.logData('matrix'); // =&gt; (2) [Array(4), Array(4)]</code></pre>
+
+      <p><em>Note: your function must have a name.</em> If you try to use an anonymous function as a plugin, Checkboxland will throw an error.</p>
+
+      <p>For more plugin examples, see <a href="https://github.com/bryanbraun/checkboxland/tree/master/src/plugins">these plugins built into Checkboxland</a>.</p>
+
+      <hr />
+
+
+
+
 
       <div class="rc-text">
         <a href="http://www.recurse.com" title="Made with love at the Recurse Center">
@@ -105,6 +495,9 @@
     </main>
   </div>
 
+  <a href="https://github.com/bryanbraun/checkboxland" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.2/anchor.min.js"></script>
   <script type="module" src="docs/js/index.js"></script>
 </body>
 

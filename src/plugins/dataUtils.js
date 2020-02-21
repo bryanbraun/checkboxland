@@ -15,13 +15,13 @@ function invert(matrix) {
   });
 }
 
-function pad(matrix, options = 1) {
-  const isPaddingAllSidesEqually = Number.isInteger(options);
+function pad(matrix, options = {}) {
+  const isPaddingAllSidesEqually = Number.isInteger(options.all);
 
-  const topPadding = isPaddingAllSidesEqually ? options : options.top;
-  const rightPadding = isPaddingAllSidesEqually ? options : options.right;
-  const bottomPadding = isPaddingAllSidesEqually ? options : options.bottom;
-  const leftPadding = isPaddingAllSidesEqually ? options : options.left;
+  const topPadding = isPaddingAllSidesEqually ? options.all : options.top;
+  const rightPadding = isPaddingAllSidesEqually ? options.all : options.right;
+  const bottomPadding = isPaddingAllSidesEqually ? options.all : options.bottom;
+  const leftPadding = isPaddingAllSidesEqually ? options.all : options.left;
 
   // Create a new matrix with left and right padding.
   let newMatrix = matrix.map((row) => {

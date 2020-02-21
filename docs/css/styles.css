@@ -8,6 +8,7 @@
   /* fonts */
   --cbl-display-font: 'Blinker', 'Geneva', Tahoma, sans-serif;
   --cbl-body-font: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  --cbl-monospace: 'Inconsolata', 'Menlo', 'Courier New', 'Courier', monospace;
 
   /* widths */
   --sidebar-width: 200px;
@@ -29,18 +30,49 @@ body {
   background: linear-gradient(90deg, var(--cbl-white) 0%, var(--cbl-white) 50%, var(--cbl-bg-gray) 50%, var(--cbl-bg-gray) 100%);
 }
 
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #ccc;
+  margin: 2.5rem 0;
+  padding: 0;
+}
+
+a {
+  color: var(--checkbox-blue);
+}
+
+code,
+samp,
+kbd {
+  font-family: var(--cbl-monospace);
+  font-size: 0.875rem;
+  text-align: left;
+  padding: 0 3px;
+}
+
+pre {
+  font-family: var(--cbl-monospace);
+  font-size: 0.875rem;
+  margin: 1.75rem 0;
+  overflow: auto;
+  padding: 0 0 0 1.5rem;
+}
+
+/* Override 'code' css rules if using 'pre > code' markup. */
+pre > code {
+  padding: 0px;
+}
+
 /* single margin directions */
 h1,h2,h3,h4,h5,h6,hgroup,ul,ol,dd,p,figure,pre,table,fieldset,hr {
   margin-top: 0;
   margin-bottom: 1.4rem;
 }
 
-h1,h2,h3,h4,h5,h6, {
+h1,h2,h3,h4,h5,h6 {
   font-family: var(--cbl-display-font);
-}
-
-a {
-  color: var(--checkbox-blue);
 }
 
 
@@ -83,6 +115,9 @@ a {
 .sidebar li > ul {
   margin-left: 1rem;
 }
+.sidebar li > ul:last-child {
+  margin-bottom: 0.5rem;
+}
 
 .checkbox-logo {
   margin-bottom: 3rem;
@@ -97,18 +132,55 @@ a {
   background: #fafafa;
   margin-left: var(--sidebar-width);
 }
+.main h2 {
+  /* I'm breaking my own 'single-direction margins' rule here
+     to add a bit of space in between 'sections' of the docs,
+     without adding additional markup. Sorry! */
+  padding-top: 1em;
+}
+
+/* adjust page layout for mobile */
+@media (max-width: 33rem) { /* 33rem = 528px */
+  .sidebar {
+    position: initial;
+    overflow: initial;
+    width: 100%;
+  }
+  .checkbox-logo {
+    display: none;
+  }
+  .main {
+    margin-left: 0;
+  }
+}
 
 .title {
   font-family: var(--cbl-display-font);
-  font-size: 4.5rem;
-  line-height: 1;
+  font-size: 5.5rem;
+  letter-spacing: 1px;
+  line-height: 0.8;
   word-break: break-all;
+  margin-bottom: 1.125rem;
 }
 
 .subtitle {
   font-family: var(--cbl-display-font);
-  font-size: 1.675rem;
-  margin-bottom: 2.5rem;
+  font-size: 2rem;
+  margin-bottom: 2.25rem;
+  letter-spacing: 0.5px;
+}
+h2.subtitle {
+  /* needed a bit more specificity for this rule */
+  padding: 0;
+}
+
+@media (max-width: 50rem) { /* 50rem = 800px */
+  .title {
+    font-size: 2.5rem;
+  }
+  .subtitle {
+    font-size: 1.25rem;
+  }
 }
 
 .demobox {
@@ -123,8 +195,10 @@ a {
 }
 
 .demobox label {
+  font-family: var(--cbl-display-font);
   display: inline-block;
   padding: 4px 16px;
+  margin-bottom: 0.5rem;
   cursor: pointer;
   border-radius: 999px;
 }
@@ -139,6 +213,12 @@ a {
 .demobox input[type="radio"]:checked + label {
   background-color: var(--checkbox-blue);
   color: white;
+}
+.demobox input[type="radio"]:focus + label {
+  box-shadow: 0 0 4px 3px #23539e;
+}
+.no-focus .demobox input[type="radio"]:focus + label {
+  box-shadow: none;
 }
 
 
