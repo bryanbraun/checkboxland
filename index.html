@@ -94,7 +94,9 @@
 
       <p>Checkboxland is a JavaScript library for rendering things as HTML checkboxes, and embedding them in a webpage.</p>
 
-      <p>You can use it to display animations, text, and arbitrary data. Checkboxland is dependency-free, framework-agnostic, and fun.</p>
+      <p>You can use it to display animations, text, and arbitrary data. It also supports plugins, so you can build more powerful APIs on top of it.</p>
+
+      <p>Checkboxland is dependency-free, framework-agnostic, and fun! 🙃</p>
 
       <h2>Limitations</h2>
 
@@ -129,7 +131,7 @@ const cbl = new Checkboxland({ dimensions: '16x8', selector: '#my-container' });
 
       <pre><code class="js language-js">import { Checkboxland } from 'checkboxland';
 
-const cbl = new Checkboxland({ dimensions: '8x8', selector: '#my-container' });
+const cbl = new Checkboxland({ dimensions: '8x7', selector: '#my-container' });
 
 // Create a data representation of the heart.
 const heart = [
@@ -140,7 +142,6 @@ const heart = [
   [0,1,0,0,0,0,1,0],
   [0,0,1,0,0,1,0,0],
   [0,0,0,1,1,0,0,0],
-  [0,0,0,0,0,0,0,0]
 ];
 
 // This updates the grid with the data we provided.
