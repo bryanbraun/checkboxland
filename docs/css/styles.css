@@ -1,26 +1,42 @@
+:root {
+  /* colors */
+  --checkbox-blue: #3c88fd;
+  --cbl-bg-gray: #fafafa;
+  --cbl-white: white;
+  --cbl-text: #505e71;
+
+  /* fonts */
+  --cbl-display-font: 'Blinker', 'Geneva', Tahoma, sans-serif;
+  --cbl-body-font: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+
+  /* widths */
+  --sidebar-width: 200px;
+}
+
 html {
   box-sizing: border-box;
   font-size: 16px;
-  line-height: 1.5;
+  line-height: 1.4;
 }
 *, *:before, *:after {
   box-sizing: inherit;
 }
 
 body {
-  font-family: 'Geneva', Tahoma, sans-serif;
+  font-family: var(--cbl-body-font);
   margin: 0;
-  color: #505E71;
-}
-
-:root {
-  --checkbox-blue: #3c88fd;
+  color: var(--cbl-text);
+  background: linear-gradient(90deg, var(--cbl-white) 0%, var(--cbl-white) 50%, var(--cbl-bg-gray) 50%, var(--cbl-bg-gray) 100%);
 }
 
 /* single margin directions */
 h1,h2,h3,h4,h5,h6,hgroup,ul,ol,dd,p,figure,pre,table,fieldset,hr {
   margin-top: 0;
-  margin-bottom:1.5rem;
+  margin-bottom: 1.4rem;
+}
+
+h1,h2,h3,h4,h5,h6, {
+  font-family: var(--cbl-display-font);
 }
 
 a {
@@ -31,18 +47,46 @@ a {
 /* basic component styles */
 
 .page {
-  display: grid;
-  grid-template-columns: 250px auto;
-  grid-template-rows: 100vh;
+  margin: 0 auto;
+  max-width: 800px;
 }
 
 .sidebar {
-  padding: 2rem 1rem 1rem;
+  font-family: var(--cbl-display-font);
+  background-color: white;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  overflow: scroll;
+
+  width: var(--sidebar-width);
+  padding: 2rem 2rem 1rem;
+}
+.sidebar nav {
+  margin-bottom: 1.5rem;
+}
+.sidebar h3 {
+  line-height: 1;
+  margin-bottom: 0.75rem;
+}
+.sidebar ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.sidebar li {
+  font-size: 0.875rem;
+}
+.sidebar li:not(:last-child) {
+  margin-bottom: 0.125rem;
+}
+.sidebar li > ul {
+  margin-left: 1rem;
 }
 
 .checkbox-logo {
-  text-align: center;
   margin-bottom: 3rem;
+  height: 120px; /* prevents page shift once the checkboxes load */
 }
 .checkbox-logo input {
   cursor: pointer;
@@ -51,31 +95,43 @@ a {
 .main {
   padding: 2rem;
   background: #fafafa;
+  margin-left: var(--sidebar-width);
 }
 
 .title {
-  font-size: 4rem;
+  font-family: var(--cbl-display-font);
+  font-size: 4.5rem;
   line-height: 1;
+  word-break: break-all;
 }
 
 .subtitle {
-  font-size: 1.45rem;
+  font-family: var(--cbl-display-font);
+  font-size: 1.675rem;
+  margin-bottom: 2.5rem;
+}
+
+.demobox {
   margin-bottom: 3rem;
 }
 
 .demoframe {
-  width: 600px;
+  width: 100%;
   height: 180px;
   border: none;
   margin-bottom: 1.5rem;
 }
 
 .demobox label {
-  padding: 2px 14px;
+  display: inline-block;
+  padding: 4px 16px;
   cursor: pointer;
-  border: 2px solid transparent;
   border-radius: 999px;
 }
+.demobox label:hover {
+  background-color: #f0f0f0;
+}
+
 .demobox label:not(:last-child) {
   margin-right: 0.25rem;
 }
@@ -100,7 +156,6 @@ a {
 
 /* Recurse Center Badge */
 .rc-text {
-  font-family: 'Open Sans', sans-serif;
   font-size: 0.85em;
   cursor: pointer;
   display: inline-block;
@@ -114,7 +169,7 @@ a {
 }
 
 .rc-text a {
-  color: black;
+  color: var(--cbl-text);
   text-decoration: none;
 }
 

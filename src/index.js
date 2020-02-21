@@ -1,4 +1,4 @@
-import { Checkboxland } from './checkboxland-core.js';
+import { Checkboxland } from './checkboxland.js';
 import { print } from './plugins/print/print.js';
 import { marquee } from './plugins/marquee.js';
 import { transitionWipe } from './plugins/transitionWipe.js';

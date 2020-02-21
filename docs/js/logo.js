@@ -1,4 +1,4 @@
-import { Checkboxland } from '../../lib/checkboxland.js'
+import { Checkboxland } from '../../src/index.js'
 
 function init() {
   const selector = '#logo';

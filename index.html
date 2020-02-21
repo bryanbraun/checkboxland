@@ -17,34 +17,62 @@
   <!-- <meta property="og:url" content="https://musicboxfun.com"> -->
   <meta property="og:type" content="website">
 
-  <link rel="icon" type="image/png" sizes="16x16" href="favicon.png">
-  <link href="https://fonts.googleapis.com/css?family=Gudea:400,700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="styles.css" />
+  <link rel="icon" type="image/png" sizes="16x16" href="docs/favicon.png">
+  <link href="https://fonts.googleapis.com/css?family=Blinker:400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="docs/css/styles.css" />
 </head>
 
 <body>
   <div class="page">
     <aside class="sidebar">
       <div id="logo" class="checkbox-logo"></div>
-      <h3>The Basics</h3>
-      <ul>
-        <li><a href="#">Getting Started</a></li>
-        <li><a href="#">Methods</a></li>
-      </ul>
+      <nav>
+        <h3>The Basics</h3>
+        <ul>
+          <li><a href="#">Overview</a></li>
+          <li><a href="#">Setup</a></li>
+          <li><a href="#">Limitations</a></li>
+          <li><a href="#">An Example</a></li>
+        </ul>
+      </nav>
 
-      <h3>Advanced Usage</h3>
-      <ul>
-        <li><a href="#">Using Plugins</a></li>
-        <li><a href="#">Creating a Plugin</a></li>
-      </ul>
+      <nav>
+        <h3>Methods</h3>
+        <ul>
+          <li><a href="#">Low-level API</a>
+            <ul>
+              <li><a href="#">getCheckboxValue</a></li>
+              <li><a href="#">setCheckboxValue</a></li>
+              <li><a href="#">getData</a></li>
+              <li><a href="#">setData</a></li>
+              <li><a href="#">clearData</a></li>
+            </ul>
+          </li>
+          <li><a href="#">Extended API</a>
+            <ul>
+              <li><a href="#">print</a></li>
+              <li><a href="#">marquee</a></li>
+              <li><a href="#">transitionWipe</a></li>
+              <li><a href="#">dataUtils</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
 
+      <nav>
+        <h3>Advanced Usage</h3>
+        <ul>
+          <li><a href="#">Using Plugins</a></li>
+          <li><a href="#">Creating a Plugin</a></li>
+        </ul>
+      </nav>
     </aside>
 
     <main class="main">
       <h1 class="title">Checkboxland</h1>
       <h2 class="subtitle">Render anything as HTML checkboxes</h2>
       <div id="demobox" class="demobox">
-        <iframe src="demos/clock/index.html" frameborder="0" scrolling="no" class="demoframe"></iframe>
+        <iframe src="docs/demos/clock/index.html" frameborder="0" scrolling="no" class="demoframe"></iframe>
         <form id="demoboxForm">
           <input type="radio" id="clock-demo" class="visuallyhidden" name="demoRadios" value="clock" checked="true" />
           <label for="clock-demo">Clock</label>
@@ -56,6 +84,10 @@
           <label for="wipe-demo">Wipe</label>
         </form>
       </div>
+
+      <p>Volutpat duis quisque feugiat efficitur ultrices tempus et augue habitant nec tristique integer, nostra nascetur proin ullamcorper vehicula enim rutrum consectetur est amet.</p>
+      <p>Luctus ridiculus mus phasellus elementum penatibus elit justo mollis, congue auctor purus rhoncus enim blandit hac est, lobortis feugiat tincidunt parturient commodo ultricies eu. Sapien mauris porttitor donec pulvinar ridiculus vehicula diam laoreet, parturient sollicitudin ut felis vitae malesuada praesent facilisis pellentesque, massa sagittis sociosqu fermentum habitasse posuere facilisi. Lectus libero felis curae id vestibulum iaculis aliquam malesuada dui, lacus placerat habitant odio dapibus netus ultricies senectus urna, risus vitae nascetur proin natoque praesent inceptos congue. Vel imperdiet rhoncus magna malesuada venenatis class sapien lectus mattis, neque odio cras vitae ad curae suspendisse aliquam lorem, dis efficitur mus netus torquent volutpat ligula inceptos.</p>
+      <p>Phasellus elit ac himenaeos id est vestibulum rutrum cursus torquent, mattis ridiculus justo adipiscing senectus suscipit scelerisque mi ornare, ex nullam interdum feugiat amet vel lectus magna. Ante montes cubilia tortor primis ac nostra platea ex, lobortis maecenas rhoncus mi sagittis dictum quis, ridiculus dapibus eros odio tristique vel ligula.</p>
 
       <div class="rc-text">
         <a href="http://www.recurse.com" title="Made with love at the Recurse Center">
@@ -73,7 +105,7 @@
     </main>
   </div>
 
-  <script type="module" src="scripts.js"></script>
+  <script type="module" src="docs/js/index.js"></script>
 </body>
 
 </html>

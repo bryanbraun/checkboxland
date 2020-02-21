@@ -3,7 +3,7 @@ function init() {
 
   document.forms.demoboxForm.addEventListener('change', function handleDemoChange(e) {
     if (e.target.name === 'demoRadios') {
-      const newIframeSrc = `demos/${e.target.value}/index.html`;
+      const newIframeSrc = `docs/demos/${e.target.value}/index.html`;
 
       iFrameEl.src = newIframeSrc;
     }

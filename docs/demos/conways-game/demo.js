@@ -1,8 +1,8 @@
-import { Checkboxland } from '../../../lib/checkboxland.js';
+import { Checkboxland } from '../../../src/index.js';
 import { life } from './conways.js';
 
-const width = 35;
-const height = 15;
+const width = 32;
+const height = 32;
 
 const cbl = new Checkboxland({ dimensions: `${width}x${height}` });
 

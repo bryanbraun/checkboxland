@@ -1,4 +1,4 @@
-import { Checkboxland } from '../../../lib/checkboxland.js';
+import { Checkboxland } from '../../../src/index.js';
 import { fourByEleven } from './font-4x11.js';
 
 const cbl = new Checkboxland({ dimensions: '35x15' });

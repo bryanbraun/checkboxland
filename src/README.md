@@ -1,4 +1,4 @@
-# Challenges
+# Developer Notes and Challenges
 
 Here's some documentation on some challenges we've faced and solutions we've tried.
 
@@ -19,6 +19,8 @@ So, let's fix this by not making them inline-block! Unfortunately, we don't have
 2. `inline` - *Browsers won't let you do this one*! It still treats them like inline-block (see the computed properties).
 3. `flex` - This works! However, I've noticed a noticeable performance hit on very large grids (Composite Layering taking up to twice as long on a 60x60 grid, for example).
 4. `grid` - Same as flex, but with even worse performance.
+
+For now, I'm using inline-block with some styles (like `vertical-align: top`) that minimizes most of the cross-browser differences.
 
 ## Performance
 
@@ -49,6 +51,7 @@ We *did* notice that using flex/grid to arrange the checkboxes has a performance
 
 ### Future performance ideas
 
+- Todo: Create a perf-test page with a pre-built scenario that makes it easier to profile and test solutions.
 - Support rendering checkboxes to canvas (for extra large grids)?
   - Prototype here: https://codepen.io/bryanbraun/pen/abOZapL
   - Wouldn't be interactive.
