@@ -1,5 +1,5 @@
 {
-  "name": "Checkboxland",
+  "name": "checkboxland",
   "version": "1.0.0",
   "description": "Render anything as HTML checkboxes",
   "author": "Bryan Braun",
@@ -15,8 +15,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "pika build",
-    "prepublish": "npm run build",
     "publish": "pika publish",
+    "version": "npm run build",
     "dev": "http-server"
   },
   "@pika/pack": {
