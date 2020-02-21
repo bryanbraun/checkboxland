@@ -1,6 +1,6 @@
 {
   "name": "checkboxland",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Render anything as HTML checkboxes",
   "author": "Bryan Braun",
   "license": "MIT",
@@ -21,10 +21,24 @@
   },
   "@pika/pack": {
     "pipeline": [
-      ["@pika/plugin-standard-pkg", { "exclude": ["tests/**/*", "docs/**/*"] }],
-      ["@pika/plugin-build-web"],
-      ["pika-plugin-minify"],
-      ["@pika/plugin-build-types"]
+      [
+        "@pika/plugin-standard-pkg",
+        {
+          "exclude": [
+            "tests/**/*",
+            "docs/**/*"
+          ]
+        }
+      ],
+      [
+        "@pika/plugin-build-web"
+      ],
+      [
+        "pika-plugin-minify"
+      ],
+      [
+        "@pika/plugin-build-types"
+      ]
     ]
   },
   "devDependencies": {
