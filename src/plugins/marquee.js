@@ -1,4 +1,4 @@
-export function marquee(newData, options = {}) {
+function marquee(newData, options = {}) {
   const { interval = 200, repeat = false, fillValue = 0, callback = () => {} } = options;
 
   const numberOfRows = this.dimensions[1];
@@ -43,4 +43,9 @@ export function marquee(newData, options = {}) {
       currentIteration++;
     }
   }, interval);
+}
+
+export default {
+  name: 'marquee',
+  exec: marquee
 }

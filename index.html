@@ -13,7 +13,7 @@
 
   <meta property="og:title" content="Checkboxland">
   <meta property="og:description" content="Render anything as HTML checkboxes">
-  <meta property="og:url" content="https://braynbraun.com/checkboxland/">
+  <meta property="og:url" content="https://bryanbraun.com/checkboxland/">
   <meta property="og:type" content="website">
   <!-- <meta property="og:image" content="docs/img/og-image.png"> -->
 
@@ -80,6 +80,8 @@
           <label for="conways-demo">Game of Life</label>
           <input type="radio" id="marquee-demo" class="visuallyhidden" name="demoRadios" value="marquee" />
           <label for="marquee-demo">Marquee</label>
+          <input type="radio" id="icons-demo" class="visuallyhidden" name="demoRadios" value="icons" />
+          <label for="icons-demo">Icons</label>
           <input type="radio" id="wipe-demo" class="visuallyhidden" name="demoRadios" value="wipe" />
           <label for="wipe-demo">Wipe</label>
         </form>
@@ -92,7 +94,7 @@
 
       <h2>Overview</h2>
 
-      <p>Checkboxland is a JavaScript library for rendering things as HTML checkboxes, and embedding them in a webpage.</p>
+      <p>Checkboxland is a JavaScript library for rendering anything as HTML checkboxes.</p>
 
       <p>You can use it to display animations, text, and arbitrary data. It also supports plugins, so you can build more powerful APIs on top of it.</p>
 
@@ -102,7 +104,7 @@
 
       <p>Having lots of elements on a webpage <a href="https://web.dev/dom-size/">can impact runtime performance</a>. Checkboxes are no exception. Checkboxland attempts to mitigate some of these issues, but you'll likely run into performance issues if you are displaying large grids (1500+ checkboxes), and trying to update them rapidly.</p>
 
-      <p>For best results, stay below 1500 checkboxes. Some good sizes in this range include <code>32x32</code>, <code>48x24</code>, and <code>64x16</code>;</p>
+      <p>For best results, stay below 1500 checkboxes. Some good sizes in this range include <code>32x32</code>, <code>48x24</code>, and <code>64x16</code>.</p>
 
       <h2>Setup</h2>
 
@@ -154,9 +156,9 @@ cbl.setData(heart);</code></pre>
       <p>We created a JavaScript matrix (an array of arrays) to represent the grid. Each location in the matrix represents a checkbox, where:</p>
 
       <ul>
-      <li>0 = Unchecked</li>
+      <li>0 = <img src="docs/img/unchecked.png" style="width:16px; height:16px; vertical-align: middle;" alt="a single unchecked checkbox" /> (unchecked)</li>
 
-      <li>1 = Checked</li>
+      <li>1 = <img src="docs/img/checked.png" style="width:16px; height:16px; vertical-align: middle;" alt="a single checked checkbox" /> (checked)</li>
       </ul>
 
       <p>By passing this matrix to our <code>setData()</code> method, we update the checkbox grid on the page.</p>
@@ -403,19 +405,22 @@ abcdefghijklmnopqrstuvwxyz
 
       <p>Checkboxland supports plugins, which extend the API and provide higher-level functionality.</p>
 
-      <p>Here's an example on how use a plugin to extend Checkboxland:</p>
+      <p>Here's a (realistic, but fake) example on how use a plugin to extend Checkboxland:</p>
 
       <pre><code class="js language-js">import { Checkboxland } from 'checkboxland';
-import { newFunctionality } from 'myPlugin';
+import mirror from 'checkboxland-mirror';
 
-Checkboxland.extend(newFunctionality);
+Checkboxland.extend(mirror);
 
 const cbl = new Checkboxland();
 
-// Now we can run the newFunctionality
-cbl.newFunctionality();</code></pre>
+// Mirrors the data on the grid
+cbl.mirror();</code></pre>
 
-      <p>You can see <a href="https://github.com/bryanbraun/checkboxland/blob/master/src/index.js">an example of this in action, with Checkboxland's core plugins</a>.</p>
+      <p>You can see <a href="https://github.com/bryanbraun/checkboxland/blob/master/src/index.js">more examples of plugins being used in Checkboxland's core files</a>.</p>
+
+      <h3>Existing Plugins</h3>
+      <p><em>(if you write a useful 3rd-party plugin for Checkboxland, I'll list it here)</em></p>
 
       <h2>Creating a Plugin</h2>
 
@@ -447,30 +452,31 @@ cbl.newFunctionality();</code></pre>
 
       <pre><code class="js language-js">import { Checkboxland } from 'checkboxland';
 
-// Define the plugin's functionality.
-// The function name 'logData' becomes the api method name.
-const myPlugin = function logData(propertyName) {
-  if (propertyName === 'element') {
-    console.log(this.displayEl);
-  } else
-  if (propertyName === 'dimensions') {
-    console.log(`width: ${dimensions[0]}, height: ${dimensions[1]}`);
-  } else
-  if (propertyName === 'matrix') {
-    console.log(this.getData());
+// Define the plugin's name and the function to be executed.
+const myPlugin = {
+  name: 'logData',
+  exec: (propertyName) => {
+    if (propertyName === 'element') {
+      console.log(this.displayEl);
+    } else
+    if (propertyName === 'dimensions') {
+      console.log(`width: ${this.dimensions[0]}, height: ${this.dimensions[1]}`);
+    } else
+    if (propertyName === 'matrix') {
+      console.log(this.getData());
+    }
   }
-};
+}
 
+// Register the plugin
 Checkboxland.extend(myPlugin);
 
 const cbl = new Checkboxland({ dimensions: '4x2' });
 
-// Use the plugin
+// Call the plugin's function via its name.
 cbl.logData('dimensions'); // =&gt; 'width: 4, height: 2'
 cbl.logData('element'); // =&gt; &lt;div id="checkboxland"&gt;...&lt;/div&gt;
 cbl.logData('matrix'); // =&gt; (2) [Array(4), Array(4)]</code></pre>
-
-      <p><em>Note: your function must have a name.</em> If you try to use an anonymous function as a plugin, Checkboxland will throw an error.</p>
 
       <p>For more plugin examples, see <a href="https://github.com/bryanbraun/checkboxland/tree/master/src/plugins">these plugins built into Checkboxland</a>.</p>
 

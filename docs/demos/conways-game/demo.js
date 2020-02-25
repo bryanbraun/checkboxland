@@ -11,7 +11,6 @@ life.seed(width, height);
 cbl.setData(life.state);
 
 let interval = 200;
-let trueInterval = performance.now();
 
 function loop() {
   setTimeout(function timeoutFunc() {

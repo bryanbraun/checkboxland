@@ -55,12 +55,12 @@ export class Checkboxland {
     this.setData(emptyMatrix);
   }
 
-  static extend(fn) {
-    if (!fn.name) {
-      throw new Error('Your plugin must be a function with a "name" property.');
+  static extend(pluginObj = {}) {
+    if (!pluginObj.name || !pluginObj.exec) {
+      throw new Error('Your plugin must have a "name" and an "exec" function.');
     }
 
-    this.prototype[fn.name] = fn;
+    this.prototype[pluginObj.name] = pluginObj.exec;
   }
 }
 

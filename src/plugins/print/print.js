@@ -1,6 +1,6 @@
 import { fiveBySeven } from './font-5x7.js';
 
-export function print(text, options = {}) {
+function print(text, options = {}) {
   const textArray = text.split('');
   const font = options.font || fiveBySeven;
 
@@ -34,3 +34,7 @@ function _matrixConcat(mat1, mat2) {
   return newMatrix;
 }
 
+export default {
+  name: 'print',
+  exec: print
+}

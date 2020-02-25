@@ -4,11 +4,11 @@ const cbl = new Checkboxland({ dimensions: '44x15' });
 
 const initialMatrix = cbl.dataUtils('invert', cbl.getData());
 
-const secondMatrix = cbl.print(`Recurse`, { dataOnly: true });
+const secondMatrix = cbl.print(`Hello`, { dataOnly: true });
 const paddedSecondMatrix = cbl.dataUtils('pad', secondMatrix, { top: 2, left: 2 });
 
-const finalMatrix = cbl.print(`Center`, { dataOnly: true });
-const paddedFinalMatrix = cbl.dataUtils('pad', finalMatrix, { top: 6, left: 4 });
+const finalMatrix = cbl.print(`World`, { dataOnly: true });
+const paddedFinalMatrix = cbl.dataUtils('pad', finalMatrix, { top: 6, left: 10 });
 const invertedPaddedFinalMatrix = cbl.dataUtils('invert', paddedFinalMatrix);
 
 function transition1() {

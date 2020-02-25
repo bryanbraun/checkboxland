@@ -1,4 +1,4 @@
-export function dataUtils(actionName, matrix, options) {
+function dataUtils(actionName, matrix, options) {
   const actions = {
     invert,
     pad,
@@ -55,4 +55,9 @@ function pad(matrix, options = {}) {
   }
 
   return newMatrix
+}
+
+export default {
+  name: 'dataUtils',
+  exec: dataUtils
 }
