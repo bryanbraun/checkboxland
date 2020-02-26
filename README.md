@@ -44,6 +44,17 @@ cbl.setData(heart);
 
 <img src="docs/img/checkbox-heart.png" style="width:115px; height:102px" alt="a grid of checkboxes displaying the shape of a heart" />
 
+## Contributing
+
+Checkboxland is designed to be extendable. If you want to add a feature, first ask yourself if it could be done as an external plugin.
+
+If you contribution requires a change to the core library, follow these steps:
+
+1. Fork/Clone the repo.
+2. Make your changes on a feature branch.
+3. Run the docs site locally (`npm run dev`) to confirm that the demos still work as expected.
+4. Submit a Pull Request.
+
 ## License
 
 MIT

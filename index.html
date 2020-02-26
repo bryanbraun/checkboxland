@@ -122,10 +122,14 @@ const cbl = new Checkboxland({ dimensions: '16x8', selector: '#my-container' });
       <p>If no options are provided, the following defaults will be used:</p>
 
       <ul>
-      <li><code>dimensions</code>: <code>8x8</code></li>
+      <li><code>dimensions</code>: <code>'8x8'</code></li>
 
-      <li><code>selector</code>: <code>#checkboxland</code></li>
+      <li><code>selector</code>: <code>'#checkboxland'</code></li>
       </ul>
+
+      <p><em>Note: if you really want to load it with a <code>&lt;script&gt;</code> tag, consider one using <code>type="module</code></em>, as shown below:</p>
+
+      <pre><code class="language-markup">&lt;script type=&quot;module&quot;&gt;import {Checkboxland} from &apos;https://unpkg.com/checkboxland?module&apos;; window.Checkboxland = Checkboxland;&lt;/script&gt;</code></pre>
 
       <h2 id="an-example">An Example</h2>
 
@@ -408,13 +412,13 @@ abcdefghijklmnopqrstuvwxyz
       <p>Here's a (realistic, but fake) example on how use a plugin to extend Checkboxland:</p>
 
       <pre><code class="js language-js">import { Checkboxland } from 'checkboxland';
-import mirror from 'checkboxland-mirror';
+import mirrorPlugin from 'checkboxland-mirror';
 
-Checkboxland.extend(mirror);
+Checkboxland.extend(mirrorPlugin);
 
 const cbl = new Checkboxland();
 
-// Mirrors the data on the grid
+// Mirror the data on the grid
 cbl.mirror();</code></pre>
 
       <p>You can see <a href="https://github.com/bryanbraun/checkboxland/blob/master/src/index.js">more examples of plugins being used in Checkboxland's core files</a>.</p>

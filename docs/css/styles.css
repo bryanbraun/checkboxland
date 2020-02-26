@@ -4,6 +4,7 @@
   --cbl-bg-gray: #fafafa;
   --cbl-white: white;
   --cbl-text: #505e71;
+  --cbl-code-bg: #f1f1f1;
 
   /* fonts */
   --cbl-display-font: 'Blinker', /*iOS*/ "AvenirNextCondensed-Bold", /*MacOSX*/ 'HelveticaNeue-CondensedBold', /*Ubuntu*/ "Ubuntu Condensed", "Liberation Sans Narrow",  /*Windows*/ "Franklin Gothic Demi Cond", "Arial Narrow", /*Android*/ sans-serif-condensed, /*Fallback*/Arial, "Trebuchet MS", "Lucida Grande", Tahoma, Verdana, sans-serif;
@@ -49,7 +50,7 @@ kbd {
   font-family: var(--cbl-monospace);
   font-size: 0.875rem;
   text-align: left;
-  padding: 0 3px;
+  padding: 0 2px;
 }
 
 pre {
@@ -57,7 +58,8 @@ pre {
   font-size: 0.875rem;
   margin: 1.75rem 0;
   overflow: auto;
-  padding: 0 0 0 1.5rem;
+  padding: 0.5rem 0 0.5rem 0.75rem;
+  background-color: var(--cbl-code-bg);
 }
 
 /* Override 'code' css rules if using 'pre > code' markup. */
