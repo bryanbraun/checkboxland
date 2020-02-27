@@ -2,7 +2,9 @@
 
 <a href='http://www.recurse.com' title='Made with love at the Recurse Center'><img src='https://cloud.githubusercontent.com/assets/2883345/11325206/336ea5f4-9150-11e5-9e90-d86ad31993d8.png' height='20px'/></a>
 
-Checkboxland is a JavaScript library for rendering things as HTML checkboxes, and embedding them in a webpage.
+<img src="docs/img/checkboxland-banner.png" alt="a grid of checkboxes displaying the words 'Welcome to Checkboxland" />
+
+Checkboxland is a JavaScript library for rendering anything as HTML checkboxes.
 
 You can use it to display animations, text, and arbitrary data. It also supports plugins, so you can build more powerful APIs on top of it.
 
