@@ -48,7 +48,7 @@ function setInitialState() {
   snakeVector = 'right'; // possible: 'right' 'left' 'up' or 'down'
   snake = [{ x:14, y:7 }, { x:13, y:7 }, { x:12, y:7 }];
   apple = { x:24, y:7 };
-  gameMap = getEmptyGameMap(width, height);
+  gameMap = cbl.getEmptyMatrix();
   intervalId;
 }
 
@@ -154,7 +154,7 @@ function isSnakeCollision() {
 
 function redrawGameMap() {
   // clear the existing map
-  gameMap = getEmptyGameMap(width, height);
+  gameMap = cbl.getEmptyMatrix();
 
   // Draw the snake and apple on the map as-is.
   gameMap[apple.y][apple.x] = 2;
@@ -169,19 +169,6 @@ function redrawGameMap() {
 function gameOver() {
   clearInterval(intervalId);
   printGameOver();
-}
-
-function getEmptyGameMap(width, height) {
-  const matrix = [];
-
-  for (let i = 0; i < height; i++) {
-    matrix[i] = [];
-    for (let j = 0; j < width; j++) {
-      matrix[i][j] = 0;
-    }
-  }
-
-  return matrix;
 }
 
 function printGameOver() {

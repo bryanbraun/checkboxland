@@ -1,12 +1,14 @@
 export class Checkboxland {
   constructor(props = {}) {
+    if (typeof props.fillValue !== 'undefined') _checkForValidValue(props.fillValue);
+
     this.displayEl = document.querySelector(props.selector || '#checkboxland');
     this.dimensions = _textDimensionsToArray(props.dimensions || '8x8');
 
     // The data object. Don't access this directly. Use methods like getData() and setData() instead.
     // Maybe we can restrict access to this variable in the future, using Proxies. See examples here:
     // https://github.com/bryanbraun/music-box-fun/commit/f399255261e9b8ab9fb8c10edbbedd55a639e9d1
-    this._data = _getEmptyMatrix(this.dimensions[0], this.dimensions[1]);
+    this._data = this.getEmptyMatrix(props.fillValue || 0);
 
     _createInitialCheckboxDisplay(this.displayEl, this._data);
   }
@@ -22,12 +24,9 @@ export class Checkboxland {
   }
 
   setCheckboxValue(x, y, newValue) {
-    const isNewValueValid = (newValue === 0 || newValue === 1 || newValue === 2);
     const isWithinDisplay = (typeof this._data[y] !== 'undefined' && typeof this._data[y][x] !== 'undefined');
 
-    if (!isNewValueValid) {
-      throw new Error(`${newValue} is not a valid checkbox value`);
-    }
+    _checkForValidValue(newValue);
 
     if (!isWithinDisplay) return;
 
@@ -74,8 +73,23 @@ export class Checkboxland {
   }
 
   clearData() {
-    const emptyMatrix = _getEmptyMatrix(this.dimensions[0], this.dimensions[1]);
+    const emptyMatrix = this.getEmptyMatrix();
     this.setData(emptyMatrix);
+  }
+
+  // This kind of method makes more sense as a plugin but I needed to
+  // use it in the core library anyways so I decided to expose it here.
+  getEmptyMatrix(fillValue = 0, width = this.dimensions[0], height = this.dimensions[1]) {
+    const matrix = [];
+
+    for (let i = 0; i < height; i++) {
+      matrix[i] = [];
+      for (let j = 0; j < width; j++) {
+        matrix[i][j] = fillValue;
+      }
+    }
+
+    return matrix;
   }
 
   static extend(pluginObj = {}) {
@@ -94,17 +108,12 @@ export class Checkboxland {
 
 // Private helper functions
 
-function _getEmptyMatrix(width, height) {
-  const matrix = [];
-
-  for (let i = 0; i < height; i++) {
-    matrix[i] = [];
-    for (let j = 0; j < width; j++) {
-      matrix[i][j] = 0;
-    }
+function _checkForValidValue(value) {
+  if (value === 0 || value === 1 || value === 2) {
+    return;
   }
 
-  return matrix;
+  throw new Error(`${value} is not a valid checkbox value`);
 }
 
 function _textDimensionsToArray(textDimensions) {
@@ -132,10 +141,16 @@ function _createInitialCheckboxDisplay(displayEl, data) {
 
     rowData.forEach(cellData => {
       const checkboxEl = document.createElement('input');
+      const indeterminateVal = cellData === 2 ? true : false;
+      const checkedVal = indeterminateVal ? false : Boolean(cellData);
+
       checkboxEl.style.margin = 0;
       checkboxEl.style.verticalAlign = 'top';
       checkboxEl.type = 'checkbox';
       checkboxEl.tabIndex = '-1';
+      checkboxEl.checked = checkedVal;
+      checkboxEl.indeterminate = indeterminateVal;
+
       rowEl.appendChild(checkboxEl);
     });
 
