@@ -23,5 +23,3 @@ textboxEl2.addEventListener('input', (event) => {
   cbl2.setData(paddedData);
 });
 
-// for console scratchpad things
-window.Checkboxland = Checkboxland;

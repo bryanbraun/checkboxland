@@ -59,9 +59,7 @@ function updateQrCode(string) {
 
   const data = qrLib._oQRCode.modules;
   const qrData = convertMatrixToBinary(data);
-  const paddedQrData = cbl.dataUtils('pad', qrData, { left: 9 });
-
-  cbl.setData(paddedQrData);
+  cbl.setData(qrData, { x: 9 });
 }
 
 function convertMatrixToBinary(data) {

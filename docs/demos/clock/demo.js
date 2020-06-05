@@ -31,9 +31,7 @@ function getCurrentTimeString() {
 
 function updateClock() {
   const clockData = cbl.print(getCurrentTimeString(), { font: fourByEleven, dataOnly: true });
-  const paddedClockData = cbl.dataUtils('pad', clockData, { left: 3, top: 2 });
-  cbl.clearData();
-  cbl.setData(paddedClockData);
+  cbl.setData(clockData, { x: 3, y: 2, fillValue: 0 });
 }
 
 export {

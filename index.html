@@ -215,7 +215,7 @@ cbl.setData(heart);</code></pre>
 
       <p>Gets the value of a single checkbox in the checkbox grid.</p>
 
-      <p>Requires an (x,y) coordinate to identify the checkbox.</p>
+      <p>Requires an (x,y) coordinate to identify the checkbox location.</p>
 
       <p><em>Note: the top-left corner of the grid represents the origin (0,0)</em>.</p>
 
@@ -236,18 +236,18 @@ cbl.setData(heart);</code></pre>
 
       <p>Sets the value of a single checkbox in the checkbox grid.</p>
 
-      <p>Requires an (x, y) coordinate to identify the checkbox.</p>
+      <p>Requires an (x, y) coordinate to identify the checkbox location.</p>
 
       <p><em>Note: the top-left corner of the grid represents the origin (0,0)</em>.</p>
 
-      <pre><code>.setCheckboxValue(x, y, value)</code></pre>
+      <pre><code>.setCheckboxValue(x, y, newValue)</code></pre>
 
       <h4 id="setcheckboxvalue-arguments">Arguments</h4>
 
       <ul>
         <li><code>x</code> (number): The x-coordinate of the checkbox you are targeting.</li>
         <li><code>y</code> (number): The y-coordinate of the checkbox you are targeting.</li>
-        <li><code>value</code> (number): The value of the checkbox you are setting. Must be 0, 1, or 2 (0 represents "unchecked", 1 represents "checked", and 2 represents "indeterminate").</li>
+        <li><code>newValue</code> (number): The value of the checkbox you are setting. Must be 0, 1, or 2 (0 represents "unchecked", 1 represents "checked", and 2 represents "indeterminate").</li>
       </ul>
 
       <h4 id="setcheckboxvalue-returns">Returns</h4>
@@ -272,14 +272,21 @@ cbl.setData(heart);</code></pre>
 
       <p>Sets the values in the checkbox grid to those in the provided matrix.</p>
 
-      <p>The matrix will overwrite the existing data in the grid, starting at the top-left corner.</p>
+      <p>By default, the matrix will overwrite the existing data in the grid, starting at the top-left corner. Options exist for more targeted data setting.</p>
 
-      <pre><code>.setData(data)</code></pre>
+      <pre><code>.setData(data, [options])</code></pre>
 
       <h4  id="setdata-arguments">Arguments</h4>
 
       <ul>
-        <li><code>data</code> (array): A matrix (array of arrays), representing the intended state of the checkbox grid.</li>
+        <li><code>data</code> (array): A matrix (array of arrays), containing the data you want to set to the checkbox grid.</li>
+        <li><code>options</code> (object)
+          <ul>
+            <li><code>x</code> (number): The x-coordinate where you want to begin setting data. <em>Default: 0.</em></li>
+            <li><code>y</code> (number): The y-coordinate where you want to begin setting data. <em>Default: 0.</em></li>
+            <li><code>fillValue</code> (number): If the data you are setting won't fill the whole checkbox grid, you can optionally provide a checkbox value which will then be used to fill the leftover areas. <em>Default: <code>undefined</code>.</em></li>
+          </ul>
+        </li>
       </ul>
 
       <h4 id="setdata-returns">Returns</h4>
@@ -302,18 +309,18 @@ cbl.setData(heart);</code></pre>
 
       <h3>getEmptyMatrix</h3>
 
-      <p>A utility that returns an empty matrix (containing only <code>0</code>s), with the dimensions of the existing grid.</p>
+      <p>A utility that returns an empty matrix, with the dimensions of the existing grid.</p>
 
       <p>Optional parameters can be provided to change the pre-filled value, or the dimensions of the returned matrix.</p>
 
-      <pre><code>.getEmptyMatrix([fillValue],[width],[height])</code></pre>
+      <pre><code>.getEmptyMatrix([fillValue], [width], [height])</code></pre>
 
       <h4 id="cleardata-arguments">Arguments</h4>
 
       <ul>
-        <li><code>fillValue</code> (number): The value you want to pre-populate the returned matrix with. Defaults to 0.</li>
-        <li><code>width</code> (number): The width of the returned matrix (in columns). Defaults to the width of the existing grid.</li>
-        <li><code>height</code> (number): The height of the returned matrix (in rows). Defaults to the height of the existing grid.</li>
+        <li><code>fillValue</code> (number): The value you want to pre-populate the returned matrix with. <em>Defaults to 0.</em></li>
+        <li><code>width</code> (number): The width of the returned matrix (in columns). <em>Defaults to the width of the existing grid.</em></li>
+        <li><code>height</code> (number): The height of the returned matrix (in rows). <em>Defaults to the height of the existing grid.</em></li>
       </ul>
 
       <h4 id="cleardata-returns">Returns</h4>
@@ -370,7 +377,7 @@ abcdefghijklmnopqrstuvwxyz
           <ul>
             <li><code>repeat</code> (boolean): Repeat the animation, once it is complete. <em>Default: <code>false</code></em></li>
             <li><code>interval</code> (number): The number of milliseconds between each step in the animation. <em>Default: <code>200</code></em></li>
-            <li><code>fillValue</code> (number): If the scrolling data doesn't fill the whole checkbox grid, this value is used to fill the leftover areas. <em>Default: <code>0</code></em></li>
+            <li><code>fillValue</code> (number): If the scrolling data doesn't fill the whole checkbox grid, this checkbox value is used to fill the leftover areas. <em>Default: <code>0</code></em></li>
             <li><code>callback</code> (function): A callback to be executed when the animation is complete.</li>
           </ul>
         </li>
@@ -402,7 +409,7 @@ abcdefghijklmnopqrstuvwxyz
         <ul>
           <li><code>direction</code> (string): The direction of the wipe. Accepts <code>ltr</code> (left-to-right) and <code>rtl</code> (right-to-left). <em>Default: <code>ltr</code></em></li>
           <li><code>interval</code> (number): The number of milliseconds between each step in the animation. <em>Default: <code>200</code></em></li>
-          <li><code>fillValue</code> (number): If the scrolling data doesn't fill the whole checkbox grid, this value is used to fill the leftover areas. <em>Default: <code>0</code></em></li>
+          <li><code>fillValue</code> (number): If the scrolling data doesn't fill the whole checkbox grid, this checkbox value is used to fill the leftover areas. <em>Default: <code>0</code></em></li>
           <li><code>callback</code> (function): A callback to be executed when the animation is complete.</li>
         </ul>
       </li>

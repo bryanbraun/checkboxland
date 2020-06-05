@@ -14,7 +14,7 @@ export class Checkboxland {
   }
 
   getCheckboxValue(x, y) {
-    const isWithinDisplay = (typeof this._data[y] !== 'undefined' && typeof this._data[y][x] !== 'undefined');
+    const isWithinDisplay = (x >= 0 && y >= 0 && x < this.dimensions[0] && y < this.dimensions[1]);
 
     if (!isWithinDisplay) {
       throw new Error(`The location (x: ${x}, y: ${y}) is outside of this checkbox display`);
@@ -24,7 +24,7 @@ export class Checkboxland {
   }
 
   setCheckboxValue(x, y, newValue) {
-    const isWithinDisplay = (typeof this._data[y] !== 'undefined' && typeof this._data[y][x] !== 'undefined');
+    const isWithinDisplay = (x >= 0 && y >= 0 && x < this.dimensions[0] && y < this.dimensions[1]);
 
     _checkForValidValue(newValue);
 
@@ -43,7 +43,6 @@ export class Checkboxland {
       // The indeterminate state masks the checked state, so we always
       // uncheck indeterminate checkboxes to prevent weird state combinations.
       checkboxEl.checked = false;
-      return;
     }
     // Handle non-indeterminate newValues
     else {
@@ -64,12 +63,27 @@ export class Checkboxland {
     return clonedData;
   }
 
-  setData(data) {
-    data.forEach((rowData, rowIndex) => {
-      rowData.forEach((cellValue, cellIndex) => {
-        this.setCheckboxValue(cellIndex, rowIndex, cellValue);
-      });
-    });
+  setData(data, options = {}) {
+    const { x = 0, y = 0, fillValue } = options;
+    const isFillValueProvided = (typeof fillValue !== 'undefined');
+    const colNum = this.dimensions[0];
+    const rowNum = this.dimensions[1];
+
+    for (let rowIndex = 0; rowIndex < rowNum; rowIndex++) {
+      for (let colIndex = 0; colIndex < colNum; colIndex++) {
+        let isBeforeStartingXPos = (colIndex < x);
+        let isBeforeStartingYPos = (rowIndex < y);
+        let isBeyondProvidedXPlusData = (colIndex >= x + data[0].length);
+        let isBeyondProvidedYPlusData = (rowIndex >= y + data.length);
+        let isOutsideOfProvidedData = (isBeforeStartingXPos || isBeforeStartingYPos || isBeyondProvidedXPlusData || isBeyondProvidedYPlusData);
+
+        if (isOutsideOfProvidedData && !isFillValueProvided) continue;
+
+        let valueToSet = isOutsideOfProvidedData ? fillValue : data[rowIndex - y][colIndex - x];
+
+        this.setCheckboxValue(colIndex, rowIndex, valueToSet);
+      }
+    }
   }
 
   clearData() {
