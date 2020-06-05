@@ -12,29 +12,52 @@ export class Checkboxland {
   }
 
   getCheckboxValue(x, y) {
-    // @todo: needs a isWithinDisplay check.
+    const isWithinDisplay = (typeof this._data[y] !== 'undefined' && typeof this._data[y][x] !== 'undefined');
+
+    if (!isWithinDisplay) {
+      throw new Error(`The location (x: ${x}, y: ${y}) is outside of this checkbox display`);
+    }
+
     return this._data[y][x];
   }
 
-  setCheckboxValue(x, y, value) {
-    const isValueValid = (value === 0 || value === 1);
+  setCheckboxValue(x, y, newValue) {
+    const isNewValueValid = (newValue === 0 || newValue === 1 || newValue === 2);
     const isWithinDisplay = (typeof this._data[y] !== 'undefined' && typeof this._data[y][x] !== 'undefined');
 
-    if (!isValueValid) {
-      throw new Error(`${value} is not a valid checkbox value`);
+    if (!isNewValueValid) {
+      throw new Error(`${newValue} is not a valid checkbox value`);
     }
 
     if (!isWithinDisplay) return;
 
-    this._data[y][x] = value;
+    this._data[y][x] = newValue;
 
     // We can assume the checkboxEl exists because it's within the display.
     const checkboxEl = this.displayEl.children[y].children[x];
-    const isCellChecked = Boolean(value);
 
-    if (checkboxEl.checked === isCellChecked) return;
+    // Handle indeterminate newValues
+    if (newValue === 2) {
+      if (checkboxEl.indeterminate) return;
 
-    checkboxEl.checked = isCellChecked;
+      checkboxEl.indeterminate = true;
+      // The indeterminate state masks the checked state, so we always
+      // uncheck indeterminate checkboxes to prevent weird state combinations.
+      checkboxEl.checked = false;
+      return;
+    }
+    // Handle non-indeterminate newValues
+    else {
+      // Remove any previously set indeterminate values.
+      if (checkboxEl.indeterminate) {
+        checkboxEl.indeterminate = false;
+      }
+
+      // If the checkbox value matches, then we don't need to update it.
+      if (checkboxEl.checked === Boolean(newValue)) return;
+
+      checkboxEl.checked = Boolean(newValue);
+    }
   }
 
   getData() {
@@ -58,6 +81,10 @@ export class Checkboxland {
   static extend(pluginObj = {}) {
     if (!pluginObj.name || !pluginObj.exec) {
       throw new Error('Your plugin must have a "name" and an "exec" function.');
+    }
+
+    if (pluginObj.cleanUp) {
+      pluginObj.exec.cleanUp = pluginObj.cleanUp;
     }
 
     this.prototype[pluginObj.name] = pluginObj.exec;

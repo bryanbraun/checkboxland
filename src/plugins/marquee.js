@@ -1,3 +1,5 @@
+let intervalId;
+
 function marquee(newData, options = {}) {
   const { interval = 200, repeat = false, fillValue = 0, callback = () => {} } = options;
 
@@ -7,7 +9,7 @@ function marquee(newData, options = {}) {
 
   let currentIteration = 1;
 
-  const intervalId = setInterval(() => {
+  intervalId = setInterval(() => {
     const currentData = this.getData();
 
     for (let y = 0; y < numberOfRows; y++) {
@@ -45,7 +47,12 @@ function marquee(newData, options = {}) {
   }, interval);
 }
 
+function cleanUp() {
+  clearInterval(intervalId);
+}
+
 export default {
   name: 'marquee',
-  exec: marquee
+  exec: marquee,
+  cleanUp: cleanUp,
 }

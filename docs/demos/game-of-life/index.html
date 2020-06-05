@@ -34,7 +34,10 @@
       <input type="checkbox" id="play" checked="true" />
     </label>
   </div>
-  <script type="module" src="demo.js"></script>
+  <script type="module">
+    import * as gameOfLifeDemo from './demo.js';
+    gameOfLifeDemo.init();
+  </script>
 </body>
 
 </html>

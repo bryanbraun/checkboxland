@@ -1,11 +1,26 @@
 import { Checkboxland } from '../../../src/index.js';
 
-const cbl = new Checkboxland({ dimensions: '44x15' });
+let dimensions = '44x15';
+let cbl;
 
-const textData = cbl.print("Don't Panic.", { dataOnly: true });
-const paddedTextData = cbl.dataUtils('pad', textData, { top: 4 });
+function init(existingCbl) {
+  cbl = !!existingCbl ? existingCbl : new Checkboxland({ dimensions });
 
-cbl.marquee(paddedTextData, { interval: 100, repeat: true });
+  let textData = cbl.print("Don't Panic.", { dataOnly: true });
+  let paddedTextData = cbl.dataUtils('pad', textData, { top: 4 });
 
-// For easy debugging
-window.cbl = cbl;
+  cbl.marquee(paddedTextData, { interval: 100, repeat: true });
+
+  return cbl;
+}
+
+function cleanUp() {
+  cbl.marquee.cleanUp();
+}
+
+
+export {
+  init,
+  cleanUp,
+  dimensions,
+}

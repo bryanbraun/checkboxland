@@ -1,0 +1,27 @@
+/*
+  Checkboxland itself adds a few styles in order to arrange the checkboxes into a tight grid.
+
+  It does not attempt to style the checkboxes themselves or force them to display the same across browsers.
+
+  However, it can be useful to ensure the checkbox grid itself is the same size across browsers. These styles
+  help with that.
+
+  At some point, it may make sense to add this to checkboxland as an option, but I'm leaving it out for now.
+
+  Note: Firefox's checkboxes currently have border-spacing around them, but it can't be overridden since they
+        exist in the shadow-root and cannot be customized.
+*/
+
+.cbl-normalize-size input[type="checkbox"] {
+  /* Ensure the default checkbox size is consistent across all browsers.
+     Otherwise, it will uses the browser defaults, which currently look like this:
+
+     Firefox: 14px;
+     Edge: 14px;
+     Chrome: 14px;
+     Safari: 12px;
+  */
+
+  width: 12px;
+  height: 12px;
+}

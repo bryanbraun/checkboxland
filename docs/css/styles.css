@@ -5,6 +5,7 @@
   --cbl-white: white;
   --cbl-text: #505e71;
   --cbl-code-bg: #f1f1f1;
+  --demo-focus-color: #005DC8;
 
   /* fonts */
   --cbl-display-font: 'Blinker', /*iOS*/ "AvenirNextCondensed-Bold", /*MacOSX*/ 'HelveticaNeue-CondensedBold', /*Ubuntu*/ "Ubuntu Condensed", "Liberation Sans Narrow",  /*Windows*/ "Franklin Gothic Demi Cond", "Arial Narrow", /*Android*/ sans-serif-condensed, /*Fallback*/Arial, "Trebuchet MS", "Lucida Grande", Tahoma, Verdana, sans-serif;
@@ -13,6 +14,7 @@
 
   /* widths */
   --sidebar-width: 200px;
+  --demo-option-border-thickness: 4px;
 }
 
 html {
@@ -203,38 +205,67 @@ h2.subtitle {
 
 .demoframe {
   width: 100%;
-  height: 182px;
-  border: none;
-  margin-bottom: 1.5rem;
+  margin: 0 0 0.5rem var(--demo-option-border-thickness);
 }
 
-.demobox label {
+h3.demo-title { /* we're using this element selector for additional specificity */
+  text-align: center;
+  font-size: 14px;
+  margin: 4px;
+}
+
+.demobox-form {
+  display: grid;
+  grid-gap: 8px;
+  grid-template-columns: repeat(auto-fill, minmax(171px, auto));
+}
+.demo-thumbnail {
+  width: 100%;
+  max-height: 100%;
+  display: block;
+  border: 1px solid #999;
+}
+.demo-option {
   font-family: var(--cbl-display-font);
-  display: inline-block;
-  padding: 4px 16px;
-  margin-bottom: 0.5rem;
+  font-size: 12px;
   cursor: pointer;
-  border-radius: 999px;
+  border: var(--demo-option-border-thickness) solid transparent;
+  background-size: cover;
+  position: relative;
 }
-.demobox label:hover {
-  background-color: #f0f0f0;
+.demo-option:hover {
+  border: 4px solid #e2e2e2;
+}
+.demo-name {
+  position: absolute;
+  padding: 2px 8px;
+  border: 1px solid transparent;
+  background: var(--checkbox-blue);
+  background-clip: padding-box;
+  color: white;
 }
 
-.demobox label:not(:last-child) {
-  margin-right: 0.25rem;
+.demobox input[type="radio"]:checked + label .demo-name {
+  border-left: 1px solid white;
+  border-top: 1px solid white;
+}
+
+.demobox input[type="radio"]:checked + label .demo-thumbnail {
+  border: 1px solid white;
 }
 
 .demobox input[type="radio"]:checked + label {
-  background-color: var(--checkbox-blue);
-  color: white;
-}
-.demobox input[type="radio"]:focus + label {
-  box-shadow: 0 0 4px 3px #23539e;
-}
-.no-focus .demobox input[type="radio"]:focus + label {
-  box-shadow: none;
+  border: var(--demo-option-border-thickness) solid var(--checkbox-blue);
 }
 
+.demobox input[type="radio"]:checked:focus + label {
+  border: var(--demo-option-border-thickness) solid var(--demo-focus-color);
+}
+
+/* Mouse-users see the normal color when clicking on an option instead of the focus-color */
+.no-focus .demobox input[type="radio"]:checked:focus + label {
+  border: var(--demo-option-border-thickness) solid var(--checkbox-blue);
+}
 
 /* utilities */
 .visuallyhidden {

@@ -19,6 +19,7 @@
   <link rel="icon" type="image/png" sizes="16x16" href="docs/favicon.png">
   <link href="https://fonts.googleapis.com/css?family=Blinker:400&display=swap" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="docs/css/styles.css" />
+  <link rel="stylesheet" type="text/css" href="docs/css/cbl-normalize-size.css" />
 </head>
 
 <body>
@@ -28,6 +29,7 @@
       <nav>
         <h3>The Basics</h3>
         <ul>
+          <li><a href="#demos">Demos</a></li>
           <li><a href="#overview">Overview</a></li>
           <li><a href="#limitations">Limitations</a></li>
           <li><a href="#setup">Setup</a></li>
@@ -47,7 +49,7 @@
               <li><a href="#cleardata">clearData</a></li>
             </ul>
           </li>
-          <li><a href="#">Extended API</a>
+          <li><a href="#extended-api">Extended API</a>
             <ul>
               <li><a href="#print">print</a></li>
               <li><a href="#marquee">marquee</a></li>
@@ -70,19 +72,49 @@
     <main class="main">
       <h1 class="title">Checkboxland</h1>
       <h2 class="subtitle">Render anything as HTML checkboxes</h2>
-      <div id="demobox" class="demobox">
-        <iframe src="docs/demos/clock/index.html" frameborder="0" scrolling="no" class="demoframe"></iframe>
-        <form id="demoboxForm">
-          <input type="radio" id="clock-demo" class="visuallyhidden" name="demoRadios" value="clock" checked="true" />
-          <label for="clock-demo">Clock</label>
-          <input type="radio" id="conways-demo" class="visuallyhidden" name="demoRadios" value="conways-game" />
-          <label for="conways-demo">Game of Life</label>
-          <input type="radio" id="marquee-demo" class="visuallyhidden" name="demoRadios" value="marquee" />
-          <label for="marquee-demo">Marquee</label>
+      <div id="demos" class="demobox cbl-normalize-size">
+
+        <div id="checkboxland" class="demoframe"></div>
+
+        <h3 class="demo-title">Demos</h3>
+
+        <form id="demoboxForm" class="demobox-form">
+          <!-- note: the image thumbnails show a screenshot of a 34x15 grid captured in Safari -->
+          <input type="radio" id="marquee-demo" class="visuallyhidden" name="demoRadios" value="marquee" checked="true" />
+          <label for="marquee-demo" class="demo-option">
+            <span class="demo-name">Marquee</span>
+            <img class="demo-thumbnail" src="docs/img/demo-marquee.png" />
+          </label>
+          <input type="radio" id="snake-demo" class="visuallyhidden" name="demoRadios" value="snake" />
+          <label for="snake-demo" class="demo-option">
+            <span class="demo-name">Snake</span>
+            <img class="demo-thumbnail" src="docs/img/demo-snake.png" />
+          </label>
+          <input type="radio" id="clock-demo" class="visuallyhidden" name="demoRadios" value="clock" />
+          <label for="clock-demo" class="demo-option">
+            <span class="demo-name">Clock</span>
+            <img class="demo-thumbnail" src="docs/img/demo-clock.png" />
+          </label>
+          <input type="radio" id="game-of-life-demo" class="visuallyhidden" name="demoRadios" value="gameOfLife" />
+          <label for="game-of-life-demo" class="demo-option">
+            <span class="demo-name">Game of Life</span>
+            <img class="demo-thumbnail" src="docs/img/demo-game-of-life.png" />
+          </label>
           <input type="radio" id="icons-demo" class="visuallyhidden" name="demoRadios" value="icons" />
-          <label for="icons-demo">Icons</label>
+          <label for="icons-demo" class="demo-option">
+            <span class="demo-name">Icons</span>
+            <img class="demo-thumbnail" src="docs/img/demo-icons.png" />
+          </label>
           <input type="radio" id="wipe-demo" class="visuallyhidden" name="demoRadios" value="wipe" />
-          <label for="wipe-demo">Wipe</label>
+          <label for="wipe-demo" class="demo-option">
+            <span class="demo-name">Wipe</span>
+            <img class="demo-thumbnail" src="docs/img/demo-wipe.png" />
+          </label>
+          <input type="radio" id="qr-code-demo" class="visuallyhidden" name="demoRadios" value="qrCode" />
+          <label for="qr-code-demo" class="demo-option">
+            <span class="demo-name">QR Code</span>
+            <img class="demo-thumbnail" src="docs/img/demo-qr-code.png" />
+          </label>
         </form>
       </div>
 
@@ -165,9 +197,9 @@ cbl.setData(heart);</code></pre>
       <p>We created a JavaScript matrix (an array of arrays) to represent the grid. Each location in the matrix represents a checkbox, where:</p>
 
       <ul>
-      <li>0 = <img src="docs/img/unchecked.png" style="width:16px; height:16px; vertical-align: middle;" alt="a single unchecked checkbox" /> (unchecked)</li>
-
-      <li>1 = <img src="docs/img/checked.png" style="width:16px; height:16px; vertical-align: middle;" alt="a single checked checkbox" /> (checked)</li>
+      <li>0 = <img src="docs/img/unchecked.png" style="width:16px; height:16px; vertical-align: middle;" alt="a single, unchecked, checkbox" /> (unchecked)</li>
+      <li>1 = <img src="docs/img/checked.png" style="width:16px; height:16px; vertical-align: middle;" alt="a single, checked, checkbox" /> (checked)</li>
+      <li>2 = <img src="docs/img/indeterminate.png" style="width:16px; height:16px; vertical-align: middle;" alt="a single, indeterminate, checkbox" /> (indeterminate)</li>
       </ul>
 
       <p>By passing this matrix to our <code>setData()</code> method, we update the checkbox grid on the page.</p>
@@ -338,6 +370,12 @@ abcdefghijklmnopqrstuvwxyz
 
       <p>Nothing</p>
 
+      <h4 id="marquee-clean-up">Clean up</h4>
+
+      <p>To cancel a marquee in progress, call the <code>cleanUp</code> method:</p>
+
+      <pre><code>.marquee.cleanUp()</code></pre>
+
       <h3>transitionWipe</h3>
 
       <p>Transition between the current checkbox grid state and a future state by wiping across the screen.</p>
@@ -368,6 +406,12 @@ abcdefghijklmnopqrstuvwxyz
       <h4 id="transitionwipe-returns">Returns</h4>
 
       <p>Nothing</p>
+
+      <h4 id="transitionwipe-clean-up">Clean up</h4>
+
+      <p>To cancel a transition in progress, call the <code>cleanUp</code> method:</p>
+
+      <pre><code>.transitionWipe.cleanUp()</code></pre>
 
       <h3>dataUtils</h3>
 
@@ -476,6 +520,12 @@ const myPlugin = {
       console.log(this.getData());
     }
   }
+  cleanUp: () => {
+    // An optional method for cleaning up when you're done
+    // using the plugin (useful for removing event listeners,
+    // clearing timeouts, etc.)
+    console.log('clean up was called');
+  }
 }
 
 // Register the plugin
@@ -484,9 +534,10 @@ Checkboxland.extend(myPlugin);
 const cbl = new Checkboxland({ dimensions: '4x2' });
 
 // Call the plugin's function via its name
-cbl.logData('dimensions'); // =&gt; 'width: 4, height: 2'
 cbl.logData('element'); // =&gt; &lt;div id="checkboxland"&gt;...&lt;/div&gt;
-cbl.logData('matrix'); // =&gt; (2) [Array(4), Array(4)]</code></pre>
+cbl.logData('dimensions'); // =&gt; 'width: 4, height: 2'
+cbl.logData('matrix'); // =&gt; (2) [Array(4), Array(4)]
+cbl.logData.cleanUp(); // =&gt; 'clean up was called'</code></pre>
 
       <p>For more plugin examples, see <a href="https://github.com/bryanbraun/checkboxland/tree/master/src/plugins">these plugins built into Checkboxland</a>.</p>
 

@@ -1,3 +1,5 @@
+let intervalId;
+
 function transitionWipe(newData, options = {}) {
   const { interval = 200, fillValue = 0, direction = 'ltr', callback = () => {} } = options;
 
@@ -7,7 +9,7 @@ function transitionWipe(newData, options = {}) {
 
   let currentIteration = 1;
 
-  const intervalId = setInterval(() => {
+  intervalId = setInterval(() => {
     let leadingEdgeIndex, writingEdgeIndex;
 
     switch (direction) {
@@ -46,7 +48,12 @@ function transitionWipe(newData, options = {}) {
   }, interval);
 }
 
+function cleanUp() {
+  clearInterval(intervalId);
+}
+
 export default {
   name: 'transitionWipe',
-  exec: transitionWipe
+  exec: transitionWipe,
+  cleanUp: cleanUp
 }
