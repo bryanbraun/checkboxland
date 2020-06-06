@@ -66,31 +66,24 @@ export class Checkboxland {
   setData(data, options = {}) {
     const { x = 0, y = 0, fillValue } = options;
     const isFillValueProvided = (typeof fillValue !== 'undefined');
-    let xOffset = x;
-    let yOffset = y;
-    let finalMatrix;
+    const colNum = this.dimensions[0];
+    const rowNum = this.dimensions[1];
 
-    if (isFillValueProvided) {
-      finalMatrix = this.getEmptyMatrix({ fillValue });
+    for (let rowIndex = 0; rowIndex < rowNum; rowIndex++) {
+      for (let colIndex = 0; colIndex < colNum; colIndex++) {
+        let isBeforeStartingXPos = (colIndex < x);
+        let isBeforeStartingYPos = (rowIndex < y);
+        let isBeyondProvidedXPlusData = (colIndex >= x + data[0].length);
+        let isBeyondProvidedYPlusData = (rowIndex >= y + data.length);
+        let isOutsideOfProvidedData = (isBeforeStartingXPos || isBeforeStartingYPos || isBeyondProvidedXPlusData || isBeyondProvidedYPlusData);
 
-      data.forEach((rowData, rowIndex) => {
-        rowData.forEach((cellValue, cellIndex) => {
-          finalMatrix[rowIndex + yOffset][cellIndex + xOffset] = cellValue;
-        });
-      });
+        if (isOutsideOfProvidedData && !isFillValueProvided) continue;
 
-      // Reset the offsets, since we've factored them in above.
-      xOffset = 0;
-      yOffset = 0;
-    } else {
-      finalMatrix = data;
+        let valueToSet = isOutsideOfProvidedData ? fillValue : data[rowIndex - y][colIndex - x];
+
+        this.setCheckboxValue(colIndex, rowIndex, valueToSet);
+      }
     }
-
-    finalMatrix.forEach((rowData, rowIndex) => {
-      rowData.forEach((cellValue, cellIndex) => {
-        this.setCheckboxValue(cellIndex + xOffset, rowIndex + yOffset, cellValue);
-      });
-    });
   }
 
   clearData() {
