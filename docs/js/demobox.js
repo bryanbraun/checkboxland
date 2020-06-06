@@ -1,4 +1,4 @@
-import { Checkboxland } from '../../../src/index.js';
+import { Checkboxland } from '../../src/index.js';
 
 import * as marqueeDemo from '../demos/marquee/demo.js';
 import * as snakeDemo from '../demos/snake/demo.js';
