@@ -284,7 +284,7 @@ cbl.setData(heart);</code></pre>
           <ul>
             <li><code>x</code> (number): The x-coordinate where you want to begin setting data. <em>Default: 0.</em></li>
             <li><code>y</code> (number): The y-coordinate where you want to begin setting data. <em>Default: 0.</em></li>
-            <li><code>fillValue</code> (number): If the data you are setting won't fill the whole checkbox grid, you can optionally provide a checkbox value which will then be used to fill the leftover areas. <em>Default: <code>undefined</code>.</em></li>
+            <li><code>fillValue</code> (number): If the data you are setting won't fill the whole checkbox grid, you can optionally provide a checkbox value (0, 1, or 2) which will then be used to fill the leftover areas. <em>Default: <code>undefined</code>.</em></li>
           </ul>
         </li>
       </ul>
@@ -355,7 +355,10 @@ abcdefghijklmnopqrstuvwxyz
         <li><code>text</code> (string): The text you want printed to the checkbox grid.</li>
         <li><code>options</code> (object)
         <ul>
-          <li><code>font</code> (object): An object containing character data for a custom font, if you want to use one. For an example, see <a href="https://github.com/bryanbraun/checkboxland/blob/master/docs/demos/clock/demo.js">the clock demo</a>.</li>
+          <li><code>font</code> (object): An object containing character data for a custom font, if you want to use one. For a working example, see <a href="https://github.com/bryanbraun/checkboxland/blob/master/docs/demos/clock/demo.js">the clock demo</a>.</li>
+          <li><code>x</code> (number): The x-coordinate where the text should start on the checkbox grid. <em>Default: 0.</em></li>
+          <li><code>y</code> (number): The y-coordinate where the text should start on the checkbox grid. <em>Default: 0.</em></li>
+          <li><code>fillValue</code> (number): If the text data won't fill the whole checkbox grid, you can  (0, 1, or 2) which will then be used to fill the leftover areas. <em>Default: <code>undefined</code>.</em></li>
           <li><code>dataOnly</code> (boolean): If <code>true</code>, returns a data matrix for the text instead of updating the checkbox grid. <em>Default: <code>false</code></em></li>
         </ul>
         </li>
@@ -363,13 +366,13 @@ abcdefghijklmnopqrstuvwxyz
 
       <h4 id="print-arguments">Returns</h4>
 
-      <p>None, UNLESS <code>options.dataOnly</code> is set to <code>true</code>. If this is the case, it returns a matrix (array of array).</p>
+      <p>None, UNLESS <code>options.dataOnly</code> is set to <code>true</code>. If this is the case, it returns a matrix (array of arrays).</p>
 
       <h3>marquee</h3>
 
       <p>Animates a block of data, by making it scroll across the checkbox grid from right to left.</p>
 
-      <p>For an working example, see <a href="https://github.com/bryanbraun/checkboxland/blob/master/docs/demos/marquee/demo.js">the marquee demo</a>.</p>
+      <p>For a working example, see <a href="https://github.com/bryanbraun/checkboxland/blob/master/docs/demos/marquee/demo.js">the marquee demo</a>.</p>
 
       <pre><code>.marquee(data, [options])</code></pre>
 

@@ -31,7 +31,6 @@ function buildDemo(demoName) {
   }
 
   if (isDimensionsMatch) {
-    // cbl.clearData(); // Does this always cause a "flash of empty checkboxes"? Set up more demos, then see.
     nextDemo.init(cbl);
   } else {
     cbl = nextDemo.init();
@@ -43,8 +42,6 @@ function buildDemo(demoName) {
 function init() {
   cbl = new Checkboxland({ dimensions: '44x15' });
   buildDemo('marquee');
-
-  window.cbl = cbl; // for easy debugging.
 
   document.forms.demoboxForm.addEventListener('change', function handleDemoChange(e) {
     if (e.target.name === 'demoRadios') {

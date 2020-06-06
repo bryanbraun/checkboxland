@@ -30,8 +30,7 @@ function getCurrentTimeString() {
 }
 
 function updateClock() {
-  const clockData = cbl.print(getCurrentTimeString(), { font: fourByEleven, dataOnly: true });
-  cbl.setData(clockData, { x: 3, y: 2, fillValue: 0 });
+  cbl.print(getCurrentTimeString(), { font: fourByEleven, x: 3, y: 2, fillValue: 0 });
 }
 
 export {

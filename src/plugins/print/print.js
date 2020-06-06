@@ -1,21 +1,31 @@
 import { fiveBySeven } from './font-5x7.js';
 
 function print(text, options = {}) {
+  const { dataOnly = false, font = fiveBySeven, x = 0, y = 0, fillValue } = options;
+  const isFillValueProvided = (typeof fillValue !== 'undefined');
   const textArray = text.split('');
-  const font = options.font || fiveBySeven;
 
-  const dataMatrix = textArray.reduce((matrix, currentChar) => {
+  const textMatrix = textArray.reduce((matrix, currentChar) => {
     const currentCharacterMatrix = font[currentChar];
     return _matrixConcat(matrix, currentCharacterMatrix);
   }, []);
 
-  if (options.dataOnly) {
+  if (dataOnly) {
+    if (!isFillValueProvided) return textMatrix;
+
+    let dataMatrix = this.getEmptyMatrix({ fillValue });
+
+    textMatrix.forEach((rowData, rowIndex) => {
+      rowData.forEach((cellValue, cellIndex) => {
+        dataMatrix[rowIndex + y][cellIndex + x] = cellValue;
+      });
+    });
+
     return dataMatrix;
   }
 
-  this.setData(dataMatrix);
+  this.setData(textMatrix, { x, y, fillValue });
 }
-
 
 // HELPER FUNCTIONS
 function _matrixConcat(mat1, mat2) {
