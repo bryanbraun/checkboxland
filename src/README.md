@@ -22,6 +22,19 @@ So, let's fix this by not making them inline-block! Unfortunately, we don't have
 
 For now, I'm using inline-block with some styles (like `vertical-align: top`) that minimizes most of the cross-browser differences.
 
+Firefox's checkboxes have border-spacing around them, which it can't be overridden since they exist in the shadow-root (which cannot be customized). It's not too big of a deal, as long as the checkboxes are the same size (see next).
+
+## Size
+
+The default size of checkboxes can differ from browser to browser, which can affect the size of the full checkbox grid. The current browser default sizes look like this:
+
+* Firefox: 14px;
+* Edge: 14px;
+* Chrome: 14px;
+* Safari: 12px;
+
+Checkboxland doesn't currently try to change these default checkbox sizes, but [this stylesheet used in the docs](https://github.com/bryanbraun/checkboxland/blob/master/docs/css/cbl-normalize-size.css) shows how to do it.
+
 ## Performance
 
 Updating the checkboxes can be performance intensive when there's a lot of them. [Google recommends a your DOM be 1500 nodes or smaller](https://web.dev/dom-size/), which is pretty restrictive, given what we're trying to do.
