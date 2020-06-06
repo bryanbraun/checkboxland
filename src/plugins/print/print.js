@@ -10,6 +10,12 @@ function print(text, options = {}) {
     return _matrixConcat(matrix, currentCharacterMatrix);
   }, []);
 
+  // Handle an edge-case where an empty string produces an empty
+  // array instead of an empty matrix (which is what we'd prefer).
+  if (textMatrix.length === 0) {
+    textMatrix.push([]);
+  }
+
   if (dataOnly) {
     if (!isFillValueProvided) return textMatrix;
 

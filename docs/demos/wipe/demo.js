@@ -9,22 +9,19 @@ let cbl;
 function init(existingCbl) {
   cbl = !!existingCbl ? existingCbl : new Checkboxland({ dimensions });
 
-  let initialMatrix = cbl.getEmptyMatrix({ fillValue: 1 });
-  let secondMatrix = cbl.print(`Hello`, { dataOnly: true, x: 2, y: 2, fillValue: 0 });
-  let finalMatrix = cbl.print(`World`, { dataOnly: true, x: 10, y: 6, fillValue: 0 });
-  let invertedFinalMatrix = cbl.dataUtils('invert', finalMatrix);
+  let firstMatrix = cbl.print(`Hello`, { dataOnly: true, x: 2, y: 2, fillValue: 0 });
+  let invertedFirstMatrix = cbl.dataUtils('invert', firstMatrix);
+  let secondMatrix = cbl.print(`World`, { dataOnly: true, x: 10, y: 6, fillValue: 0 });
 
   function transition1() {
-    cbl.transitionWipe(secondMatrix, { interval: 120, callback: transition2 });
+    cbl.transitionWipe(invertedFirstMatrix, { interval: 120, callback: transition2 });
   }
 
   function transition2() {
-    cbl.transitionWipe(invertedFinalMatrix, { interval: 120, callback: transition1 });
+    cbl.transitionWipe(secondMatrix, { interval: 120, callback: transition1 });
   }
 
   // Kick off the cycle
-  cbl.setData(initialMatrix);
-
   transition1();
 
   return cbl;

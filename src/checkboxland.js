@@ -69,6 +69,8 @@ export class Checkboxland {
     const colNum = this.dimensions[0];
     const rowNum = this.dimensions[1];
 
+    _checkForValidMatrix(data);
+
     for (let rowIndex = 0; rowIndex < rowNum; rowIndex++) {
       for (let colIndex = 0; colIndex < colNum; colIndex++) {
         let isBeforeStartingXPos = (colIndex < x);
@@ -128,7 +130,13 @@ export class Checkboxland {
 function _checkForValidValue(value) {
   if (value === 0 || value === 1 || value === 2) return;
 
-  throw new Error(`${value} is not a valid checkbox value`);
+  throw new Error(`${value} is not a valid checkbox value.`);
+}
+
+function _checkForValidMatrix(matrix) {
+  if (Array.isArray(matrix) && Array.isArray(matrix[0])) return;
+
+  throw new Error(`${matrix} is not a valid matrix.`);
 }
 
 function _textDimensionsToArray(textDimensions) {
