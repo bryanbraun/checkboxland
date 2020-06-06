@@ -8,7 +8,7 @@ export class Checkboxland {
     // The data object. Don't access this directly. Use methods like getData() and setData() instead.
     // Maybe we can restrict access to this variable in the future, using Proxies. See examples here:
     // https://github.com/bryanbraun/music-box-fun/commit/f399255261e9b8ab9fb8c10edbbedd55a639e9d1
-    this._data = this.getEmptyMatrix(props.fillValue || 0);
+    this._data = this.getEmptyMatrix({ fillValue: props.fillValue || 0 });
 
     _createInitialCheckboxDisplay(this.displayEl, this._data);
   }
@@ -93,7 +93,8 @@ export class Checkboxland {
 
   // This kind of method makes more sense as a plugin but I needed to
   // use it in the core library anyways so I decided to expose it here.
-  getEmptyMatrix(fillValue = 0, width = this.dimensions[0], height = this.dimensions[1]) {
+  getEmptyMatrix(options = {}) {
+    const { fillValue = 0, width = this.dimensions[0], height = this.dimensions[1] } = options;
     const matrix = [];
 
     for (let i = 0; i < height; i++) {
@@ -107,15 +108,17 @@ export class Checkboxland {
   }
 
   static extend(pluginObj = {}) {
-    if (!pluginObj.name || !pluginObj.exec) {
+    const { name, exec, cleanUp } = pluginObj;
+
+    if (!name || !exec) {
       throw new Error('Your plugin must have a "name" and an "exec" function.');
     }
 
-    if (pluginObj.cleanUp) {
-      pluginObj.exec.cleanUp = pluginObj.cleanUp;
+    if (cleanUp) {
+      exec.cleanUp = cleanUp;
     }
 
-    this.prototype[pluginObj.name] = pluginObj.exec;
+    this.prototype[name] = exec;
   }
 }
 
@@ -123,9 +126,7 @@ export class Checkboxland {
 // Private helper functions
 
 function _checkForValidValue(value) {
-  if (value === 0 || value === 1 || value === 2) {
-    return;
-  }
+  if (value === 0 || value === 1 || value === 2) return;
 
   throw new Error(`${value} is not a valid checkbox value`);
 }

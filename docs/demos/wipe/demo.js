@@ -9,7 +9,7 @@ let cbl;
 function init(existingCbl) {
   cbl = !!existingCbl ? existingCbl : new Checkboxland({ dimensions });
 
-  let initialMatrix = cbl.getEmptyMatrix(1);
+  let initialMatrix = cbl.getEmptyMatrix({ fillValue: 1 });
   let secondMatrix = cbl.print(`Hello`, { dataOnly: true });
   let paddedSecondMatrix = cbl.dataUtils('pad', secondMatrix, { top: 2, left: 2 });
 

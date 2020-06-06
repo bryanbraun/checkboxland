@@ -309,23 +309,27 @@ cbl.setData(heart);</code></pre>
 
       <h3>getEmptyMatrix</h3>
 
-      <p>A utility that returns an empty matrix, with the dimensions of the existing grid.</p>
+      <p>A utility that returns an empty matrix, with the dimensions of the existing checkbox grid.</p>
 
-      <p>Optional parameters can be provided to change the pre-filled value, or the dimensions of the returned matrix.</p>
+      <p>Optionally, an object can be provided to customize the pre-filled value, or the dimensions of the returned matrix.</p>
 
-      <pre><code>.getEmptyMatrix([fillValue], [width], [height])</code></pre>
+      <pre><code>.getEmptyMatrix([options])</code></pre>
 
       <h4 id="cleardata-arguments">Arguments</h4>
 
       <ul>
-        <li><code>fillValue</code> (number): The value you want to pre-populate the returned matrix with. <em>Defaults to 0.</em></li>
-        <li><code>width</code> (number): The width of the returned matrix (in columns). <em>Defaults to the width of the existing grid.</em></li>
-        <li><code>height</code> (number): The height of the returned matrix (in rows). <em>Defaults to the height of the existing grid.</em></li>
+        <li><code>options</code> (object)
+          <ul>
+            <li><code>fillValue</code> (number): The value you want to pre-populate the returned matrix with. <em>Default: 0.</em></li>
+            <li><code>width</code> (number): The width of the returned matrix (in columns). <em>Defaults to the width of the existing checkbox grid.</em></li>
+            <li><code>height</code> (number): The height of the returned matrix (in rows). <em>Defaults to the height of the existing checkbox grid.</em></li>
+          </ul>
+        </li>
       </ul>
 
       <h4 id="cleardata-returns">Returns</h4>
 
-      <p>(array): A matrix (array of arrays), with the dimensions of the checkbox grid containing only <code>0</code> values (unless otherwise specified).</p>
+      <p>(array): A matrix (array of arrays), with the dimensions of the existing checkbox grid containing only <code>0</code> values (unless otherwise specified).</p>
 
       <h2>Extended API</h2>
 
