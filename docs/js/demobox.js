@@ -7,6 +7,7 @@ import * as iconsDemo from '../demos/icons/demo.js';
 import * as qrCodeDemo from '../demos/qr-code/demo.js';
 import * as wipeDemo from '../demos/wipe/demo.js';
 import * as gameOfLifeDemo from '../demos/game-of-life/demo.js';
+import * as waveDemo from '../demos/wave/demo.js';
 
 const demoNameMap = {
   marquee: marqueeDemo,
@@ -16,6 +17,7 @@ const demoNameMap = {
   icons: iconsDemo,
   wipe: wipeDemo,
   qrCode: qrCodeDemo,
+  wave: waveDemo,
 };
 
 let cbl;
