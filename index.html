@@ -81,7 +81,12 @@
 
         <form id="demoboxForm" class="demobox-form">
           <!-- note: the image thumbnails show a screenshot of a 34x15 grid captured in Safari -->
-          <input type="radio" id="marquee-demo" class="visuallyhidden" name="demoRadios" value="marquee" checked="true" />
+          <input type="radio" id="wave-demo" class="visuallyhidden" name="demoRadios" value="wave" checked="true" />
+          <label for="wave-demo" class="demo-option">
+            <span class="demo-name">Wave</span>
+            <img class="demo-thumbnail" src="docs/img/demo-wave.png" />
+          </label>
+          <input type="radio" id="marquee-demo" class="visuallyhidden" name="demoRadios" value="marquee" />
           <label for="marquee-demo" class="demo-option">
             <span class="demo-name">Marquee</span>
             <img class="demo-thumbnail" src="docs/img/demo-marquee.png" />
@@ -115,11 +120,6 @@
           <label for="qr-code-demo" class="demo-option">
             <span class="demo-name">QR Code</span>
             <img class="demo-thumbnail" src="docs/img/demo-qr-code.png" />
-          </label>
-          <input type="radio" id="wave-demo" class="visuallyhidden" name="demoRadios" value="wave" />
-          <label for="wave-demo" class="demo-option">
-            <span class="demo-name">Wave</span>
-            <img class="demo-thumbnail" src="docs/img/demo-wave.png" />
           </label>
         </form>
       </div>

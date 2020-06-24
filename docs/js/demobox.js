@@ -43,7 +43,7 @@ function buildDemo(demoName) {
 
 function init() {
   cbl = new Checkboxland({ dimensions: '44x15' });
-  buildDemo('marquee');
+  buildDemo('wave');
 
   document.forms.demoboxForm.addEventListener('change', function handleDemoChange(e) {
     if (e.target.name === 'demoRadios') {
