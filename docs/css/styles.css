@@ -93,7 +93,7 @@ h1,h2,h3,h4,h5,h6 {
   position: fixed;
   top: 0;
   bottom: 0;
-  overflow: scroll;
+  overflow: auto;
 
   width: var(--sidebar-width);
   padding: 2rem 2rem 1rem;
