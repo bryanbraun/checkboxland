@@ -8,6 +8,7 @@ import * as qrCodeDemo from '../demos/qr-code/demo.js';
 import * as wipeDemo from '../demos/wipe/demo.js';
 import * as gameOfLifeDemo from '../demos/game-of-life/demo.js';
 import * as waveDemo from '../demos/wave/demo.js';
+import * as onClickDemo from '../demos/on-click/demo.js';
 
 const demoNameMap = {
   marquee: marqueeDemo,
@@ -18,6 +19,7 @@ const demoNameMap = {
   wipe: wipeDemo,
   qrCode: qrCodeDemo,
   wave: waveDemo,
+  onClick: onClickDemo,
 };
 
 let cbl;
