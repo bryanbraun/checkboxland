@@ -7,8 +7,7 @@ let lastPos = null;
 function init(existingCbl) {
   cbl = !!existingCbl ? existingCbl : new Checkboxland({ dimensions });
 
-  const data = cbl.getData();
-  cbl.setData(data.map(e => e.map(_ => 0)));
+  cbl.clearData();
 
   cbl.print('click', { x: 10, y: 0 });
   cbl.print('2 boxes', { x: 2, y: 8 });
@@ -34,7 +33,7 @@ function draw(start, end) {
   const maxX = Math.max(start.x, end.x);
   const minY = Math.min(start.y, end.y);
   const maxY = Math.max(start.y, end.y);
-  
+
   for (let y = minY; y <= maxY; y += 1) {
     for (let x = minX; x <= maxX; x += 1) {
       data[y][x] = 1;

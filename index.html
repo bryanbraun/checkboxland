@@ -56,6 +56,7 @@
               <li><a href="#marquee">marquee</a></li>
               <li><a href="#transitionwipe">transitionWipe</a></li>
               <li><a href="#datautils">dataUtils</a></li>
+              <li><a href="#onclick">onClick</a></li>
             </ul>
           </li>
         </ul>
@@ -199,6 +200,8 @@ const heart = [
 
 // This updates the grid with the data we provided.
 cbl.setData(heart);</code></pre>
+
+      <small><p><em>(note: you can <a href="https://codepen.io/bryanbraun/pen/YzwoxpB">play with this example on Codepen</a> and fork it to build your own demos)</em></p></small>
 
       <p><img src="docs/img/checkbox-heart.png" style="width:115px; height:102px" alt="a grid of checkboxes displaying the shape of a heart" /></p>
 
@@ -375,7 +378,7 @@ abcdefghijklmnopqrstuvwxyz
         </li>
       </ul>
 
-      <h4 id="print-arguments">Returns</h4>
+      <h4 id="print-returns">Returns</h4>
 
       <p>None, UNLESS <code>options.dataOnly</code> is set to <code>true</code>. If this is the case, it returns a matrix (array of arrays).</p>
 
@@ -475,6 +478,41 @@ abcdefghijklmnopqrstuvwxyz
       <h4 id="datautils-returns">Returns</h4>
 
       <p>(array): A matrix (array of arrays), representing the transformed data.</p>
+
+      <h3>onClick</h3>
+
+      <p>Registers an <code>eventHandler</code>, which is called when the checkbox grid is clicked. Also provides <code>data</code> about the location of the click.</p>
+
+      <p>For a working example, see <a href="https://github.com/bryanbraun/checkboxland/blob/master/docs/demos/on-click/demo.js">the "On Click" demo</a>.</p>
+
+      <pre><code>.onClick(eventHandler)</code></pre>
+
+      <h4 id="onclick-arguments">Arguments</h4>
+
+      <ul>
+        <li><code>eventHandler</code> (function|object): A callback function, to be called when the checkbox grid is clicked. An <a href="https://developer.mozilla.org/en-US/docs/Web/API/EventListener">eventListener interface object</a> is also valid.</li>
+      </ul>
+
+      <p>When called, the <code>eventHandler</code> is passed a <code>data</code> object, as defined below:</p>
+
+      <ul>
+        <li><code>data</code> (object): An object containing data about the click. Its properties include the following:</li>
+        <ul>
+          <li><code>x</code> (number): The x-coordinate of the checkbox that was clicked.</li>
+          <li><code>y</code> (number): The y-coordinate of the checkbox that was clicked.</li>
+          <li><code>checkbox</code> (HTMLInputElement): The DOM object representing the checkbox that was clicked.</li>
+        </ul>
+      </ul>
+
+      <h4 id="onclick-returns">Returns</h4>
+
+      <p>Nothing</p>
+
+      <h4 id="onclick-clean-up">Clean up</h4>
+
+      <p>To remove the <code>onClick</code> event listener from your checkbox grid, call the <code>cleanUp</code> method:</p>
+
+      <pre><code>.onClick.cleanUp()</code></pre>
 
       <h2>Using Plugins</h2>
 
