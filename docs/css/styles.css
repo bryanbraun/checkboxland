@@ -182,7 +182,7 @@ h1,h2,h3,h4,h5,h6 {
 .subtitle {
   font-family: var(--cbl-display-font);
   margin-bottom: 2.25rem;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.4px;
 }
 h2.subtitle {
   /* needed a bit more specificity for these rules */
