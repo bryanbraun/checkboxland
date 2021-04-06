@@ -1,6 +1,7 @@
 import { Checkboxland } from '../../src/index.js';
 
 import * as marqueeDemo from '../demos/marquee/demo.js';
+import * as rippleDemo from '../demos/ripple/demo.js';
 import * as snakeDemo from '../demos/snake/demo.js';
 import * as clockDemo from '../demos/clock/demo.js';
 import * as iconsDemo from '../demos/icons/demo.js';
@@ -12,6 +13,7 @@ import * as onClickDemo from '../demos/on-click/demo.js';
 
 const demoNameMap = {
   marquee: marqueeDemo,
+  ripple: rippleDemo,
   snake: snakeDemo,
   clock: clockDemo,
   gameOfLife: gameOfLifeDemo,
