@@ -4,10 +4,11 @@ import * as marqueeDemo from '../demos/marquee/demo.js';
 import * as rippleDemo from '../demos/ripple/demo.js';
 import * as snakeDemo from '../demos/snake/demo.js';
 import * as clockDemo from '../demos/clock/demo.js';
-import * as iconsDemo from '../demos/icons/demo.js';
-import * as qrCodeDemo from '../demos/qr-code/demo.js';
-import * as wipeDemo from '../demos/wipe/demo.js';
 import * as gameOfLifeDemo from '../demos/game-of-life/demo.js';
+import * as iconsDemo from '../demos/icons/demo.js';
+import * as spiralDemo from '../demos/spiral/demo.js';
+import * as wipeDemo from '../demos/wipe/demo.js';
+import * as qrCodeDemo from '../demos/qr-code/demo.js';
 import * as waveDemo from '../demos/wave/demo.js';
 import * as onClickDemo from '../demos/on-click/demo.js';
 
@@ -18,6 +19,7 @@ const demoNameMap = {
   clock: clockDemo,
   gameOfLife: gameOfLifeDemo,
   icons: iconsDemo,
+  spiral: spiralDemo,
   wipe: wipeDemo,
   qrCode: qrCodeDemo,
   wave: waveDemo,

@@ -20,12 +20,19 @@ function init(existingCbl) {
   return cbl;
 }
 
-function simpleWave(x, y, t) {
-  let frequencyConstant = 0.9;
+function simpleWave(x, y, t, theta) {
+  let frequencyConstant = 1;
   let scaledTime = t * 3;
 
+  // Other types of spirals we could make:
+  // - θ creates a ripple mirrored across y
+  // - 2θ creates a two-armed spiral
+  // - 4θ creates a four-armed spiral
+  // - 8θ creates an eight-armed spiral
+  let translationValue = scaledTime + theta * 2;
+
   // For reference, see https://www.desmos.com/calculator/bp9t79pfa0
-  return y < 5 * Math.sin((x - scaledTime) / frequencyConstant);
+  return y < 5 * Math.sin((x - translationValue) / frequencyConstant);
 }
 
 function hypotenuseLength(x, y) {
@@ -50,10 +57,10 @@ function loop() {
     newMatrix[y] = [];
     for (let x = 0; x < width; x++) {
       let [reIndexedX, reIndexedY] = shiftCoordinates(x, y);
-
+      let theta = Math.atan(reIndexedY / reIndexedX);
       let radialX = hypotenuseLength(reIndexedX, reIndexedY);
 
-      checkboxState = simpleWave(radialX, 0, elapsedTimeSeconds);
+      checkboxState = simpleWave(radialX, 0, elapsedTimeSeconds, theta);
       newMatrix[y][x] = checkboxState ? 1 : 0;
     }
   }
