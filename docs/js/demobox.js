@@ -5,8 +5,9 @@ import * as rippleDemo from '../demos/ripple/demo.js';
 import * as snakeDemo from '../demos/snake/demo.js';
 import * as clockDemo from '../demos/clock/demo.js';
 import * as gameOfLifeDemo from '../demos/game-of-life/demo.js';
-import * as iconsDemo from '../demos/icons/demo.js';
 import * as spiralDemo from '../demos/spiral/demo.js';
+import * as iconsDemo from '../demos/icons/demo.js';
+import * as pinwheelDemo from '../demos/pinwheel/demo.js';
 import * as wipeDemo from '../demos/wipe/demo.js';
 import * as qrCodeDemo from '../demos/qr-code/demo.js';
 import * as waveDemo from '../demos/wave/demo.js';
@@ -18,8 +19,9 @@ const demoNameMap = {
   snake: snakeDemo,
   clock: clockDemo,
   gameOfLife: gameOfLifeDemo,
-  icons: iconsDemo,
   spiral: spiralDemo,
+  icons: iconsDemo,
+  pinwheel: pinwheelDemo,
   wipe: wipeDemo,
   qrCode: qrCodeDemo,
   wave: waveDemo,
