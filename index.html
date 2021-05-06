@@ -143,6 +143,7 @@
             <img class="demo-thumbnail" src="docs/img/demo-on-click.png" />
           </label>
         </form>
+        <div class="demo-source"><a href="https://github.com/bryanbraun/checkboxland/tree/master/docs/demos">(view source code for the demos here)</a></div>
       </div>
 
 
@@ -200,7 +201,10 @@ const cbl = new Checkboxland({
 
       <pre><code class="js language-js">import { Checkboxland } from 'checkboxland';
 
-const cbl = new Checkboxland({ dimensions: '8x7' });
+const cbl = new Checkboxland({
+  dimensions: '8x7',
+  selector: '#my-container'
+});
 
 // Create a data representation of the heart.
 const heart = [

@@ -261,6 +261,12 @@ h3.demo-title { /* we're using this element selector for additional specificity 
   border: var(--demo-option-border-thickness) solid var(--demo-focus-color);
 }
 
+.demo-source {
+  text-align: center;
+  font-size: 12px;
+  margin: 8px 0 0;
+}
+
 /* Mouse-users see the normal color when clicking on an option instead of the focus-color */
 .no-focus .demobox input[type="radio"]:checked:focus + label {
   border: var(--demo-option-border-thickness) solid var(--checkbox-blue);
