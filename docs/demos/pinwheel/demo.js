@@ -59,7 +59,7 @@ function loop() {
 }
 
 function cleanUp() {
-  clearInterval(timeoutId);
+  clearTimeout(timeoutId);
 }
 
 export {
