@@ -3,6 +3,7 @@ import { Checkboxland } from '../../src/index.js';
 import * as marqueeDemo from '../demos/marquee/demo.js';
 import * as rippleDemo from '../demos/ripple/demo.js';
 import * as snakeDemo from '../demos/snake/demo.js';
+import * as circlesDemo from '../demos/circles/demo.js';
 import * as clockDemo from '../demos/clock/demo.js';
 import * as gameOfLifeDemo from '../demos/game-of-life/demo.js';
 import * as spiralDemo from '../demos/spiral/demo.js';
@@ -17,6 +18,7 @@ const demoNameMap = {
   marquee: marqueeDemo,
   ripple: rippleDemo,
   snake: snakeDemo,
+  circles: circlesDemo,
   clock: clockDemo,
   gameOfLife: gameOfLifeDemo,
   spiral: spiralDemo,
