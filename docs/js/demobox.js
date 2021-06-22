@@ -6,6 +6,7 @@ import * as snakeDemo from '../demos/snake/demo.js';
 import * as circlesDemo from '../demos/circles/demo.js';
 import * as clockDemo from '../demos/clock/demo.js';
 import * as gameOfLifeDemo from '../demos/game-of-life/demo.js';
+import * as lasersDemo from '../demos/lasers/demo.js';
 import * as spiralDemo from '../demos/spiral/demo.js';
 import * as iconsDemo from '../demos/icons/demo.js';
 import * as pinwheelDemo from '../demos/pinwheel/demo.js';
@@ -21,6 +22,7 @@ const demoNameMap = {
   circles: circlesDemo,
   clock: clockDemo,
   gameOfLife: gameOfLifeDemo,
+  lasers: lasersDemo,
   spiral: spiralDemo,
   icons: iconsDemo,
   pinwheel: pinwheelDemo,
