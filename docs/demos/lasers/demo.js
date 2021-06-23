@@ -2,8 +2,8 @@ import { Checkboxland } from '../../../src/index.js';
 
 // Config
 let cbl;
-const width = 34;
-const height = 20;
+const width = 44;
+const height = 15;
 const interval = 70;
 const dimensions = `${width}x${height}`;
 const maxLaserLength = 8;
