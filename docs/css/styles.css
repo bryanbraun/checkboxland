@@ -17,6 +17,25 @@
   --demo-option-border-thickness: 4px;
 }
 
+/* latin-ext */
+@font-face {
+  font-family: 'Blinker';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/blinker/v4/cIf9MaFatEE-VTaP9CChYUsEkIpdQQ.woff2) format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Blinker';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/blinker/v4/cIf9MaFatEE-VTaP9C6hYUsEkIo.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
 html {
   box-sizing: border-box;
   font-size: 16px;
@@ -78,7 +97,6 @@ h1,h2,h3,h4,h5,h6,hgroup,ul,ol,dd,p,figure,pre,table,fieldset,hr {
 h1,h2,h3,h4,h5,h6 {
   font-family: var(--cbl-display-font);
 }
-
 
 /* basic component styles */
 
@@ -267,6 +285,13 @@ h3.demo-title { /* we're using this element selector for additional specificity 
   margin: 8px 0 0;
 }
 
+/* Constraining images */
+.cb-16x16 {
+  width: 16px;
+  height: 16px;
+  vertical-align: middle;
+}
+
 /* Mouse-users see the normal color when clicking on an option instead of the focus-color */
 .no-focus .demobox input[type="radio"]:checked:focus + label {
   border: var(--demo-option-border-thickness) solid var(--checkbox-blue);
@@ -320,4 +345,45 @@ h3.demo-title { /* we're using this element selector for additional specificity 
 .rc-text:focus a {
   color: #61ae24;
   text-decoration: none;
+}
+
+/* Github corner styles */
+.github-corner svg {
+  fill: #151513;
+  color:#fff;
+  position: absolute;
+  top: 0;
+  border: 0;
+  right: 0;
+}
+
+.github-corner:hover .octo-arm {
+	animation: octocat-wave 560ms ease-in-out;
+}
+.octo-arm {
+  transform-origin: 130px 106px;
+}
+
+@keyframes octocat-wave {
+	0%,
+	100% {
+		transform: rotate(0);
+	}
+	20%,
+	60% {
+		transform: rotate(-25deg);
+	}
+	40%,
+	80% {
+		transform: rotate(10deg);
+	}
+}
+
+@media (max-width:500px) {
+	.github-corner:hover .octo-arm {
+		animation: none;
+	}
+	.github-corner .octo-arm {
+		animation: octocat-wave 560ms ease-in-out;
+	}
 }
