@@ -1,2 +1,3 @@
 # Ignore docs when language scanning
 docs/* linguist-vendored
+index.html linguist-vendored
