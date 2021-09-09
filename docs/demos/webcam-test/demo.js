@@ -3,6 +3,7 @@ import { Checkboxland } from '../../../src/index.js';
 const selector = '#checkboxland';
 const checkboxDisplayWidth = 45;
 const checkboxDisplayHeight = 45;
+const CHECKBOX_LENGTH = 12;
 const dimensions = `${checkboxDisplayWidth}x${checkboxDisplayHeight}`;
 const fillValue = 0;
 
@@ -17,7 +18,11 @@ thresholdEl.addEventListener('input', event => {
 });
 
 const populateVideo = async videoEl => {
-  const stream = await navigator.mediaDevices.getUserMedia({ video: { width: 540, height: 540 } });
+  const webcamDimensions = {
+    width: checkboxDisplayWidth * CHECKBOX_LENGTH,
+    height: checkboxDisplayHeight * CHECKBOX_LENGTH,
+  };
+  const stream = await navigator.mediaDevices.getUserMedia({ video: webcamDimensions });
   videoEl.srcObject = stream;
   await videoEl.play();
 }
