@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Webcam</title>
+
+  <link rel="icon" type="image/png" sizes="16x16" href="../../favicon.png">
+  <link rel="stylesheet" type="text/css" href="../../css/cbl-normalize-size.css">
+
+  <style>
+    body {
+      text-align: center;
+      font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+    }
+    .page {
+      display: inline-block;
+    }
+    .media {
+      display: flex;
+      flex-direction: column;
+    }
+    @media (min-width: 1080px) {
+      .media {
+        flex-direction: row;
+      }
+    }
+    video {
+      background: black;
+    }
+    [type="range"] {
+      width: 250px;
+    }
+    .threshold,
+    footer {
+      padding-top: 1rem;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <div class="media">
+      <video width="540" height="540"></video>
+      <div id="checkboxland" class="cbl-normalize-size"></div>
+    </div>
+    <div class="threshold">
+      <label for="range">Threshold:</label><br />
+      <input type="range" id="threshold" min="0" max="100" />
+    </div>
+    <footer>
+      <div><a href="../../../">← Back to Checkboxland</div></a>
+    </footer>
+  </div>
+  <script type="module" src="webcam-test.js"></script>
+</body>
+
+</html>

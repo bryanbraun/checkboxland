@@ -5,24 +5,27 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Circles</title>
+  <title>Image</title>
 
   <link rel="icon" type="image/png" sizes="16x16" href="../../favicon.png">
-
+  <link rel="stylesheet" type="text/css" href="../../css/cbl-normalize-size.css">
   <style>
     body {
       margin: 0;
+    }
+    .page {
+      display: flex;
     }
   </style>
 </head>
 
 <body>
   <div class="page">
-    <div id="checkboxland"></div>
+    <div id="checkboxland" class="cbl-normalize-size"></div>
   </div>
   <script type="module">
-    import * as circles from './demo.js';
-    circles.init();
+    import * as marqueeDemo from './demo.js';
+    marqueeDemo.init();
   </script>
 </body>
 

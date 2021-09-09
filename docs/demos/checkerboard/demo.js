@@ -3,7 +3,6 @@ import { Checkboxland } from '../../../src/index.js';
 const width = 44;
 const height = 15;
 const dimensions = `${width}x${height}`;
-const frames = []
 
 let interval = 100;
 let cbl;
@@ -20,7 +19,7 @@ function init(existingCbl) {
   return cbl;
 }
 
-function getCirclesCheckbox(x, y, t) {
+function getCheckerboardCheckbox(x, y, t) {
   let xOffset = 2*t;
   let yOffset = -1.6*t;
   let sizeValue = 1;
@@ -38,7 +37,7 @@ function loop() {
   for (let y = 0; y < height; y++) {
     newMatrix[y] = [];
     for (let x = 0; x < width; x++) {
-      checkboxState = getCirclesCheckbox(x, y, elapsedTimeSeconds);
+      checkboxState = getCheckerboardCheckbox(x, y, elapsedTimeSeconds);
       newMatrix[y][x] = checkboxState ? 1 : 0;
     }
   }

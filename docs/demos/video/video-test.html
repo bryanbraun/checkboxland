@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Video</title>
+
+  <link rel="icon" type="image/png" sizes="16x16" href="../../favicon.png">
+  <link rel="stylesheet" type="text/css" href="../../css/cbl-normalize-size.css">
+
+  <style>
+    .dropzone {
+      border: 1px dashed black;
+      margin: 1rem;
+      width: 400px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <h1>Video Plugin Examples</h1>
+    <h2>Loading via embedded video tag</h2>
+    <div style="display: flex">
+      <div id="checkboxland" class="cbl-normalize-size"></div>
+      <video src="https://i.gifer.com/8B4D.mp4" crossorigin="anonymous" controls loop></video>
+    </div>
+    <h2>Loading via URL</h2>
+    <div>
+      <form id="url-form">
+        <input placeholder="URL to video file" type="text" id="url" />
+        <button type="submit">Load</button>
+      </form>
+      <pre>
+https://i.gifer.com/UPLU.mp4
+https://i.gifer.com/Ui02.mp4
+https://i.gifer.com/8B4D.mp4
+https://i.gifer.com/DC2D.mp4
+https://i.gifer.com/g0RQ.mp4
+https://i.gifer.com/3Y1A.mp4
+https://i.gifer.com/7SIO.mp4
+https://i.gifer.com/7X38.mp4
+https://i.gifer.com/um.mp4
+https://i.gifer.com/DsP.mp4
+      </pre>
+    </div>
+    <h2>Loading via file-upload</h2>
+    <input type="file" name="picture" />
+    <h2>Loading via drag-and-drop</h2>
+    <div id="dropzone" class="dropzone">DROPZONE</div>
+  </div>
+  <script type="module" src="video-test.js"></script>
+</body>
+</html>

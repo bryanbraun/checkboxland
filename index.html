@@ -58,6 +58,8 @@
               <li><a href="#transitionwipe">transitionWipe</a></li>
               <li><a href="#datautils">dataUtils</a></li>
               <li><a href="#onclick">onClick</a></li>
+              <li><a href="#renderimage">renderImage</a></li>
+              <li><a href="#rendervideo">renderVideo</a></li>
             </ul>
           </li>
         </ul>
@@ -103,15 +105,20 @@
             <span class="demo-name">Snake</span>
             <img class="demo-thumbnail" src="docs/img/demo-snake.png" />
           </label>
-          <input type="radio" id="circles-demo" class="visuallyhidden" name="demoRadios" value="circles" />
-          <label for="circles-demo" class="demo-option">
-            <span class="demo-name">Circles</span>
-            <img class="demo-thumbnail" src="docs/img/demo-circles.png" />
+          <input type="radio" id="pinwheel-demo" class="visuallyhidden" name="demoRadios" value="pinwheel" />
+          <label for="pinwheel-demo" class="demo-option">
+            <span class="demo-name">Pinwheel</span>
+            <img class="demo-thumbnail" src="docs/img/demo-pinwheel.png" />
           </label>
           <input type="radio" id="clock-demo" class="visuallyhidden" name="demoRadios" value="clock" />
           <label for="clock-demo" class="demo-option">
             <span class="demo-name">Clock</span>
             <img class="demo-thumbnail" src="docs/img/demo-clock.png" />
+          </label>
+          <input type="radio" id="webcam-demo" class="visuallyhidden" name="demoRadios" value="webcam" />
+          <label for="webcam-demo" class="demo-option">
+            <span class="demo-name">Webcam</span>
+            <img class="demo-thumbnail" src="docs/img/demo-webcam.png" />
           </label>
           <input type="radio" id="game-of-life-demo" class="visuallyhidden" name="demoRadios" value="gameOfLife" />
           <label for="game-of-life-demo" class="demo-option">
@@ -123,25 +130,30 @@
             <span class="demo-name">Lasers</span>
             <img class="demo-thumbnail" src="docs/img/demo-lasers.png" />
           </label>
-          <input type="radio" id="spiral-demo" class="visuallyhidden" name="demoRadios" value="spiral" />
-          <label for="spiral-demo" class="demo-option">
-            <span class="demo-name">Spiral</span>
-            <img class="demo-thumbnail" src="docs/img/demo-spiral.png" />
-          </label>
           <input type="radio" id="icons-demo" class="visuallyhidden" name="demoRadios" value="icons" />
           <label for="icons-demo" class="demo-option">
             <span class="demo-name">Icons</span>
             <img class="demo-thumbnail" src="docs/img/demo-icons.png" />
           </label>
-          <input type="radio" id="pinwheel-demo" class="visuallyhidden" name="demoRadios" value="pinwheel" />
-          <label for="pinwheel-demo" class="demo-option">
-            <span class="demo-name">Pinwheel</span>
-            <img class="demo-thumbnail" src="docs/img/demo-pinwheel.png" />
+          <input type="radio" id="spiral-demo" class="visuallyhidden" name="demoRadios" value="spiral" />
+          <label for="spiral-demo" class="demo-option">
+            <span class="demo-name">Spiral</span>
+            <img class="demo-thumbnail" src="docs/img/demo-spiral.png" />
+          </label>
+          <input type="radio" id="checkerboard-demo" class="visuallyhidden" name="demoRadios" value="checkerboard" />
+          <label for="checkerboard-demo" class="demo-option">
+            <span class="demo-name">Checkerboard</span>
+            <img class="demo-thumbnail" src="docs/img/demo-checkerboard.png" />
           </label>
           <input type="radio" id="wipe-demo" class="visuallyhidden" name="demoRadios" value="wipe" />
           <label for="wipe-demo" class="demo-option">
             <span class="demo-name">Wipe</span>
             <img class="demo-thumbnail" src="docs/img/demo-wipe.png" />
+          </label>
+          <input type="radio" id="image-demo" class="visuallyhidden" name="demoRadios" value="image" />
+          <label for="image-demo" class="demo-option">
+            <span class="demo-name">Image</span>
+            <img class="demo-thumbnail" src="docs/img/demo-image.png" />
           </label>
           <input type="radio" id="qr-code-demo" class="visuallyhidden" name="demoRadios" value="qrCode" />
           <label for="qr-code-demo" class="demo-option">
@@ -443,6 +455,64 @@ abcdefghijklmnopqrstuvwxyz
       <p>To cancel a marquee in progress, call the <code>cleanUp</code> method:</p>
 
       <pre><code>.marquee.cleanUp()</code></pre>
+
+      <h3>renderImage</h3>
+
+      <p>Renders the provided image as checkboxes. Tested formats include PNG, JPEG, WEBP, and GIF (not animated).</p>
+      <p>Note: when loading an image from an external domain using an <code>HTMLImageElement</code>, you will need to include <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/crossorigin">the crossorigin="anonymous" attribute</a>. The image host will also need to send <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin">an Access-Control-Allow-Origin header</a>.</p>
+      <p>See examples using <a href="./docs/demos/image/image-test.html"><code>HTMLImageElement</code>, file uploads, url loading, and drag-and-drop</a>.</p>
+
+      <pre><code>.renderImage(dataSource, [options])</code></pre>
+
+      <h4 id="renderImage-arguments">Arguments</h4>
+
+      <ul>
+        <li><code>dataSource</code> (string | HTMLImageElement): A string containing the URL for an image (including data URLs), or an <code>HTMLImageElement</code> with the <code>src</code> defined (like an <code>&lt;img /&gt;</code> tag queried from the page).</li>
+        <li><code>options</code> (object)
+          <ul>
+            <li><code>threshold</code> (number): A number between 0-100, representing <a href="https://en.wikipedia.org/wiki/Thresholding_(image_processing)">the threshold value</a> for separating the image into dark and light regions. <em>Default: 50.</em></li>
+            <li><code>x</code> (number): The x-coordinate where you want the image to begin. <em>Default: 0.</em></li>
+            <li><code>y</code> (number): The y-coordinate where you want the image to begin. <em>Default: 0.</em></li>
+            <li><code>fillValue</code> (number): If the image you are placing doesn't fill the whole checkbox grid, you can optionally provide a checkbox value (0, 1, or 2) which will then be used to fill the leftover areas. <em>Default: <code>undefined</code>.</em></li>
+          </ul>
+        </li>
+      </ul>
+
+      <h4 id="renderImage-returns">Returns</h4>
+
+      <p>Nothing</p>
+
+      <h3>renderVideo</h3>
+
+      <p>Renders the provided video as checkboxes. Tested formats include MP4, WEBM, and <a href="https://developer.mozilla.org/en-US/docs/Web/API/MediaStream">MediaStreams</a>.</p>
+      <p>Note: when loading an video from an external domain with an <code>HTMLVideoElement</code>, you will need to include <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/crossorigin">the crossorigin="anonymous" attribute</a>. The video host should also send <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin">an Access-Control-Allow-Origin header</a>.</p>
+      <p>See examples using <a href="./docs/demos/video/video-test.html"><code>HTMLVideoElement</code>, file uploads, url loading, drag-and-drop</a>, and <a href="./docs/demos/webcam/webcam-test.html">webcam</a>.</p>
+
+      <pre><code>.renderVideo(dataSource, [options])</code></pre>
+
+      <h4 id="renderVideo-arguments">Arguments</h4>
+
+      <ul>
+        <li><code>dataSource</code> (string | HTMLVideoElement): A string containing the URL for a video (including data URLs), or an <code>HTMLVideoElement</code> with the <code>src</code> defined (like an <code>&lt;video /&gt;</code> tag queried from the page). Videos passed as URLs will play automatically with reasonable default settings. Videos passed as an <code>HTMLVideoElement</code> can be customized via <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video#attributes">HTML attributes</a> and controlled via <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement">the HTMLMediaElement APIs</a>.</li>
+        <li><code>options</code> (object)
+          <ul>
+            <li><code>threshold</code> (number): A number between 0-100, representing <a href="https://en.wikipedia.org/wiki/Thresholding_(image_processing)">the threshold value</a> for separating the video into dark and light regions. <em>Default: 50.</em></li>
+            <li><code>x</code> (number): The x-coordinate where you want the video to begin. <em>Default: 0.</em></li>
+            <li><code>y</code> (number): The y-coordinate where you want the video to begin. <em>Default: 0.</em></li>
+            <li><code>fillValue</code> (number): If the video you are placing won't fill the whole checkbox grid, you can optionally provide a checkbox value (0, 1, or 2) which will then be used to fill the leftover areas. <em>Default: <code>undefined</code>.</em></li>
+          </ul>
+        </li>
+      </ul>
+
+      <h4 id="renderVideo-returns">Returns</h4>
+
+      <p>Nothing</p>
+
+      <h4 id="renderVideo-clean-up">Clean up</h4>
+
+      <p>To cancel an autoplaying checkbox video, call the <code>cleanUp</code> method:</p>
+
+      <pre><code>.renderVideo.cleanUp()</code></pre>
 
       <h3>transitionWipe</h3>
 
