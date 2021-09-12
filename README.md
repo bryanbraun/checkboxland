@@ -6,7 +6,7 @@
 
 Checkboxland is a JavaScript library for rendering anything as HTML checkboxes.
 
-You can use it to display animations, text, and arbitrary data. It also supports plugins, so you can build more powerful APIs on top of it.
+You can use it to display animations, text, images, video, and arbitrary data. It also supports plugins, so you can add your own APIs.
 
 Checkboxland is dependency-free, framework-agnostic, and fun! 🙃
 
