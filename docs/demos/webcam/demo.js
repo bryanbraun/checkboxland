@@ -11,13 +11,20 @@ function init(existingCbl) {
   cbl = !!existingCbl ? existingCbl : new Checkboxland({ dimensions });
 
   const videoEl = document.createElement('video');
+  videoEl.setAttribute('autoplay', '');
+  videoEl.setAttribute('muted', '');
+  videoEl.setAttribute('playsinline', '');
 
   const populateVideo = async videoEl => {
-    const webcamDimensions = {
-      width: width * CHECKBOX_LENGTH,
-      height: height * CHECKBOX_LENGTH,
+    const constraints = {
+      audio: false,
+      video: {
+        width: width * CHECKBOX_LENGTH,
+        height: height * CHECKBOX_LENGTH,
+        facingMode: 'user',
+      },
     };
-    const stream = await navigator.mediaDevices.getUserMedia({ video: webcamDimensions });
+    const stream = await navigator.mediaDevices.getUserMedia(constraints);
     videoEl.srcObject = stream;
     await videoEl.play();
   }
