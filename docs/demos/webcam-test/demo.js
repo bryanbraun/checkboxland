@@ -18,11 +18,15 @@ thresholdEl.addEventListener('input', event => {
 });
 
 const populateVideo = async videoEl => {
-  const webcamDimensions = {
-    width: checkboxDisplayWidth * CHECKBOX_LENGTH,
-    height: checkboxDisplayHeight * CHECKBOX_LENGTH,
+  const constraints = {
+    audio: false,
+    video: {
+      width: checkboxDisplayWidth * CHECKBOX_LENGTH,
+      height: checkboxDisplayHeight * CHECKBOX_LENGTH,
+      facingMode: 'user',
+    },
   };
-  const stream = await navigator.mediaDevices.getUserMedia({ video: webcamDimensions });
+  const stream = await navigator.mediaDevices.getUserMedia(constraints);
   videoEl.srcObject = stream;
   await videoEl.play();
 }
