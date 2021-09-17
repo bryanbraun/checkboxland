@@ -7,9 +7,10 @@ import * as pinwheelDemo from '../demos/pinwheel/demo.js';
 import * as clockDemo from '../demos/clock/demo.js';
 import * as webcamDemo from '../demos/webcam/demo.js';
 import * as gameOfLifeDemo from '../demos/game-of-life/demo.js';
+import * as videoDemo from '../demos/video/demo.js';
 import * as lasersDemo from '../demos/lasers/demo.js';
-import * as iconsDemo from '../demos/icons/demo.js';
 import * as spiralDemo from '../demos/spiral/demo.js';
+import * as iconsDemo from '../demos/icons/demo.js';
 import * as checkerboardDemo from '../demos/checkerboard/demo.js';
 import * as wipeDemo from '../demos/wipe/demo.js';
 import * as imageDemo from '../demos/image/demo.js';
@@ -25,9 +26,10 @@ const demoNameMap = {
   clock: clockDemo,
   webcam: webcamDemo,
   gameOfLife: gameOfLifeDemo,
+  video: videoDemo,
   lasers: lasersDemo,
-  icons: iconsDemo,
   spiral: spiralDemo,
+  icons: iconsDemo,
   checkerboard: checkerboardDemo,
   wipe: wipeDemo,
   image: imageDemo,
