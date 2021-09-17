@@ -171,7 +171,7 @@
             <img class="demo-thumbnail" src="docs/img/demo-on-click.png" />
           </label>
         </form>
-        <div class="demo-source"><a href="https://github.com/bryanbraun/checkboxland/tree/master/docs/demos">(view source code for the demos here)</a></div>
+        <div class="demo-source"><a href="https://github.com/bryanbraun/checkboxland/tree/main/docs/demos">(view source code for the demos here)</a></div>
       </div>
 
 
@@ -264,7 +264,7 @@ cbl.setData(heart);</code></pre>
 
       <p>By passing this matrix to our <code>setData()</code> method, we update the checkbox grid on the page.</p>
 
-      <p>For more examples, see <a href="https://github.com/bryanbraun/checkboxland/tree/master/docs/demos">the source code for the demos here</a>.</p>
+      <p>For more examples, see <a href="https://github.com/bryanbraun/checkboxland/tree/main/docs/demos">the source code for the demos here</a>.</p>
 
       <p>For more ways to interact with the checkbox grid, see the API methods below.</p>
 
@@ -400,13 +400,13 @@ cbl.setData(heart);</code></pre>
 
       <p>Prints text to the checkbox grid. This text overwrites the existing checkbox grid, starting in the top left corner.</p>
 
-      <p>Most of the characters in <a href="https://github.com/bryanbraun/checkboxland/blob/master/src/plugins/print/font-5x7.js">the default font</a> are 5x7 checkboxes in size. Supported characters include the following:</p>
+      <p>Most of the characters in <a href="https://github.com/bryanbraun/checkboxland/blob/main/src/plugins/print/font-5x7.js">the default font</a> are 5x7 checkboxes in size. Supported characters include the following:</p>
 
       <pre><code>ABCDEFGHIJKLMNOPQRSTUVWXYZ
 abcdefghijklmnopqrstuvwxyz
 0123456789`~!@#$%^&amp;*()-_+=[]{}|\/;:"',.&lt;&gt;?</code></pre>
 
-      <p>For a working example, see <a href="https://github.com/bryanbraun/checkboxland/blob/master/docs/demos/textbox/demo.js">the textbox demo</a>.</p>
+      <p>For a working example, see <a href="https://github.com/bryanbraun/checkboxland/blob/main/docs/demos/textbox/demo.js">the textbox demo</a>.</p>
 
       <pre><code>.print(text, [options])</code></pre>
 
@@ -416,7 +416,7 @@ abcdefghijklmnopqrstuvwxyz
         <li><code>text</code> (string): The text you want printed to the checkbox grid.</li>
         <li><code>options</code> (object)
         <ul>
-          <li><code>font</code> (object): An object containing character data for a custom font, if you want to use one. For a working example, see <a href="https://github.com/bryanbraun/checkboxland/blob/master/docs/demos/clock/demo.js">the clock demo</a>.</li>
+          <li><code>font</code> (object): An object containing character data for a custom font, if you want to use one. For a working example, see <a href="https://github.com/bryanbraun/checkboxland/blob/main/docs/demos/clock/demo.js">the clock demo</a>.</li>
           <li><code>x</code> (number): The x-coordinate where the text should start on the checkbox grid. <em>Default: 0.</em></li>
           <li><code>y</code> (number): The y-coordinate where the text should start on the checkbox grid. <em>Default: 0.</em></li>
           <li><code>fillValue</code> (number): If the text data won't fill the whole checkbox grid, you can  (0, 1, or 2) which will then be used to fill the leftover areas. <em>Default: <code>undefined</code>.</em></li>
@@ -433,7 +433,7 @@ abcdefghijklmnopqrstuvwxyz
 
       <p>Animates a block of data, by making it scroll across the checkbox grid from right to left.</p>
 
-      <p>For a working example, see <a href="https://github.com/bryanbraun/checkboxland/blob/master/docs/demos/marquee/demo.js">the marquee demo</a>.</p>
+      <p>For a working example, see <a href="https://github.com/bryanbraun/checkboxland/blob/main/docs/demos/marquee/demo.js">the marquee demo</a>.</p>
 
       <pre><code>.marquee(data, [options])</code></pre>
 
@@ -523,7 +523,7 @@ abcdefghijklmnopqrstuvwxyz
 
       <p>Transition between the current checkbox grid state and a future state by wiping across the screen.</p>
 
-      <p>For a working example, see <a href="https://github.com/bryanbraun/checkboxland/blob/master/docs/demos/wipe/demo.js">the wipe demo</a>.</p>
+      <p>For a working example, see <a href="https://github.com/bryanbraun/checkboxland/blob/main/docs/demos/wipe/demo.js">the wipe demo</a>.</p>
 
       <pre><code>.transitionWipe(newData, [options])</code></pre>
 
@@ -588,7 +588,7 @@ abcdefghijklmnopqrstuvwxyz
 
       <p>Registers an <code>eventHandler</code>, which is called when the checkbox grid is clicked. Also provides <code>data</code> about the location of the click.</p>
 
-      <p>For a working example, see <a href="https://github.com/bryanbraun/checkboxland/blob/master/docs/demos/on-click/demo.js">the "On Click" demo</a>.</p>
+      <p>For a working example, see <a href="https://github.com/bryanbraun/checkboxland/blob/main/docs/demos/on-click/demo.js">the "On Click" demo</a>.</p>
 
       <pre><code>.onClick(eventHandler)</code></pre>
 
@@ -635,7 +635,7 @@ const cbl = new Checkboxland();
 // Mirror the data on the grid
 cbl.mirror();</code></pre>
 
-      <p>You can see <a href="https://github.com/bryanbraun/checkboxland/blob/master/src/index.js">more examples of plugins being used in Checkboxland's core files</a>.</p>
+      <p>You can see <a href="https://github.com/bryanbraun/checkboxland/blob/main/src/index.js">more examples of plugins being used in Checkboxland's core files</a>.</p>
 
       <h3>Existing Plugins</h3>
       <p><em>(if you write a 3rd-party plugin for Checkboxland, I'll list it here)</em></p>
@@ -699,7 +699,7 @@ cbl.logData('dimensions'); // =&gt; 'width: 4, height: 2'
 cbl.logData('matrix'); // =&gt; (2) [Array(4), Array(4)]
 cbl.logData.cleanUp(); // =&gt; 'clean up was called'</code></pre>
 
-      <p>For more plugin examples, see <a href="https://github.com/bryanbraun/checkboxland/tree/master/src/plugins">these plugins built into Checkboxland</a>.</p>
+      <p>For more plugin examples, see <a href="https://github.com/bryanbraun/checkboxland/tree/main/src/plugins">these plugins built into Checkboxland</a>.</p>
 
       <hr />
 
