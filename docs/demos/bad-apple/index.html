@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Bad Apple on HTML Checkboxes</title>
+  <meta name="description" content="The Bad Apple video clip, displayed using HTML checkboxes.">
+  <meta name="keywords" content="video, animation, bad apple">
+  <meta name="author" content="Bryan Braun">
+
+  <link rel="icon" type="image/png" sizes="16x16" href="../../favicon.png">
+  <link rel="stylesheet" type="text/css" href="../../css/cbl-normalize-size.css">
+  <style>
+    body {
+      text-align: center;
+      font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+    }
+    .page {
+      display: inline-block;
+      position: relative;
+    }
+    video {
+      background: black;
+      color: white;
+      position: absolute;
+      bottom: 6px;
+      right: 6px;
+    }
+    footer {
+      padding-top: 1rem;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <div id="checkboxland" class="cbl-normalize-size"></div>
+    <video controls loop width="200" height="150">
+      <source src="bad-apple.mp4" type="video/mp4" >
+      <p>Your browser doesn't support HTML5 video. :(</p>
+    </video>
+  </div>
+  <footer>
+    <!-- <div><a href="../../../">← Back to Checkboxland</div></a> -->
+  </footer>
+  <script type="module" src="demo.js"></script>
+</body>
+
+</html>
