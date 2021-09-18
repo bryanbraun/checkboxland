@@ -3,7 +3,6 @@ import { Checkboxland } from '../../../src/index.js';
 const width = 44;
 const height = 15;
 const dimensions = `${width}x${height}`;
-const frames = []
 
 let interval = 100;
 let cbl;

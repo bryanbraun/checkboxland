@@ -10,6 +10,7 @@ import * as gameOfLifeDemo from '../demos/game-of-life/demo.js';
 import * as videoDemo from '../demos/video/demo.js';
 import * as lasersDemo from '../demos/lasers/demo.js';
 import * as spiralDemo from '../demos/spiral/demo.js';
+import * as pulseDemo from '../demos/pulse/demo.js';
 import * as iconsDemo from '../demos/icons/demo.js';
 import * as checkerboardDemo from '../demos/checkerboard/demo.js';
 import * as wipeDemo from '../demos/wipe/demo.js';
@@ -29,6 +30,7 @@ const demoNameMap = {
   video: videoDemo,
   lasers: lasersDemo,
   spiral: spiralDemo,
+  pulse: pulseDemo,
   icons: iconsDemo,
   checkerboard: checkerboardDemo,
   wipe: wipeDemo,

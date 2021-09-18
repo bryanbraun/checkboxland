@@ -37,8 +37,6 @@ function init(existingCbl) {
   cbl = !!existingCbl ? existingCbl : new Checkboxland({ dimensions });
   cbl.onClick(({ x, y }) => lasers.push(new Laser({ x, y })));
 
-  document.querySelector('#checkboxland').focus();
-
   setInitialState();
 
   intervalId = setInterval(() => {
