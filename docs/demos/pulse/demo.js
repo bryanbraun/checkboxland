@@ -46,6 +46,7 @@ function pulse({ x, y }) {
         let distanceToOrigin = Math.hypot(xDistanceToOrigin, yDistanceToOrigin);
 
         // Our mathematical distance comparison function.
+        // See: https://www.desmos.com/calculator/ptbmix9qi0
         let calculatedPulseState = distanceToOrigin > (elapsedTime / 100) ? 'Ω' : '@';
 
         // Determine if this checkbox is on the leading edge and should be toggled.
