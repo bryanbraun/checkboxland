@@ -67,7 +67,10 @@ function advanceTheLaser(laser) {
 
   if (wallsCollidedWith.length !== 0) {
     wallsCollidedWith.forEach(wallCollidedWith => {
-      laser.vector = reflections[wallCollidedWith][laser.vector];
+      // If we've just created a new laser on a boundary cell, this might not be true.
+      if (laser.vector in reflections[wallCollidedWith]) {
+        laser.vector = reflections[wallCollidedWith][laser.vector];
+      }
     });
   }
 
