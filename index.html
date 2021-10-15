@@ -480,7 +480,7 @@ abcdefghijklmnopqrstuvwxyz
         <li><code>dataSource</code> (string | HTMLImageElement): A string containing the URL for an image (including data URLs), or an <code>HTMLImageElement</code> with the <code>src</code> defined (like an <code>&lt;img /&gt;</code> tag queried from the page).</li>
         <li><code>options</code> (object)
           <ul>
-            <li><code>threshold</code> (number): A number between 0-100, representing <a href="https://en.wikipedia.org/wiki/Thresholding_(image_processing)">the threshold value</a> for separating the image into dark and light regions. <em>Default: 50.</em></li>
+            <li><code>sharpening</code> (number): A number between 0-100, representing sharpening quotient. <em>Default: 50</em></li>
             <li><code>x</code> (number): The x-coordinate where you want the image to begin. <em>Default: 0.</em></li>
             <li><code>y</code> (number): The y-coordinate where you want the image to begin. <em>Default: 0.</em></li>
             <li><code>fillValue</code> (number): If the image you are placing doesn't fill the whole checkbox grid, you can optionally provide a checkbox value (0, 1, or 2) which will then be used to fill the leftover areas. <em>Default: <code>undefined</code>.</em></li>
@@ -506,7 +506,7 @@ abcdefghijklmnopqrstuvwxyz
         <li><code>dataSource</code> (string | HTMLVideoElement): A string containing the URL for a video (including data URLs), or an <code>HTMLVideoElement</code> with the <code>src</code> defined (like an <code>&lt;video /&gt;</code> tag queried from the page). Videos passed as URLs will play automatically with reasonable default settings. Videos passed as an <code>HTMLVideoElement</code> can be customized via <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video#attributes">HTML attributes</a> and controlled via <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement">the HTMLMediaElement APIs</a>.</li>
         <li><code>options</code> (object)
           <ul>
-            <li><code>threshold</code> (number): A number between 0-100, representing <a href="https://en.wikipedia.org/wiki/Thresholding_(image_processing)">the threshold value</a> for separating the video into dark and light regions. <em>Default: 50.</em></li>
+            <li><code>sharpening</code> (number): A number between 0-100, representing sharpening quotient. <em>Default: 50</em></li>
             <li><code>x</code> (number): The x-coordinate where you want the video to begin. <em>Default: 0.</em></li>
             <li><code>y</code> (number): The y-coordinate where you want the video to begin. <em>Default: 0.</em></li>
             <li><code>fillValue</code> (number): If the video you are placing won't fill the whole checkbox grid, you can optionally provide a checkbox value (0, 1, or 2) which will then be used to fill the leftover areas. <em>Default: <code>undefined</code>.</em></li>

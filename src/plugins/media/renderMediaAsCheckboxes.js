@@ -1,6 +1,21 @@
 let canvasEl;
 let context;
-let grayscaleThreshold;
+let sharpening;
+
+import {sharpen} from './sharpen.js';
+
+// There is some weirdness how dither.js is imported
+// I don't have energy to reverse engineer require/import/export/default mindf*ks, so let's just call it twice
+import DitherJSImport from './dither.js'
+const DitherJS = DitherJSImport();
+
+const ditherjsOptions = {
+  "step": 1, // The step for the pixel quantization n = 1,2,3...
+  "palette": [[60,136,253], [255, 255, 255], ], // an array of colors as rgb arrays; first is "checkbox blue", second is white
+  "algorithm": "ordered" // one of ["ordered", "diffusion", "atkinson"]
+}
+
+const ditherjs = new DitherJS([ditherjsOptions]);
 
 export function renderMediaAsCheckboxes(element, options = {}, checkboxland) {
   if (!canvasEl) {
@@ -8,7 +23,10 @@ export function renderMediaAsCheckboxes(element, options = {}, checkboxland) {
     context = canvasEl.getContext('2d');
   }
 
-  grayscaleThreshold = ((options.threshold || 50) / 100) * 255;
+  // default is 50, but we want to be able to pass 0
+  let s = options.sharpening == null ? 50 : options.sharpening;
+
+  sharpening = (s / 100);
 
   // Create a tiny canvas. Each pixel on the canvas will represent a checkbox.
   canvasEl.width = checkboxland.dimensions[0];
@@ -78,28 +96,17 @@ function clampDimensions(imageWidth, imageHeight, canvasWidth, canvasHeight) {
 };
 
 function getBlackAndWhiteImageData(context, width, height) {
-  // These toGrayScale function values were borrowed from here:
-  // https://www.jonathan-petitcolas.com/2017/12/28/converting-image-to-ascii-art.html#turning-an-image-into-gray-colors
-  const toGrayScale = (r, g, b) => 0.21 * r + 0.72 * g + 0.07 * b;
+  const original = context.getImageData(0, 0, width, height);
 
-  const rgbaImageArray = context.getImageData(0, 0, width, height);
+  const sharpened = sharpen(context, original, sharpening);
+
+  const dithered = sharpened
+  ditherjs.ditherImageData(dithered, ditherjsOptions);
+
   const pixelMatrix = [];
 
-  for (let i = 0 ; i < rgbaImageArray.data.length ; i += 4) {
-    const r = rgbaImageArray.data[i];
-    const g = rgbaImageArray.data[i + 1];
-    const b = rgbaImageArray.data[i + 2];
-
-    const grayScaleVal = toGrayScale(r, g, b);
-
-    const thresholdedVal = grayScaleVal > grayscaleThreshold ? 255 : 0;
-
-    // We overwrite the pixels with their black and white counterparts and
-    // return rgbaImageArray in case we ever want to preview it on a canvas.
-    rgbaImageArray.data[i] = thresholdedVal;
-    rgbaImageArray.data[i + 1] = thresholdedVal;
-    rgbaImageArray.data[i + 2] = thresholdedVal;
-    // Note: we currently ignore the transparency value;
+  for (let i = 0 ; i < dithered.data.length ; i += 4) {
+    const r = dithered.data[i];
 
     const pixelNum = i/4;
     const rowNumber = Math.floor(pixelNum / width);
@@ -109,8 +116,8 @@ function getBlackAndWhiteImageData(context, width, height) {
       pixelMatrix[rowNumber] = [];
     }
 
-    pixelMatrix[rowNumber][rowIndex] = grayScaleVal > grayscaleThreshold ? 0 : 1;
+    pixelMatrix[rowNumber][rowIndex] = r==255 ? 0 : 1;
   }
 
-  return [rgbaImageArray, pixelMatrix];
-};
+  return [dithered, pixelMatrix];
+}
