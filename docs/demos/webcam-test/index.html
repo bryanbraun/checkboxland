@@ -47,8 +47,17 @@
       <div id="checkboxland" class="cbl-normalize-size"></div>
     </div>
     <div class="threshold">
-      <label for="range">Threshold:</label><br />
+      <label for="threshold">Threshold:</label><br />
       <input type="range" id="threshold" min="0" max="100" />
+    </div>
+    <div>
+      <label for="dithering">Dithering:</label>
+      <select id="dithering">
+        <option value="none">- none -</option>
+        <option value="atkinson">Atkinson</option>
+        <option value="bayer">Bayer</option>
+        <option value="floydsteinberg">Floyd-Steinberg</option>
+      </select>
     </div>
     <footer>
       <div><a href="../../../">← Back to Checkboxland</div></a>
