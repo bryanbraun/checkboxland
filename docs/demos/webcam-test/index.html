@@ -33,7 +33,7 @@
     [type="range"] {
       width: 250px;
     }
-    .sharpening,
+    .threshold,
     footer {
       padding-top: 1rem;
     }
@@ -46,9 +46,18 @@
       <video width="540" height="540" autoplay muted playsinline></video>
       <div id="checkboxland" class="cbl-normalize-size"></div>
     </div>
-    <div class="sharpening">
-      <label for="range">Sharpening:</label><br />
-      <input type="range" id="sharpening" min="0" max="100" />
+    <div class="threshold">
+      <label for="range">Threshold:</label><br />
+      <input type="range" id="threshold" min="0" max="100" />
+    </div>
+    <div>
+      <label for="dithering">Dithering:</label>
+      <select id="dithering">
+        <option value="none">- none -</option>
+        <option value="ordered">Ordered</option>
+        <option value="atkinson">Atkinson</option>
+        <option value="errorDiffusion">Error Diffusion</option>
+      </select>
     </div>
     <footer>
       <div><a href="../../../">← Back to Checkboxland</div></a>

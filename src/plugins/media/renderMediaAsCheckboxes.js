@@ -1,32 +1,14 @@
+import { orderedDither, atkinsonDither, errorDiffusionDither } from './dithering-algorithms.js'
+import { blackAndWhiteThreshold, sharpen } from './thresholds.js';
+
 let canvasEl;
 let context;
-let sharpening;
-
-import {sharpen} from './sharpen.js';
-
-// There is some weirdness how dither.js is imported
-// I don't have energy to reverse engineer require/import/export/default mindf*ks, so let's just call it twice
-import DitherJSImport from './dither.js'
-const DitherJS = DitherJSImport();
-
-const ditherjsOptions = {
-  "step": 1, // The step for the pixel quantization n = 1,2,3...
-  "palette": [[60,136,253], [255, 255, 255], ], // an array of colors as rgb arrays; first is "checkbox blue", second is white
-  "algorithm": "ordered" // one of ["ordered", "diffusion", "atkinson"]
-}
-
-const ditherjs = new DitherJS([ditherjsOptions]);
 
 export function renderMediaAsCheckboxes(element, options = {}, checkboxland) {
   if (!canvasEl) {
     canvasEl = document.createElement('canvas');
     context = canvasEl.getContext('2d');
   }
-
-  // default is 50, but we want to be able to pass 0
-  let s = options.sharpening == null ? 50 : options.sharpening;
-
-  sharpening = (s / 100);
 
   // Create a tiny canvas. Each pixel on the canvas will represent a checkbox.
   canvasEl.width = checkboxland.dimensions[0];
@@ -43,14 +25,15 @@ export function renderMediaAsCheckboxes(element, options = {}, checkboxland) {
   const [mediaWidth, mediaHeight] = getMediaDimensions(element);
   const [width, height] = clampDimensions(mediaWidth, mediaHeight, canvasEl.width, canvasEl.height);
 
-  // Draw the image on the tiny canvas (`drawImage` will scale the image
-  // as needed to make it fit the canvas).
+  // Draw the original image on the tiny canvas (`drawImage` will scale the
+  // image as needed to make it fit the canvas).
   context.drawImage(element, 0, 0, width, height);
 
-  // Loop over the canvas pixels and convert them to black and white values.
-  const [_, pixelMatrix] = getBlackAndWhiteImageData(context, width, height);
+  // Loop over the canvas pixels and apply an image algorithm (like dithering or thresholding).
+  const imageData = applyImageAlgorithm(context, width, height, options);
 
-  checkboxland.setData(pixelMatrix, options);
+  const checkboxMatrix = convertImageDataToCheckboxMatrix(imageData);
+  checkboxland.setData(checkboxMatrix, options);
 }
 
 function getMediaDimensions(mediaEl) {
@@ -95,29 +78,46 @@ function clampDimensions(imageWidth, imageHeight, canvasWidth, canvasHeight) {
     getDimensionsClampedByWidth();
 };
 
-function getBlackAndWhiteImageData(context, width, height) {
-  const original = context.getImageData(0, 0, width, height);
+function applyImageAlgorithm(context, width, height, options) {
+  const { threshold = 50, dithering = 'none' } = options;
 
-  const sharpened = sharpen(context, original, sharpening);
+  let imageData = context.getImageData(0, 0, width, height),
+      imageUint8data;
 
-  const dithered = sharpened
-  ditherjs.ditherImageData(dithered, ditherjsOptions);
+  const algorithms = {
+    'ordered': orderedDither,
+    'atkinson': atkinsonDither,
+    'errorDiffusion': errorDiffusionDither,
+  };
 
-  const pixelMatrix = [];
+  if (dithering === 'none') {
+    imageUint8data = blackAndWhiteThreshold(imageData.data, threshold);
+  } else {
+    // Use "sharpen" as a way of applying a threshold value to dithered approaches.
+    imageUint8data = sharpen(context, imageData, threshold / 100);
+    imageUint8data = algorithms[dithering]({ uint8data: imageUint8data, w: width, h: height });
+  }
 
-  for (let i = 0 ; i < dithered.data.length ; i += 4) {
-    const r = dithered.data[i];
+  imageData.data.set(imageUint8data);
 
+  return imageData;
+}
+
+function convertImageDataToCheckboxMatrix(imageData) {
+  const checkboxMatrix = [];
+  const width = imageData.width;
+
+  for (let i = 0; i < imageData.data.length; i += 4) {
     const pixelNum = i/4;
     const rowNumber = Math.floor(pixelNum / width);
     const rowIndex = pixelNum % width;
 
     if (rowIndex === 0) {
-      pixelMatrix[rowNumber] = [];
+      checkboxMatrix[rowNumber] = [];
     }
 
-    pixelMatrix[rowNumber][rowIndex] = r==255 ? 0 : 1;
+    checkboxMatrix[rowNumber][rowIndex] = imageData.data[i] === 255 ? 0 : 1;
   }
 
-  return [dithered, pixelMatrix];
+  return checkboxMatrix;
 }

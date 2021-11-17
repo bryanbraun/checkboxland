@@ -10,11 +10,17 @@ const fillValue = 0;
 const cbl = new Checkboxland({ selector, dimensions, fillValue });
 
 const videoEl = document.querySelector('video');
-const sharpeningEl = document.querySelector('#sharpening');
+const thresholdEl = document.querySelector('#threshold');
+const ditheringEl = document.querySelector('#dithering');
 
-sharpeningEl.addEventListener('input', event => {
+thresholdEl.addEventListener('input', event => {
   cbl.renderVideo.cleanUp();
-  cbl.renderVideo(videoEl, { sharpening: Number(event.target.value) });
+  cbl.renderVideo(videoEl, { threshold: Number(event.target.value), dithering: ditheringEl.value });
+});
+
+ditheringEl.addEventListener('change', event => {
+  cbl.renderVideo.cleanUp();
+  cbl.renderVideo(videoEl, { threshold: Number(thresholdEl.value), dithering: event.target.value });
 });
 
 const populateVideo = async videoEl => {
@@ -33,6 +39,6 @@ const populateVideo = async videoEl => {
 
 populateVideo(videoEl)
   .then(() => {
-    cbl.renderVideo(videoEl, { sharpening: Number(sharpeningEl.value) });
+    cbl.renderVideo(videoEl, { threshold: Number(thresholdEl.value), dithering: ditheringEl.value });
   });
 
