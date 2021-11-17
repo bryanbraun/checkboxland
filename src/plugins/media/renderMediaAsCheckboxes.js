@@ -1,14 +1,14 @@
+import { orderedDither, atkinsonDither, errorDiffusionDither } from './dithering-algorithms.js'
+import { blackAndWhiteThreshold, sharpen } from './thresholds.js';
+
 let canvasEl;
 let context;
-let grayscaleThreshold;
 
 export function renderMediaAsCheckboxes(element, options = {}, checkboxland) {
   if (!canvasEl) {
     canvasEl = document.createElement('canvas');
     context = canvasEl.getContext('2d');
   }
-
-  grayscaleThreshold = ((options.threshold || 50) / 100) * 255;
 
   // Create a tiny canvas. Each pixel on the canvas will represent a checkbox.
   canvasEl.width = checkboxland.dimensions[0];
@@ -25,14 +25,15 @@ export function renderMediaAsCheckboxes(element, options = {}, checkboxland) {
   const [mediaWidth, mediaHeight] = getMediaDimensions(element);
   const [width, height] = clampDimensions(mediaWidth, mediaHeight, canvasEl.width, canvasEl.height);
 
-  // Draw the image on the tiny canvas (`drawImage` will scale the image
-  // as needed to make it fit the canvas).
+  // Draw the original image on the tiny canvas (`drawImage` will scale the
+  // image as needed to make it fit the canvas).
   context.drawImage(element, 0, 0, width, height);
 
-  // Loop over the canvas pixels and convert them to black and white values.
-  const [_, pixelMatrix] = getBlackAndWhiteImageData(context, width, height);
+  // Loop over the canvas pixels and apply an image algorithm (like dithering or thresholding).
+  const imageData = applyImageAlgorithm(context, width, height, options);
 
-  checkboxland.setData(pixelMatrix, options);
+  const checkboxMatrix = convertImageDataToCheckboxMatrix(imageData);
+  checkboxland.setData(checkboxMatrix, options);
 }
 
 function getMediaDimensions(mediaEl) {
@@ -77,40 +78,46 @@ function clampDimensions(imageWidth, imageHeight, canvasWidth, canvasHeight) {
     getDimensionsClampedByWidth();
 };
 
-function getBlackAndWhiteImageData(context, width, height) {
-  // These toGrayScale function values were borrowed from here:
-  // https://www.jonathan-petitcolas.com/2017/12/28/converting-image-to-ascii-art.html#turning-an-image-into-gray-colors
-  const toGrayScale = (r, g, b) => 0.21 * r + 0.72 * g + 0.07 * b;
+function applyImageAlgorithm(context, width, height, options) {
+  const { threshold = 50, dithering = 'none' } = options;
 
-  const rgbaImageArray = context.getImageData(0, 0, width, height);
-  const pixelMatrix = [];
+  let imageData = context.getImageData(0, 0, width, height),
+      imageUint8data;
 
-  for (let i = 0 ; i < rgbaImageArray.data.length ; i += 4) {
-    const r = rgbaImageArray.data[i];
-    const g = rgbaImageArray.data[i + 1];
-    const b = rgbaImageArray.data[i + 2];
+  const algorithms = {
+    'ordered': orderedDither,
+    'atkinson': atkinsonDither,
+    'errorDiffusion': errorDiffusionDither,
+  };
 
-    const grayScaleVal = toGrayScale(r, g, b);
+  if (dithering === 'none') {
+    imageUint8data = blackAndWhiteThreshold(imageData.data, threshold);
+  } else {
+    // Use "sharpen" as a way of applying a threshold value to dithered approaches.
+    imageUint8data = sharpen(context, imageData, threshold / 100);
+    imageUint8data = algorithms[dithering]({ uint8data: imageUint8data, w: width, h: height });
+  }
 
-    const thresholdedVal = grayScaleVal > grayscaleThreshold ? 255 : 0;
+  imageData.data.set(imageUint8data);
 
-    // We overwrite the pixels with their black and white counterparts and
-    // return rgbaImageArray in case we ever want to preview it on a canvas.
-    rgbaImageArray.data[i] = thresholdedVal;
-    rgbaImageArray.data[i + 1] = thresholdedVal;
-    rgbaImageArray.data[i + 2] = thresholdedVal;
-    // Note: we currently ignore the transparency value;
+  return imageData;
+}
 
+function convertImageDataToCheckboxMatrix(imageData) {
+  const checkboxMatrix = [];
+  const width = imageData.width;
+
+  for (let i = 0; i < imageData.data.length; i += 4) {
     const pixelNum = i/4;
     const rowNumber = Math.floor(pixelNum / width);
     const rowIndex = pixelNum % width;
 
     if (rowIndex === 0) {
-      pixelMatrix[rowNumber] = [];
+      checkboxMatrix[rowNumber] = [];
     }
 
-    pixelMatrix[rowNumber][rowIndex] = grayScaleVal > grayscaleThreshold ? 0 : 1;
+    checkboxMatrix[rowNumber][rowIndex] = imageData.data[i] === 255 ? 0 : 1;
   }
 
-  return [rgbaImageArray, pixelMatrix];
-};
+  return checkboxMatrix;
+}
