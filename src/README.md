@@ -33,7 +33,7 @@ The default size of checkboxes can differ from browser to browser, which can aff
 * Chrome: 14px;
 * Safari: 12px;
 
-Checkboxland doesn't currently try to change these default checkbox sizes, but [this stylesheet used in the docs](https://github.com/bryanbraun/checkboxland/blob/main/docs/css/cbl-normalize-size.css) shows how to do it.
+Checkboxland doesn't currently try to change these default checkbox sizes, but [this stylesheet used in the docs](https://github.com/bryanbraun/checkboxland/blob/main/docs/css/cbl-normalize.css) shows how to do it.
 
 ## Performance
 

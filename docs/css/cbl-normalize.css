@@ -12,7 +12,7 @@
         exist in the shadow-root and cannot be customized.
 */
 
-.cbl-normalize-size input[type="checkbox"] {
+.cbl-normalize input[type="checkbox"] {
   /* Ensure the default checkbox size is consistent across all browsers.
      Otherwise, it will uses the browser defaults, which currently look like this:
 
@@ -24,4 +24,9 @@
 
   width: 12px;
   height: 12px;
+  
+  /* Make the checkbox color consistant across browsers. Currently, we match Safari's color.
+     See: https://github.com/bryanbraun/checkboxland/issues/19
+  */
+  accent-color: #3c88fd;
 }
