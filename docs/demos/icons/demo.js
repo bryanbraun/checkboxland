@@ -144,7 +144,8 @@ let cbl;
 let timeoutId;
 
 function init(existingCbl) {
-  cbl = !!existingCbl ? existingCbl : new Checkboxland({ dimensions });
+  const checkboxlandEl = document.querySelector('#checkboxland');
+  cbl = !!existingCbl ? existingCbl : new Checkboxland({ dimensions, selector: checkboxlandEl });
 
   loop();
 

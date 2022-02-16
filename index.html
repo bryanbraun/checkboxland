@@ -213,15 +213,15 @@ const cbl = new Checkboxland({
   selector: '#my-container'
 });</code></pre>
 
-      <p>If no options are provided, the following defaults will be used:</p>
+      <p>The Checkboxland class accepts a few possible arguments:</p>
 
       <ul>
-        <li><code>dimensions</code>: <code>'8x8'</code></li>
-        <li><code>selector</code>: <code>'#checkboxland'</code></li>
-        <li><code>fillValue</code>: <code>0</code> (meaning, all boxes are unchecked)</li>
+        <li><code>dimensions</code> (string): A string representing the checkbox grid dimensions in a '{width}x{height}' format. <em>Default: '8x8'.</em></li>
+        <li><code>selector</code> (string | Element): A <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector">selector</a> to the container element where Checkboxland should render the checkbox grid. Or you can pass an <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element">Element</a> or <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement">HTMLElement</a> directly. <em>Default: '#checkboxland'.</em></li>
+        <li><code>fillValue</code> (number): The type of checkbox you want to pre-populate the grid with. <em>Default: 0 (unchecked).</em></li>
       </ul>
 
-      <p><em>Note: if you really want to load it with a <code>&lt;script&gt;</code> tag, consider using an <a href="https://jakearchibald.com/2017/es-modules-in-browsers/">inline es6 module</a>, as shown below:</em></p>
+      <p><em>Note: if you really want to load Checkboxland with a <code>&lt;script&gt;</code> tag, consider using an <a href="https://jakearchibald.com/2017/es-modules-in-browsers/">inline es6 module</a>, as shown below:</em></p>
 
       <pre><code class="language-markup">&lt;script type=&quot;module&quot;&gt;
   import { Checkboxland } from &apos;https://unpkg.com/checkboxland?module&apos;;

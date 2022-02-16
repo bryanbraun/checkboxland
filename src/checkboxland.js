@@ -2,8 +2,8 @@ export class Checkboxland {
   constructor(props = {}) {
     if (typeof props.fillValue !== 'undefined') _checkForValidValue(props.fillValue);
 
-    this.displayEl = document.querySelector(props.selector || '#checkboxland');
     this.dimensions = _textDimensionsToArray(props.dimensions || '8x8');
+    this.displayEl = _getValidHTMLContainer(props.selector);
 
     // The data object. Don't access this directly. Use methods like getData() and setData() instead.
     // Maybe we can restrict access to this variable in the future, using Proxies. See examples here:
@@ -137,6 +137,18 @@ function _checkForValidMatrix(matrix) {
   if (Array.isArray(matrix) && Array.isArray(matrix[0])) return;
 
   throw new Error(`${matrix} is not a valid matrix.`);
+}
+
+function _getValidHTMLContainer(selector = '#checkboxland') {
+  if (selector instanceof Element) {
+    return selector;
+  }
+
+  if (typeof selector === 'string') {
+    return document.querySelector(selector);
+  }
+
+  throw new Error(`Checkboxland selector is invalid.`);
 }
 
 function _textDimensionsToArray(textDimensions) {
