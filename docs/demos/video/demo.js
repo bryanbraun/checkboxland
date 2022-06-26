@@ -22,8 +22,13 @@ function init(existingCbl) {
   return cbl;
 }
 
+function cleanUp() {
+  cbl.renderVideo.cleanUp()
+}
+
 export {
   init,
+  cleanUp,
   dimensions
 }
 
