@@ -1,17 +1,16 @@
 export class Checkboxland {
+
   constructor(props = {}) {
     if (typeof props.fillValue !== 'undefined') _checkForValidValue(props.fillValue);
 
     this.dimensions = _textDimensionsToArray(props.dimensions || '8x8');
     this.displayEl = _getValidHTMLContainer(props.selector);
+    this.#data = this.getEmptyMatrix({ fillValue: props.fillValue || 0 });
 
-    // The data object. Don't access this directly. Use methods like getData() and setData() instead.
-    // Maybe we can restrict access to this variable in the future, using Proxies. See examples here:
-    // https://github.com/bryanbraun/music-box-fun/commit/f399255261e9b8ab9fb8c10edbbedd55a639e9d1
-    this._data = this.getEmptyMatrix({ fillValue: props.fillValue || 0 });
-
-    _createInitialCheckboxDisplay(this.displayEl, this._data);
+    _createInitialCheckboxDisplay(this.displayEl, this.#data);
   }
+
+  #data; // Private property for storing the checkbox data matrix
 
   getCheckboxValue(x, y) {
     const isWithinDisplay = (x >= 0 && y >= 0 && x < this.dimensions[0] && y < this.dimensions[1]);
@@ -20,7 +19,7 @@ export class Checkboxland {
       throw new Error(`The location (x: ${x}, y: ${y}) is outside of this checkbox display`);
     }
 
-    return this._data[y][x];
+    return this.#data[y][x];
   }
 
   setCheckboxValue(x, y, newValue) {
@@ -30,7 +29,7 @@ export class Checkboxland {
 
     if (!isWithinDisplay) return;
 
-    this._data[y][x] = newValue;
+    this.#data[y][x] = newValue;
 
     // We can assume the checkboxEl exists because it's within the display.
     const checkboxEl = this.displayEl.children[y].children[x];
@@ -59,7 +58,7 @@ export class Checkboxland {
   }
 
   getData() {
-    const clonedData = this._data.map((row) => row.slice());
+    const clonedData = this.#data.map((row) => row.slice());
     return clonedData;
   }
 
@@ -116,6 +115,14 @@ export class Checkboxland {
       throw new Error('Your plugin must have a "name" and an "exec" function.');
     }
 
+    if (typeof name !== 'string' || typeof exec !== 'function') {
+      throw new Error('The "name" must be a string and "exec" must be a function.');
+    }
+
+    if (this.prototype.hasOwnProperty(name)) {
+      throw new Error(`Plugin "${name}" already exists on checkboxland. Please choose a different name.`);
+    }
+
     if (cleanUp) {
       exec.cleanUp = cleanUp;
     }
@@ -167,7 +174,6 @@ function _textDimensionsToArray(textDimensions) {
 function _createInitialCheckboxDisplay(displayEl, data) {
   displayEl.innerHTML = '';
   displayEl.style.overflowX = 'auto';
-  displayEl.setAttribute('aria-hidden', true);
 
   data.forEach(rowData => {
     const rowEl = document.createElement('div');

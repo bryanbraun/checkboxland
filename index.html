@@ -179,6 +179,13 @@
         <div class="demo-source"><a href="https://github.com/bryanbraun/checkboxland/tree/main/docs/demos">(view source code for the demos here)</a></div>
       </div>
 
+      <h4>Community demos:</h4>
+      <ul>
+        <li><a href="https://healeycodes.github.io/doom-checkboxes/">Doom via Checkboxes</a> by <a href="https://github.com/healeycodes">healeycodes</a></li>
+        <li><a href="https://gaypage.lilyspadd.com/checkbox-pong/">Checkbox Pong</a> by <a href="https://github.com/desecaw13">desecaw13</a></li>
+      </ul>
+
+      <p><small>(if you have a demo to share, <a href="https://github.com/bryanbraun/checkboxland?tab=readme-ov-file#contributing">create a docs PR</a> and add it to the list above)</small></p>
 
 
       <h2>Overview</h2>
@@ -189,7 +196,7 @@
 
       <p>Checkboxland is dependency-free, framework-agnostic, and fun! 🙃</p>
 
-      <small>Why does this even exist? <a href="https://www.bryanbraun.com/2020/06/06/checkboxland/">Here's some background</a>.</small>
+      <p><small>Why does this even exist? <a href="https://www.bryanbraun.com/2020/06/06/checkboxland/">Here's some background</a>.</small></p>
 
       <h2>Limitations</h2>
 
@@ -253,7 +260,7 @@ const heart = [
 // This updates the grid with the data we provided.
 cbl.setData(heart);</code></pre>
 
-      <small><p><em>(note: you can <a href="https://codepen.io/bryanbraun/pen/YzwoxpB">play with this example on Codepen</a> and fork it to build your own demos)</em></p></small>
+      <p><small><em>(note: you can <a href="https://codepen.io/bryanbraun/pen/YzwoxpB">play with this example on Codepen</a> and fork it to build your own demos)</em></small></p>
 
       <p><img src="docs/img/checkbox-heart.png" width="115" height="102" alt="a grid of checkboxes displaying the shape of a heart" /></p>
 
@@ -670,8 +677,6 @@ cbl.mirror();</code></pre>
         <li><code>this.clearData()</code> (function) - <a href="#clearData">See clearData()</a></li>
         <li><code>this.getEmptyMatrix()</code> (function) - <a href="#getemptymatrix">See getEmptyMatrix()</a></li>
       </ul>
-
-      <p><em>Note: do not access Checkboxland's internal <code>this._data</code> object directly. Instead, use <code>this.getData()</code> and <code>this.setData()</code>.</em></p>
 
       <h3 id="an-example-plugin">An Example</h3>
 
