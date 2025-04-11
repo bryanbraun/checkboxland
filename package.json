@@ -4,6 +4,17 @@
   "description": "Render anything as HTML checkboxes",
   "author": "Bryan Braun",
   "license": "MIT",
+  "type": "module",
+  "source": "src/index.js",
+  "main": "dist/checkboxland.js",
+  "types": "dist/checkboxland.d.ts",
+  "exports": "./dist/checkboxland.modern.js",
+  "files": [
+    "package.json",
+    "README.md",
+    "LICENSE",
+    "dist/"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/bryanbraun/checkboxland.git"
@@ -14,41 +25,12 @@
   "homepage": "https://github.com/bryanbraun/checkboxland#readme",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 0",
-    "build": "pika build",
-    "publish": "pika publish --any-branch",
-    "version": "npm run build",
+    "build": "microbundle --format modern --target web --tsconfig tsconfig.json",
     "dev": "http-server"
   },
-  "@pika/pack": {
-    "pipeline": [
-      [
-        "@pika/plugin-standard-pkg",
-        {
-          "exclude": [
-            "tests/**/*",
-            "docs/**/*"
-          ]
-        }
-      ],
-      [
-        "@pika/plugin-build-web"
-      ],
-      [
-        "pika-plugin-minify"
-      ],
-      [
-        "@pika/plugin-build-types"
-      ]
-    ]
-  },
   "devDependencies": {
-    "@pika/cli": "^0.2.0",
-    "@pika/pack": "^0.5.0",
-    "@pika/plugin-build-types": "^0.9.2",
-    "@pika/plugin-build-web": "^0.9.2",
-    "@pika/plugin-standard-pkg": "^0.9.2",
     "http-server": "^14.1.0",
-    "pika-plugin-minify": "^0.1.0",
-    "typescript": "^3.9.5"
+    "microbundle": "^0.15.1",
+    "typescript": "^5.8.2"
   }
 }
