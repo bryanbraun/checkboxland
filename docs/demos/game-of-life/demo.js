@@ -22,6 +22,7 @@ function init(existingCbl) {
 
 function cleanUp() {
   clearTimeout(timeoutId);
+  cbl.onClick.cleanUp();
 }
 
 function loop() {
