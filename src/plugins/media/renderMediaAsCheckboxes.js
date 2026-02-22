@@ -1,13 +1,27 @@
 import { orderedDither, atkinsonDither, errorDiffusionDither } from './dithering-algorithms.js'
 import { blackAndWhiteThreshold, sharpen } from './thresholds.js';
 
+/**
+ * @typedef {Object} RenderMediaOptions
+ * @property {number} [threshold] - The threshold value (0-100) for black and white thresholding. Default is 50.
+ * @property {'none' | 'ordered' | 'atkinson' | 'errorDiffusion'} [dithering] - The dithering algorithm to apply. Default is 'none'.
+ */
+
+/** @type {HTMLCanvasElement} */
 let canvasEl;
+/** @type {CanvasRenderingContext2D} */
 let context;
 
+/**
+ * Renders media elements (images/videos) as checkboxes.
+ * @param {HTMLImageElement | HTMLVideoElement} element - The media element to render.
+ * @param {RenderMediaOptions & { x?: number, y?: number, fillValue?: number }} options - The options for rendering.
+ * @param {import('../../checkboxland.js').Checkboxland} checkboxland - The Checkboxland instance.
+ */
 export function renderMediaAsCheckboxes(element, options = {}, checkboxland) {
   if (!canvasEl) {
     canvasEl = document.createElement('canvas');
-    context = canvasEl.getContext('2d');
+    context = /** @type {CanvasRenderingContext2D} */ (canvasEl.getContext('2d'));
   }
 
   // Create a tiny canvas. Each pixel on the canvas will represent a checkbox.
@@ -36,6 +50,11 @@ export function renderMediaAsCheckboxes(element, options = {}, checkboxland) {
   checkboxland.setData(checkboxMatrix, options);
 }
 
+/**
+ * Gets the dimensions of a media element.
+ * @param {HTMLImageElement | HTMLVideoElement} mediaEl - The media element to get dimensions from.
+ * @returns {number[]} - An array containing the width and height of the media element.
+ */
 function getMediaDimensions(mediaEl) {
   let width = 0, height = 0;
 
@@ -45,7 +64,9 @@ function getMediaDimensions(mediaEl) {
       height = mediaEl.height;
       break;
     case 'VIDEO':
+      // @ts-ignore
       width = mediaEl.videoWidth;
+      // @ts-ignore
       height = mediaEl.videoHeight;
       break;
   }
@@ -53,6 +74,14 @@ function getMediaDimensions(mediaEl) {
   return [width, height];
 }
 
+/**
+ * Clamps the dimensions of an image to fit within a canvas.
+ * @param {number} imageWidth - The width of the image.
+ * @param {number} imageHeight - The height of the image.
+ * @param {number} canvasWidth - The width of the canvas.
+ * @param {number} canvasHeight - The height of the canvas.
+ * @returns {number[]} - An array containing the clamped width and height.
+ */
 function clampDimensions(imageWidth, imageHeight, canvasWidth, canvasHeight) {
   const heightRatio = imageHeight / canvasHeight;
   const widthRatio = imageWidth / canvasWidth;
@@ -78,6 +107,14 @@ function clampDimensions(imageWidth, imageHeight, canvasWidth, canvasHeight) {
     getDimensionsClampedByWidth();
 };
 
+/**
+ * Applies an image processing algorithm to the given canvas context.
+ * @param {CanvasRenderingContext2D} context - The canvas rendering context.
+ * @param {number} width - The width of the image.
+ * @param {number} height - The height of the image.
+ * @param {RenderMediaOptions} options - The options for the image processing.
+ * @returns {ImageData} - The processed image data.
+ */
 function applyImageAlgorithm(context, width, height, options) {
   const { threshold = 50, dithering = 'none' } = options;
 
@@ -103,7 +140,13 @@ function applyImageAlgorithm(context, width, height, options) {
   return imageData;
 }
 
+/**
+ * Converts image data to a checkbox matrix.
+ * @param {ImageData} imageData - The image data to convert.
+ * @returns {number[][]} - The checkbox matrix representation of the image data.
+ */
 function convertImageDataToCheckboxMatrix(imageData) {
+  /** @type {number[][]} */
   const checkboxMatrix = [];
   const width = imageData.width;
 

@@ -1,3 +1,18 @@
+/**
+ * @typedef {Object} Options
+ * @property {number} [all]
+ * @property {number} [top]
+ * @property {number} [right]
+ * @property {number} [bottom]
+ * @property {number} [left]
+ */
+
+/**
+ * @param {'invert' | 'pad'} actionName 
+ * @param {number[][]} matrix 
+ * @param {Options} options 
+ * @returns 
+ */
 function dataUtils(actionName, matrix, options) {
   const actions = {
     invert,
@@ -7,6 +22,11 @@ function dataUtils(actionName, matrix, options) {
   return actions[actionName](matrix, options);
 }
 
+/**
+ * 
+ * @param {number[][]} matrix 
+ * @returns 
+ */
 function invert(matrix) {
   return matrix.map((row) => {
     return row.map((value) => {
@@ -15,6 +35,12 @@ function invert(matrix) {
   });
 }
 
+/**
+ * 
+ * @param {number[][]} matrix 
+ * @param {Options} options 
+ * @returns 
+ */
 function pad(matrix, options = {}) {
   const isPaddingAllSidesEqually = Number.isInteger(options.all);
 
@@ -39,7 +65,7 @@ function pad(matrix, options = {}) {
 
   // Set up to add top and bottom padding.
   const newRowLength = newMatrix[0].length;
-  const buildPaddingRows = (numberOfRows, rowLength) => {
+  const buildPaddingRows = (/** @type {number} */ numberOfRows, /** @type {number} */ rowLength) => {
     const paddingRows = [];
     for (let i = 0; i < numberOfRows; i++) {
       paddingRows.push(Array(rowLength).fill(0));
@@ -57,6 +83,9 @@ function pad(matrix, options = {}) {
   return newMatrix
 }
 
+/**
+ * @type {import('../checkboxland.js').Plugin}
+ */
 export default {
   name: 'dataUtils',
   exec: dataUtils
