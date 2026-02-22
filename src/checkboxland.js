@@ -1,17 +1,41 @@
+/**
+ * @typedef {Object} Plugin
+ * @property {string} name - The name of the plugin. This will be the name of the method added to the Checkboxland class.
+ * @property {function} exec - The function that will be executed when the plugin method is called. This function should use "this" to refer to the Checkboxland instance.
+ * @property {function} [cleanUp] - An optional function that will be executed when the plugin is cleaned up. This is useful for plugins that set up intervals, event listeners, or other resources that need to be cleaned up to prevent memory leaks.
+ */
+
 export class Checkboxland {
 
+  /**
+   * @param {{ fillValue?: number, dimensions?: string, selector?: string }} props
+   */
   constructor(props = {}) {
     if (typeof props.fillValue !== 'undefined') _checkForValidValue(props.fillValue);
 
     this.dimensions = _textDimensionsToArray(props.dimensions || '8x8');
+    /**
+     * @public
+     * @type {HTMLElement}
+     */
     this.displayEl = _getValidHTMLContainer(props.selector);
     this.#data = this.getEmptyMatrix({ fillValue: props.fillValue || 0 });
 
     _createInitialCheckboxDisplay(this.displayEl, this.#data);
   }
 
-  #data; // Private property for storing the checkbox data matrix
+  /**
+   * Private property for storing the checkbox data matrix
+   * @type {number[][]}
+   */
+  #data;
 
+  /**
+   * Gets the value of a specific checkbox in the matrix.
+   * @param {number} x - The x-coordinate of the checkbox.
+   * @param {number} y - The y-coordinate of the checkbox.
+   * @returns {number} The value of the checkbox (0, 1, or 2).
+   */
   getCheckboxValue(x, y) {
     const isWithinDisplay = (x >= 0 && y >= 0 && x < this.dimensions[0] && y < this.dimensions[1]);
 
@@ -22,6 +46,13 @@ export class Checkboxland {
     return this.#data[y][x];
   }
 
+  /**
+   * Sets the value of a specific checkbox in the matrix.
+   * @param {number} x - The x-coordinate of the checkbox.
+   * @param {number} y - The y-coordinate of the checkbox.
+   * @param {number} newValue - The new value to set (0, 1, or 2).
+   * @returns {void}
+   */
   setCheckboxValue(x, y, newValue) {
     const isWithinDisplay = (x >= 0 && y >= 0 && x < this.dimensions[0] && y < this.dimensions[1]);
 
@@ -32,7 +63,7 @@ export class Checkboxland {
     this.#data[y][x] = newValue;
 
     // We can assume the checkboxEl exists because it's within the display.
-    const checkboxEl = this.displayEl.children[y].children[x];
+    const checkboxEl = /** @type {HTMLInputElement} */ (this.displayEl.children[y].children[x]);
 
     // Handle indeterminate newValues
     if (newValue === 2) {
@@ -62,6 +93,11 @@ export class Checkboxland {
     return clonedData;
   }
 
+  /**
+   * Sets the data for the checkbox matrix.
+   * @param {number[][]} data - The new data to set.
+   * @param {{ x?: number, y?: number, fillValue?: number }} options - Options for setting the data.
+   */
   setData(data, options = {}) {
     const { x = 0, y = 0, fillValue } = options;
     const isFillValueProvided = (typeof fillValue !== 'undefined');
@@ -80,7 +116,7 @@ export class Checkboxland {
 
         if (isOutsideOfProvidedData && !isFillValueProvided) continue;
 
-        let valueToSet = isOutsideOfProvidedData ? fillValue : data[rowIndex - y][colIndex - x];
+        let valueToSet = /** @type {number} */ (isOutsideOfProvidedData ? fillValue : data[rowIndex - y][colIndex - x]);
 
         this.setCheckboxValue(colIndex, rowIndex, valueToSet);
       }
@@ -92,10 +128,17 @@ export class Checkboxland {
     this.setData(emptyMatrix);
   }
 
-  // This kind of method makes more sense as a plugin but I needed to
-  // use it in the core library anyways so I decided to expose it here.
+  /**
+   * This kind of method makes more sense as a plugin but I needed to
+   * use it in the core library anyways so I decided to expose it here.
+   * @param {{ fillValue?: number, width?: number, height?: number }} options
+   * @returns {number[][]}
+   */
   getEmptyMatrix(options = {}) {
     const { fillValue = 0, width = this.dimensions[0], height = this.dimensions[1] } = options;
+    /**
+     * @type {number[][]}
+     */
     const matrix = [];
 
     for (let i = 0; i < height; i++) {
@@ -108,7 +151,15 @@ export class Checkboxland {
     return matrix;
   }
 
-  static extend(pluginObj = {}) {
+  /**
+   * Extends the checkboxland class with a new plugin.
+   * @param {Plugin} pluginObj 
+   */
+  static extend(pluginObj) {
+    if (!pluginObj || typeof pluginObj !== 'object') {
+      throw new Error('You must provide a plugin object to extend checkboxland.');
+    }
+
     const { name, exec, cleanUp } = pluginObj;
 
     if (!name || !exec) {
@@ -124,9 +175,11 @@ export class Checkboxland {
     }
 
     if (cleanUp) {
+      // @ts-ignore
       exec.cleanUp = cleanUp;
     }
 
+    // @ts-ignore
     this.prototype[name] = exec;
   }
 }
@@ -134,30 +187,60 @@ export class Checkboxland {
 
 // Private helper functions
 
+/**
+ * Checks if the provided value is a valid checkbox value (0, 1, or 2).
+ * @param {number} value 
+ * @returns {void}
+ * @throws Will throw an error if the value is not valid.
+ */
 function _checkForValidValue(value) {
   if (value === 0 || value === 1 || value === 2) return;
 
   throw new Error(`${value} is not a valid checkbox value.`);
 }
 
+/**
+ * Checks if the provided matrix is a valid checkbox matrix. A valid matrix is a 2D array (array of arrays).
+ * @param {number[][]} matrix 
+ * @returns {void}
+ * @throws Will throw an error if the matrix is not valid.
+ */
 function _checkForValidMatrix(matrix) {
   if (Array.isArray(matrix) && Array.isArray(matrix[0])) return;
 
   throw new Error(`${matrix} is not a valid matrix.`);
 }
 
+/**
+ * Gets a valid HTML container element from the provided selector. The selector can be either a string (CSS selector) or an actual HTML element. If the selector is invalid, an error is thrown.
+ * @param {string | HTMLElement} selector 
+ * @returns {HTMLElement}
+ */
 function _getValidHTMLContainer(selector = '#checkboxland') {
-  if (selector instanceof Element) {
+  if (selector instanceof HTMLElement) {
     return selector;
   }
 
   if (typeof selector === 'string') {
-    return document.querySelector(selector);
+    const el = document.querySelector(selector);
+
+    // querySelector can return any Element,
+    // and we need a valid styleable HTMLElement.
+    if (!el || !(el instanceof HTMLElement)) {
+      throw new Error(`No element found for the selector "${selector}".`);
+    }
+
+    return el;
   }
 
   throw new Error(`Checkboxland selector is invalid.`);
 }
 
+/**
+ * Converts a text representation of dimensions (e.g., "100x200") into an array of numbers. The text must be in the format "widthxheight". If the format is invalid, an error is thrown.
+ * @param {string} textDimensions - The text representation of dimensions.
+ * @returns {number[]}
+ */
 function _textDimensionsToArray(textDimensions) {
   const errorMessage = 'The dimensions you provided are invalid.';
 
@@ -171,13 +254,18 @@ function _textDimensionsToArray(textDimensions) {
   return textDimensions.split('x').map(val => Number(val));
 }
 
+/**
+ * Creates the initial checkbox display.
+ * @param {HTMLElement} displayEl 
+ * @param {number[][]} data 
+ */
 function _createInitialCheckboxDisplay(displayEl, data) {
   displayEl.innerHTML = '';
   displayEl.style.overflowX = 'auto';
 
   data.forEach(rowData => {
     const rowEl = document.createElement('div');
-    rowEl.style.lineHeight = 0.75;
+    rowEl.style.lineHeight = '0.75';
     rowEl.style.whiteSpace = 'nowrap';
 
     rowData.forEach(cellData => {
@@ -185,10 +273,10 @@ function _createInitialCheckboxDisplay(displayEl, data) {
       const indeterminateVal = cellData === 2 ? true : false;
       const checkedVal = indeterminateVal ? false : Boolean(cellData);
 
-      checkboxEl.style.margin = 0;
+      checkboxEl.style.margin = '0';
       checkboxEl.style.verticalAlign = 'top';
       checkboxEl.type = 'checkbox';
-      checkboxEl.tabIndex = '-1';
+      checkboxEl.tabIndex = -1;
       checkboxEl.checked = checkedVal;
       checkboxEl.indeterminate = indeterminateVal;
 

@@ -1,5 +1,13 @@
+/**
+ * @type {number}
+ */
 let intervalId;
 
+/**
+ * @this {import('../checkboxland.js').Checkboxland}
+ * @param {*} newData
+ * @param {*} options
+ */
 function transitionWipe(newData, options = {}) {
   const { interval = 200, fillValue = 0, direction = 'ltr', callback = () => {} } = options;
 

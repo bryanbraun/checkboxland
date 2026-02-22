@@ -1,9 +1,18 @@
 import { renderMediaAsCheckboxes } from './renderMediaAsCheckboxes.js';
 
+/** @type {number} */
 let refreshId;
 
+/**
+ * Renders a video element as checkboxes.
+ * 
+ * @this {import('../../checkboxland.js').Checkboxland}
+ * @param {string|HTMLVideoElement} dataSource - The video source (URL or <video> element).
+ * @param {Object} options - The options for rendering.
+ */
 function renderVideo(dataSource, options) {
   const checkboxland = this;
+  /** @type {HTMLVideoElement} */
   let videoEl;
 
   // FOR PASSING A URL TO A VIDEO
@@ -30,6 +39,12 @@ function renderVideo(dataSource, options) {
   }
 }
 
+/**
+ * 
+ * @param {HTMLVideoElement} videoElement 
+ * @param {Object} options - The options for rendering.
+ * @param {import('../../checkboxland.js').Checkboxland} checkboxland 
+ */
 function setVideoRenderLoop(videoElement, options, checkboxland) {
   renderMediaAsCheckboxes(videoElement, options, checkboxland);
   refreshId = requestAnimationFrame(() => setVideoRenderLoop(videoElement, options, checkboxland));
@@ -39,6 +54,9 @@ function cleanUp() {
   cancelAnimationFrame(refreshId);
 }
 
+/**
+ * @type {import('../../checkboxland.js').Plugin}
+ */
 export default {
   name: 'renderVideo',
   exec: renderVideo,

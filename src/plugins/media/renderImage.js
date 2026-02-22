@@ -1,7 +1,15 @@
 import { renderMediaAsCheckboxes } from './renderMediaAsCheckboxes.js';
 
+/**
+ * Renders an image element as checkboxes.
+ * 
+ * @this {import('../../checkboxland.js').Checkboxland}
+ * @param {string | HTMLImageElement} dataSource - The image source (URL or <img> element).
+ * @param {Object} options - The options for rendering.
+ */
 function renderImage(dataSource, options) {
   const checkboxland = this;
+  /** @type {HTMLImageElement} */
   let imageEl;
 
   // FOR PASSING A URL TO AN IMAGE
@@ -21,6 +29,9 @@ function renderImage(dataSource, options) {
   }
 }
 
+/**
+ * @type {import('../../checkboxland.js').Plugin}
+ */
 export default {
   name: 'renderImage',
   exec: renderImage

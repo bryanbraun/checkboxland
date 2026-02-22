@@ -4,6 +4,19 @@
 // The first color is "checkbox blue" and the second is white.
 const PALLET = [[60, 136, 253], [255, 255, 255]];
 
+/**
+ * @typedef {Object} DitherOptions
+ * @property {Uint8ClampedArray} uint8data - The Uint8ClampedArray of the image data to be dithered.
+ * @property {number[][]} [palette] - An optional array of RGB color arrays to be used as the palette for dithering. Defaults to [[60, 136, 253], [255, 255, 255]].
+ * @property {number} [step] - An optional number that determines the size of the blocks to be dithered. Defaults to 1 (no blocking).
+ * @property {number} h - The height of the image data.
+ * @property {number} w - The width of the image data.
+ */
+
+/**
+ * @param {DitherOptions} options 
+ * @returns {Uint8ClampedArray}
+ */
 export function orderedDither({ uint8data, palette = PALLET, step = 1, h, w }) {
   var d = new Uint8ClampedArray(uint8data);
   var ratio = 3;
@@ -53,12 +66,16 @@ export function orderedDither({ uint8data, palette = PALLET, step = 1, h, w }) {
   return d;
 }
 
+/**
+ * @param {DitherOptions} options 
+ * @returns {Uint8ClampedArray}
+ */
 export function atkinsonDither({ uint8data, palette = PALLET, step = 1, h, w }) {
   var d = new Uint8ClampedArray(uint8data);
   var out = new Uint8ClampedArray(uint8data);
   var ratio = 1/8;
 
-  var $i = function(x,y) {
+  var $i = function(/** @type {number} */ x, /** @type {number} */ y) {
     return (4*x) + (4*y*w);
   };
 
@@ -125,12 +142,16 @@ export function atkinsonDither({ uint8data, palette = PALLET, step = 1, h, w }) 
   return out;
 }
 
+/**
+ * @param {DitherOptions} options 
+ * @returns {Uint8ClampedArray}
+ */
 export function errorDiffusionDither({ uint8data, palette = PALLET, step = 1, h, w }) {
   var d = new Uint8ClampedArray(uint8data);
   var out = new Uint8ClampedArray(uint8data);
   var ratio = 1/16;
 
-  var $i = function(x,y) {
+  var $i = function(/** @type {number} */ x, /** @type {number} */ y) {
     return (4*x) + (4*y*w);
   };
 
@@ -194,8 +215,14 @@ export function errorDiffusionDither({ uint8data, palette = PALLET, step = 1, h,
 
 
 // Color distance helpers, which are referenced in several of the algorithms.
+
+/**
+ * @param {number[]} color 
+ * @param {number[][]} palette 
+ * @returns {number[]}
+ */
 function approximateColor(color, palette) {
-  function colorDistance(a, b) {
+  function colorDistance(/** @type {number[]} */ a, /** @type {number[]} */ b) {
     return Math.sqrt(
       Math.pow( ((a[0]) - (b[0])), 2 ) +
       Math.pow( ((a[1]) - (b[1])), 2 ) +
@@ -203,6 +230,8 @@ function approximateColor(color, palette) {
     );
   };
 
+
+  // @ts-ignore
   function findIndex(fun, arg, list, min) {
     if (list.length == 2) {
       if (fun(arg,min) <= fun(arg,list[1])) {

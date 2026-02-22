@@ -1,7 +1,14 @@
+/**
+ * Applies a black and white threshold to the given RGBA image data.
+ * 
+ * @param {Uint8ClampedArray} rgbaImageData - The RGBA image data.
+ * @param {number} threshold - The threshold value (0-100).
+ * @returns {Uint8ClampedArray} - The thresholded RGBA image data.
+ */
 export function blackAndWhiteThreshold(rgbaImageData, threshold) {
   // These toGrayScale function values were borrowed from here:
   // https://www.jonathan-petitcolas.com/2017/12/28/converting-image-to-ascii-art.html#turning-an-image-into-gray-colors
-  const toGrayScale = (r, g, b) => 0.21 * r + 0.72 * g + 0.07 * b;
+  const toGrayScale = (/** @type {number} */ r, /** @type {number} */ g, /** @type {number} */ b) => 0.21 * r + 0.72 * g + 0.07 * b;
   const grayscaleThreshold = (threshold / 100) * 255;
 
   for (let i = 0; i < rgbaImageData.length; i += 4) {
@@ -24,7 +31,16 @@ export function blackAndWhiteThreshold(rgbaImageData, threshold) {
   return rgbaImageData;
 }
 
-// copied with adjustments from https://gist.github.com/mikecao/65d9fc92dc7197cb8a7c
+/**
+ * Sharpens the image.
+ * 
+ * copied with adjustments from https://gist.github.com/mikecao/65d9fc92dc7197cb8a7c
+ * 
+ * @param {CanvasRenderingContext2D} context 
+ * @param {ImageData} imageData 
+ * @param {number} mix 
+ * @returns {Uint8ClampedArray}
+ */
 export function sharpen(context, imageData, mix) {
   const w = imageData.width;
   const h = imageData.height;

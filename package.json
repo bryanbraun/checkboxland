@@ -8,7 +8,7 @@
   "source": "src/index.js",
   "main": "dist/checkboxland.js",
   "types": "dist/checkboxland.d.ts",
-  "exports": "./dist/checkboxland.modern.js",
+  "exports": "./dist/checkboxland.js",
   "files": [
     "package.json",
     "README.md",
@@ -25,12 +25,11 @@
   "homepage": "https://github.com/bryanbraun/checkboxland#readme",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 0",
-    "build": "microbundle --format modern --target web --tsconfig tsconfig.json",
+    "build": "tsc",
     "dev": "http-server"
   },
   "devDependencies": {
     "http-server": "^14.1.0",
-    "microbundle": "^0.15.1",
-    "typescript": "^5.8.2"
+    "typescript": "^5.9.3"
   }
 }
